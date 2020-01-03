@@ -33,18 +33,6 @@ object Libs {
 
     }
 
-    //------ FIREBASE ------///
-    object Firebase {
-        const val analytics = "com.google.firebase:firebase-analytics:${Versions.Firebase.analytics}"
-        const val auth = "com.google.firebase:firebase-auth:${Versions.Firebase.auth}"
-        const val config = "com.google.firebase:firebase-config:${Versions.Firebase.config}"
-    }
-
-    //----- CRASHLYTICS ---///
-    object Logging {
-        const val crashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics}"
-    }
-
     ///------ RECYCLER VIEW ADAPTER
     object FastAdapter {
         const val core = "com.mikepenz:fastadapter:$fastAdapterLib@aar"
@@ -52,7 +40,6 @@ object Libs {
         const val diff = "com.mikepenz:fastadapter-extensions-diff:${fastAdapterLib}"
         const val uiExt = "com.mikepenz:fastadapter-extensions-ui:${fastAdapterLib}"
         const val expandable = "com.mikepenz:fastadapter-extensions-expandable:${fastAdapterLib}"
-        const val stickyheaders = "com.timehop.stickyheadersrecyclerview:library:${Versions.stickyheaders}"
     }
 
     //--- ROOM DB
@@ -66,7 +53,6 @@ object Libs {
     object Retrofit {
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-        //const val moshicodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshiCodegen}"
         const val logging = ("com.github.ihsanbal:LoggingInterceptor:${retrofitLogging}")
     }
 
@@ -75,15 +61,8 @@ object Libs {
         const val coil = "io.coil-kt:coil:${Versions.coil}"
     }
 
-    object Maps {
-        ///----- MAPS
-        const val mapboxSdk = "com.mapbox.mapboxsdk:mapbox-android-sdk:${Versions.MapBox.core}"
-        const val mapboxAnnotation = "com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v8:${Versions.MapBox.annotation}"
-        const val mapMarkerPlugin = "com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v8:${Versions.MapBox.marker}"
-    }
-
     object Common {
-        ///--- View PAger Indicator
+        ///--- View Pager Indicator
         const val viewPagerIndicator = "me.relex:circleindicator:${Versions.viewPagerIndicator}"
 
         //--- SHARED PREFERENCE
@@ -97,9 +76,6 @@ object Libs {
 
         //---- LOGGING TIMER =)
         const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-
-        //---- INPUT MASK
-        const val inputMask = "com.redmadrobot:input-mask-android:${Versions.inputmask}"
     }
 
     object Tests {

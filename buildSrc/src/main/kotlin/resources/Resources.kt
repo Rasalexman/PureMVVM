@@ -8,7 +8,6 @@ object Resources {
         )
 
         val javaDirs = arrayListOf(
-            "src/main/java",
             "src/main/kotlin"
         )
     }
@@ -16,6 +15,7 @@ object Resources {
 
     object Core {
         val dirs = arrayListOf(
+            "src/main/res-components/base-layouts",
             "src/main/res"
         )
 
