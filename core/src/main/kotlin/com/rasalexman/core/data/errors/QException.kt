@@ -21,6 +21,7 @@ sealed class QException(message: String = "") : Exception(message) {
         object EmptyPhone : AuthErrors()
         object RepeatedPasswordInvalid : AuthErrors()
         object InvalidEmail : AuthErrors()
+        object UserExistError : AuthErrors("No user data")
 
         class ResultError : AuthErrors()
         class ResultNullToken : AuthErrors()

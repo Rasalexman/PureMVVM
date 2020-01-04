@@ -1,10 +1,8 @@
-import appdependencies.Apps.APP_ID
-import appdependencies.Apps.BUILD_TOOLS
-import appdependencies.Apps.COMPILE_VERSION
-import appdependencies.Apps.MIN_VERSION
-import appdependencies.Apps.TARGET_VERSION
-import appdependencies.Apps.VERSION_CODE
-import appdependencies.Apps.VERSION_NAME
+import appdependencies.Builds.APP_ID
+import appdependencies.Builds.BUILD_TOOLS
+import appdependencies.Builds.COMPILE_VERSION
+import appdependencies.Builds.MIN_VERSION
+import appdependencies.Builds.TARGET_VERSION
 import appdependencies.Libs
 import appdependencies.Versions
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
@@ -27,11 +25,9 @@ android {
         applicationId = APP_ID
         minSdkVersion(MIN_VERSION)
         targetSdkVersion(TARGET_VERSION)
-        versionCode = VERSION_CODE
-        versionName = VERSION_NAME
+        versionCode = appdependencies.Builds.App.VERSION_CODE
+        versionName = appdependencies.Builds.App.VERSION_NAME
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "SERVER_URL", "\"http://connect.quasa.io/api/v1/\"")
 
         javaCompileOptions.annotationProcessorOptions {
             includeCompileClasspath = true
@@ -53,8 +49,8 @@ android {
     productFlavors {
         create("dev") {
             applicationId = APP_ID
-            versionCode = VERSION_CODE
-            versionName = VERSION_NAME
+            versionCode = appdependencies.Builds.App.VERSION_CODE
+            versionName = appdependencies.Builds.App.VERSION_NAME
             setDimension("version")
             applicationIdSuffix = ".dev"
             versionNameSuffix = "-dev"
@@ -63,8 +59,8 @@ android {
 
         create("prod") {
             applicationId = APP_ID
-            versionCode = VERSION_CODE
-            versionName = VERSION_NAME
+            versionCode = appdependencies.Builds.App.VERSION_CODE
+            versionName = appdependencies.Builds.App.VERSION_NAME
             setDimension("version")
             multiDexEnabled = true
         }
@@ -160,29 +156,13 @@ dependencies {
     implementation(fileTree(mapOf("include" to listOf("*.jar"), "dir" to "libs")))
     implementation(kotlin("stdlib-jdk8", Versions.kotlin))
     implementation(project(":core"))
+    implementation(project(":providers"))
+    implementation(project(":onboarding"))
     // implementation(Libs.Core.material)
-
-    implementation(Libs.Lifecycle.extensions)
-    implementation(Libs.Lifecycle.common)
-
-    implementation(Libs.Room.runtime)
-    implementation(Libs.Room.ktx)
-
-    implementation(Libs.Retrofit.core)
-    implementation(Libs.Retrofit.moshi)
-    // implementation(Libs.Retrofit.moshicodegen)
-    implementation(Libs.Retrofit.logging)
-
-    implementation(Libs.ImageLoading.coil)
-
-    implementation(Libs.Common.kotpref)
 
     implementation(Libs.Common.viewPagerIndicator)
 
     testImplementation(Libs.Tests.junit)
     androidTestImplementation(Libs.Tests.runner)
     androidTestImplementation(Libs.Tests.espresso)
-
-    // kapt(Libs.Retrofit.moshicodegen)
-    kapt(Libs.Room.kapt)
 }

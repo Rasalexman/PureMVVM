@@ -9,4 +9,28 @@
     <string name="title_apply">Apply</string>
     <string name="title_loading">Loading…</string>
     <string name="title_next">Next</string>
+
+    <!-- ERRORS -->
+    <string name="error_user_password_incorrect">User password is incorrect or you trying to enter into another account</string>
+    <string name="error_user_repeated_password_incorrect">Repeated password does not equal to password written before</string>
+    <string name="error_user_email_incorrect">User email is incorrect or you trying to enter into another account</string>
+    <string name="error_user_phone_incorrect">User phone is incorrect or you trying to enter into another account</string>
+    <string name="error_user_name_empty">User name is empty. Please enter a valid name first</string>
+    <string name="error_user_email_empty">User email is empty. Please enter a valid email address first</string>
+    <string name="error_terms_of_usage_not_checked">You must agrees with terms of usage before using this application</string>
+    <string name="error_user_password_empty">User password is empty. Please enter a valid password from your account</string>
+    <string name="error_user_password_short">User password is too short. Minimum length is 6 characters</string>
+    <string name="error_user_phone_empty">User phone is empty. Please enter a valid phone number from your account</string>
+    <string name="error_user_phone_email_empty">Please enter a valid phone number or email address from your account</string>
+    <string name="error_user_sms_code_empty">Sms code is empty. Please enter a valid sms code</string>
+    <string name="error_user_not_exist">User account does not exist. Please Register!</string>
+    <string name="error_user_exist">User email account already exist. Please Register with another email!</string>
+    <string name="error_user_invalid_credentials">Incorrect user password or account does not exist!</string>
+    <string name="error_user_event_sign_in_failed">User auth event is broken! Please try later.</string>
+    <string name="error_user_sign_in">There is an error with logging in current account.</string>
+    <string name="error_unexpected">Sorry. Somethings goes wrong. Please try later.</string>
+    <string name="error_reducer_unexpected">Sorry. Somethings goes wrong with reducer call.</string>
+    <string name="error_too_many_request">Too many request. Please try later.</string>
+    <string name="error_internal_exception">Something goes wrong. Please try again later</string>
+    <string name="error_no_internet_connection">Please check your internet connection and try again</string>
 </resources>

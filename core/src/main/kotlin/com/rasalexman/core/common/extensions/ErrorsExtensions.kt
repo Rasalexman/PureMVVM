@@ -1,10 +1,11 @@
 package com.rasalexman.core.common.extensions
 
+import com.rasalexman.core.R
 import com.rasalexman.core.data.errors.QException
 
 fun QException.getErrorMessageResId(): Int {
     return when(this) {
-        /*is QException.AuthErrors.EmptyName -> R.string.error_user_name_empty
+        is QException.AuthErrors.EmptyName -> R.string.error_user_name_empty
         is QException.AuthErrors.EmptyEmail -> R.string.error_user_email_empty
         is QException.AuthErrors.EmptyPassword -> R.string.error_user_password_empty
         is QException.AuthErrors.ShortPassword -> R.string.error_user_password_short
@@ -19,9 +20,10 @@ fun QException.getErrorMessageResId(): Int {
         is QException.AuthErrors.ResultError -> R.string.error_unexpected
         is QException.AuthErrors.EventNullError -> R.string.error_user_event_sign_in_failed
         is QException.AuthErrors.SignInFailedError -> R.string.error_user_sign_in
+        is QException.AuthErrors.UserExistError -> R.string.error_user_exist
 
         is QException.NoInternetConnectionException -> R.string.error_no_internet_connection
-        is QException.ActivityNullError -> R.string.error_internal_exception*/
+        is QException.ActivityNullError -> R.string.error_internal_exception
         else -> -1
     }
 }

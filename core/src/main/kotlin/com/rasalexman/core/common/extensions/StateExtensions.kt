@@ -75,7 +75,7 @@ inline fun <reified O : Any, reified I : IConvertableTo<O>> SResult<I>.mapTo(): 
 }
 
 fun SResult.ErrorResult.getMessage(): Any? {
-    return (this.message?.takeIf { (it as? String)?.isNotEmpty() == true || (it as? Int) != null } ?: (this.exception as? QException)?.getErrorMessageResId()) ?: this.exception?.message ?: this.exception?.cause?.message
+    return (this.message?.takeIf { (it as? String)?.isNotEmpty() == true || (it as? Int) != null && it > 0 } ?: (this.exception as? QException)?.getErrorMessageResId()) ?: this.exception?.message ?: this.exception?.cause?.message
 }
 
 // /--- Inline Applying functions

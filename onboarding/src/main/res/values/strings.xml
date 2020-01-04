@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">onboarding</string>
+
+    <string name="hint_enter_name">Name</string>
+    <string name="hint_enter_email">Email</string>
+    <string name="hint_enter_password">Password</string>
+    <string name="hint_repeat_password">Repeat password</string>
+    <string name="title_sign_in">Sign In</string>
+    <string name="title_sign_up">Sign Up</string>
+    <string name="title_register">Registration</string>
+
+    <string name="error_user_name_empty">Name is empty</string>
+    <string name="error_email_match">Wrong email</string>
+    <string name="error_password_empty">Password is empty</string>
+    <string name="error_password_repeat_match">Passwords is not equals</string>
+    <string name="error_password_repeat_empty">Password is empty</string>
+</resources>

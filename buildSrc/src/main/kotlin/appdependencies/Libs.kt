@@ -18,6 +18,7 @@ object Libs {
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.Navigation.ui}"
         const val material = "com.google.android.material:material:${Versions.material}"
         const val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
+        const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipreRefresh}"
     }
 
     object Lifecycle {

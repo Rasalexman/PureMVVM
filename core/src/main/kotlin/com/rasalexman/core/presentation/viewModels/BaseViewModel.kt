@@ -10,7 +10,6 @@ import com.rasalexman.coroutinesmanager.SuspendCatch
 import com.rasalexman.coroutinesmanager.SuspendTry
 import com.rasalexman.coroutinesmanager.launchOnUITryCatch
 import com.rasalexman.core.common.extensions.errorResult
-import com.rasalexman.core.common.extensions.getNavigator
 import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.viewModels.IBaseViewModel
@@ -44,7 +43,7 @@ open class BaseViewModel : ViewModel(), IKodi,
         when (viewEvent) {
             is SEvent.NavigateTo -> {
                 val (direction, navigator) = viewEvent
-                getNavigator(navigator).navigate(direction)
+                navigator.navigate(direction)
             }
         }
     }

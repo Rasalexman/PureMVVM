@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ErrorText" parent="TextAppearance.Design.Error">
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+    <style name="EditTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/color_bg_primary</item>
+        <item name="boxStrokeWidth">@dimen/size_1dp</item>
+        <item name="boxBackgroundColor">@color/color_bg_secondary</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
+    </style>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TEXT COLORS -->
+    <color name="text_primary">#00171F</color>
+    <color name="text_secondary">#667479</color>
+
+    <!-- BACKGROUND COLORS -->
+    <color name="color_bg_header">#ff6f00</color>
+    <color name="color_bg_primary">#00838F</color>
+    <color name="color_bg_secondary">#2E294E</color>
+    <color name="color_bg_disabled">#b0bec5</color>
+
+    <!-- MAIN COLORS -->
+    <color name="color_purple">#482275</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_transparent">#00FFFFFF</color>
+</resources>

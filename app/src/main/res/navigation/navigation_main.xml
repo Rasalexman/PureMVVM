@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.rasalexman.puremvvm.presentation.start.StartFragment"
+        tools:layout="@layout/fragment_start">
+    </fragment>
+
+    <action
+        android:id="@+id/showOnboardingFragment"
+        app:destination="@id/onboardingFragment"
+        app:popUpTo="@+id/navigation_main"
+        app:popUpToInclusive="true" />
+
+    <action
+        android:id="@+id/showTabsFragment"
+        app:destination="@id/tabsFragment"
+        app:popUpTo="@+id/navigation_main"
+        app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.rasalexman.onboarding.presentation.OnboardingHostFragment"
+        tools:layout="@layout/fragment_host_onboarding">
+    </fragment>
+
+    <fragment
+        android:id="@+id/tabsFragment"
+        android:name="com.rasalexman.puremvvm.presentation.tabs.TabsHostFragment"
+        tools:layout="@layout/fragment_host_tabs">
+    </fragment>
+
+</navigation>
