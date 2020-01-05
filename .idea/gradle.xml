@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/onboarding" />
             <option value="$PROJECT_DIR$/providers" />
+            <option value="$PROJECT_DIR$/tabhome" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

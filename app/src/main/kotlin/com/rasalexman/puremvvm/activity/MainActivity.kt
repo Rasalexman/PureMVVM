@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity(), IBaseHost, IKodi {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        unbindNavController()
         bindNavController()
     }
 
     override fun bindNavController() {
-        unbind<Navigator.MainNavigator>(navigatorTag)
         bind<Navigator.MainNavigator>(navigatorTag) with single {
             Navigator.MainNavigator(
                 hostController = navigatorController,
@@ -47,6 +47,10 @@ class MainActivity : AppCompatActivity(), IBaseHost, IKodi {
                 showTabsDirection = NavigationMainDirections.showTabsFragment()
             )
         }
+    }
+
+    override fun unbindNavController() {
+        unbind<Navigator.MainNavigator>(navigatorTag)
     }
 
     override fun onSupportNavigateUp(): Boolean {

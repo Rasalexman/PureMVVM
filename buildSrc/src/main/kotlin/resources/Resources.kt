@@ -51,6 +51,8 @@ object Resources {
 
     object Home {
         val dirs = arrayListOf(
+            "src/main/res-components/movieslist",
+            "src/main/res-components/homelist",
             "src/main/res"
         )
 

@@ -158,7 +158,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":providers"))
     implementation(project(":onboarding"))
-    // implementation(Libs.Core.material)
+    implementation(project(":tabhome"))
 
     implementation(Libs.Common.viewPagerIndicator)
 

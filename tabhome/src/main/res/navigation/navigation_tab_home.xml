@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_tab_home"
+    app:startDestination="@id/homeListFragment">
+
+    <fragment
+        android:id="@+id/homeListFragment"
+        android:name="com.rasalexman.tabhome.presentation.homelist.HomeListFragment"
+        tools:layout="@layout/layout_toolbar_recycler">
+
+        <action
+            android:id="@+id/showMoviesListFragment"
+            app:destination="@+id/moviesListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/moviesListFragment"
+        android:name="com.rasalexman.tabhome.presentation.movieslist.MoviesListFragment"
+        tools:layout="@layout/layout_toolbar_recycler">
+
+        <argument
+            android:name="itemName"
+            android:defaultValue="default"
+            app:argType="string" />
+
+        <argument
+            android:name="itemId"
+            android:defaultValue="default"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

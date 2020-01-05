@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/allTasksFragment"
+        android:id="@+id/homeTabHostFragment"
         android:title="@null"
         android:icon="@drawable/ic_home_tab_24dp"
         />
 
     <item
-        android:id="@+id/myTasksFragment"
+        android:id="@+id/searchListFragment"
         android:title="@null"
         android:icon="@drawable/ic_my_tab_24dp"
         />
 
     <item
-        android:id="@+id/eventsFragment"
+        android:id="@+id/eventsListFragment"
         android:title="@null"
         android:icon="@drawable/ic_notif_tab_24dp"
         />
 
     <item
-        android:id="@+id/menuFragment"
+        android:id="@+id/profileFragment"
         android:title="@null"
         android:icon="@drawable/ic_menu_tab_24dp"
         />

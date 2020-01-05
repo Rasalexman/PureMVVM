@@ -18,7 +18,11 @@ abstract class BaseHostFragment<out VM : IBaseViewModel> : BaseFragment<VM>(), I
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        unbind<Navigator>(navigatorTag)
+        unbindNavController()
         bindNavController()
+    }
+
+    override fun unbindNavController() {
+        unbind<Navigator>(navigatorTag)
     }
 }

@@ -26,7 +26,7 @@ class StartViewModel : BaseViewModel() {
         return if (userPreference.email.isNotEmpty()) {
             mainNavigator().showTabsDirection
         } else {
-            mainNavigator().showOnboardingDirection
+            mainNavigator().showTabsDirection//showOnboardingDirection
         }.toNavResult(mainNavigator().hostController)
     }
 }

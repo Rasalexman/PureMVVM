@@ -1,11 +1,11 @@
-import resources.Resources.Providers.dirs
-import resources.Resources.Providers.javaDirs
+import resources.Resources.Home.dirs
+import resources.Resources.Home.javaDirs
 
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
-    kotlin("kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -14,13 +14,10 @@ android {
     defaultConfig {
         minSdkVersion(appdependencies.Builds.MIN_VERSION)
         targetSdkVersion(appdependencies.Builds.TARGET_VERSION)
-        versionCode = appdependencies.Builds.Providers.VERSION_CODE
-        versionName = appdependencies.Builds.Providers.VERSION_NAME
+        versionCode = appdependencies.Builds.Home.VERSION_CODE
+        versionName = appdependencies.Builds.Home.VERSION_NAME
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         //consumerProguardFiles = "consumer-rules.pro"
-
-        buildConfigField("String", "SERVER_URL", "\"http://connect.quasa.io/api/v1/\"")
-        buildConfigField("String", "IMAGES_URL", "\"https://image.tmdb.org/t/p/w500\"")
     }
 
     buildTypes {
@@ -63,18 +60,9 @@ dependencies {
     implementation(fileTree(mapOf("include" to listOf("*.jar"), "dir" to "libs")))
     implementation(kotlin("stdlib-jdk8", appdependencies.Versions.kotlin))
 
-    api(project(":core"))
-
-    api(appdependencies.Libs.Room.runtime)
-    api(appdependencies.Libs.Room.ktx)
-
-    api(appdependencies.Libs.Retrofit.core)
-    api(appdependencies.Libs.Retrofit.moshi)
-    api(appdependencies.Libs.Retrofit.logging)
+    api(project(":providers"))
 
     testImplementation(appdependencies.Libs.Tests.junit)
     androidTestImplementation(appdependencies.Libs.Tests.runner)
     androidTestImplementation(appdependencies.Libs.Tests.espresso)
-
-    kapt(appdependencies.Libs.Room.kapt)
 }

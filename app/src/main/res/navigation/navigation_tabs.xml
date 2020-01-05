@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_tabs">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_tabs"
+    app:startDestination="@id/homeTabHostFragment">
+
+    <fragment android:id="@+id/homeTabHostFragment"
+        android:name="com.rasalexman.tabhome.presentation.HomeTabHostFragment"
+        tools:layout="@layout/fragment_host_tab_home"
+        />
+
+    <fragment android:id="@+id/searchListFragment"
+        android:name="com.rasalexman.puremvvm.presentation.tabs.search.SearchListFragment"
+        tools:layout="@layout/layout_toolbar_recycler"
+        />
+
+    <fragment android:id="@+id/eventsListFragment"
+        android:name="com.rasalexman.puremvvm.presentation.tabs.events.EventsListFragment"
+        tools:layout="@layout/layout_toolbar_recycler"
+        />
+
+    <fragment android:id="@+id/profileFragment"
+        android:name="com.rasalexman.puremvvm.presentation.tabs.profile.ProfileFragment"
+        tools:layout="@layout/layout_toolbar_recycler"
+        />
 
 </navigation>
