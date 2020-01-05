@@ -2,10 +2,15 @@ package com.rasalexman.tabhome.presentation.movieslist
 
 import android.view.View
 import androidx.annotation.Keep
+import coil.api.load
+import com.rasalexman.core.common.extensions.clear
+import com.rasalexman.core.common.extensions.hide
+import com.rasalexman.core.common.extensions.show
 import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.holders.BaseViewHolder
 import com.rasalexman.providers.BuildConfig
 import com.rasalexman.tabhome.R
+import kotlinx.android.synthetic.main.layout_item_movies.view.*
 
 @Keep
 data class MovieItemUI(
@@ -39,32 +44,36 @@ data class MovieItemUI(
     class MovieViewHolder(view: View) : BaseViewHolder<MovieItemUI>(view) {
 
         override fun bindView(item: MovieItemUI, payloads: MutableList<Any>) {
-            titleTextView.text = item.title
-            releaseTextView.text = item.releaseDate
-            overviewTextView.text = item.overview
-            setVoteAverage(item)
+            with(containerView) {
+                titleTextView.text = item.title
+                releaseTextView.text = item.releaseDate
+                overviewTextView.text = item.overview
+                setVoteAverage(item)
 
-            movieImageView.load(item.fullPosterUrl) {
-                placeholder(R.drawable.ic_cloud_off_black_24dp)
-                target(onStart = {
-                    imageProgressBar.show()
-                }, onSuccess = {
-                    movieImageView.setImageDrawable(it)
-                    imageProgressBar.hide(true)
-                }, onError = {
-                    movieImageView.setImageResource(R.drawable.ic_cloud_off_black_24dp)
-                    imageProgressBar.hide(true)
-                })
+                movieImageView.load(item.fullPosterUrl) {
+                    placeholder(R.drawable.ic_cloud_off_black_24dp)
+                    target(onStart = {
+                        imageProgressBar.show()
+                    }, onSuccess = {
+                        movieImageView.setImageDrawable(it)
+                        imageProgressBar.hide(true)
+                    }, onError = {
+                        movieImageView.setImageResource(R.drawable.ic_cloud_off_black_24dp)
+                        imageProgressBar.hide(true)
+                    })
+                }
             }
         }
 
         override fun unbindView(item: MovieItemUI) {
-            titleTextView.clear()
-            releaseTextView.clear()
-            overviewTextView.clear()
-            voteAverageTextView.clear()
-            movieImageView.clear()
-            imageProgressBar.hide()
+            with(containerView) {
+                titleTextView.clear()
+                releaseTextView.clear()
+                overviewTextView.clear()
+                voteAverageTextView.clear()
+                movieImageView.clear()
+                imageProgressBar.hide()
+            }
         }
 
         private fun View.setVoteAverage(item: MovieItemUI) {
