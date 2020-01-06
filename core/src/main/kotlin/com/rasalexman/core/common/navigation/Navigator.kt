@@ -24,9 +24,15 @@ sealed class Navigator(
         hostController
     )
 
+    class HomeTabNavigator(hostController: NavController) : Navigator(
+        HOME_TAB_NAVIGATOR,
+        hostController
+    )
+
     companion object {
         const val MAIN_NAVIGATOR: String = "MainNavigator"
         const val TAB_NAVIGATOR: String = "TabNavigator"
         const val ONBOARDING_NAVIGATOR: String = "OnboardingNavigator"
+        const val HOME_TAB_NAVIGATOR: String = "HomeNavigator"
     }
 }

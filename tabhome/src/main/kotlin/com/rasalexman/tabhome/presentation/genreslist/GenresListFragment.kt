@@ -3,6 +3,7 @@ package com.rasalexman.tabhome.presentation.genreslist
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.rasalexman.core.common.extensions.ScrollPosition
+import com.rasalexman.core.common.extensions.homeTabNavigator
 import com.rasalexman.core.common.extensions.string
 import com.rasalexman.core.presentation.recyclerview.BaseToolbarRecyclerFragment
 import com.rasalexman.tabhome.R
@@ -21,7 +22,7 @@ class GenresListFragment : BaseToolbarRecyclerFragment<GenreItemUI, GenresViewMo
         get() = scrollPosition
 
     override val onItemClickHandler: ((GenreItemUI) -> Unit) = { genreItem ->
-        this.findNavController().navigate(
+        homeTabNavigator().hostController.navigate(
             GenresListFragmentDirections.showMoviesListFragment(
                 itemName = genreItem.name,
                 itemId = genreItem.id

@@ -34,6 +34,8 @@ class MoviesViewModel : BaseViewModel() {
     override val anyLiveData by unsafeLazy {
         genreIdLiveData.switchMap {
             liveData(viewModelScope.coroutineContext + CoroutinesProvider.IO) {
+
+                resultLiveData.postValue(loadingResult())
                 val pageLiveData =
                     LivePagedListBuilder(
                         localDataSourceUseCase.execute(it.data),
@@ -69,12 +71,12 @@ class MoviesViewModel : BaseViewModel() {
     ) : PagedList.BoundaryCallback<MovieEntity>(), ICoroutinesManager {
 
         override fun onZeroItemsLoaded() = fetchDataFromNetwork()
-        override fun onItemAtEndLoaded(itemAtEnd: MovieEntity) = fetchDataFromNetwork()
+        override fun onItemAtEndLoaded(itemAtEnd: MovieEntity) = fetchDataFromNetwork(itemAtEnd.releaseDate)
 
-        private fun fetchDataFromNetwork() = launchOnUI {
+        private fun fetchDataFromNetwork(fromReleaseDate: Long? = null) = launchOnUI {
             loadingLiveData?.value = loadingResult()
             doWithAsync {
-                remoteUseCase?.execute(genreId)
+                remoteUseCase?.execute(genreId, fromReleaseDate)
             }
         }
 

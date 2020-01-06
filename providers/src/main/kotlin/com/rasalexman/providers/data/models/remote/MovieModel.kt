@@ -26,33 +26,35 @@ data class MovieModel(
     val tagline: String?,
     val budget: Long?
 ) : IConvertableTo<MovieEntity> {
-    override fun convertTo(): MovieEntity {
-        return MovieEntity(
-            id = id,
-            voteCount = vote_count ?: 0,
-            voteAverage = vote_average ?: 0.0,
-            isVideo = video ?: false,
-            title = title.orEmpty(),
-            popularity = popularity ?: 0.0,
-            posterPath = poster_path.orEmpty(),
-            originalLanguage = original_language.orEmpty(),
-            originalTitle = original_title.orEmpty(),
-            genreIds = genre_ids ?: emptyList(),
-            backdropPath = backdrop_path.orEmpty(),
-            releaseDate = parseReleaseDate(),
-            adult = adult ?: false,
-            overview = overview.orEmpty(),
-            revenue = revenue ?: 0,
-            runtime = runtime ?: 0,
-            status = status.orEmpty(),
-            tagline = tagline.orEmpty(),
-            budget = budget ?: 0L
-        )
+    override fun convertTo(): MovieEntity? {
+        return release_date?.run {
+            MovieEntity(
+                id = id,
+                voteCount = vote_count ?: 0,
+                voteAverage = vote_average ?: 0.0,
+                isVideo = video ?: false,
+                title = title.orEmpty(),
+                popularity = popularity ?: 0.0,
+                posterPath = poster_path.orEmpty(),
+                originalLanguage = original_language.orEmpty(),
+                originalTitle = original_title.orEmpty(),
+                genreIds = genre_ids ?: emptyList(),
+                backdropPath = backdrop_path.orEmpty(),
+                releaseDate = parseReleaseDate(),
+                adult = adult ?: false,
+                overview = overview.orEmpty(),
+                revenue = revenue ?: 0,
+                runtime = runtime ?: 0,
+                status = status.orEmpty(),
+                tagline = tagline.orEmpty(),
+                budget = budget ?: 0L
+            )
+        }
     }
 
     private fun parseReleaseDate(): Long {
         return release_date?.let {
-            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(release_date)?.time ?: 0L
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(it)?.time ?: 0L
         } ?: 0L
     }
 

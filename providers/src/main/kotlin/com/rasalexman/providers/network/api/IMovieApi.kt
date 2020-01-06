@@ -23,7 +23,7 @@ interface IMovieApi {
         @Query("with_genres") genreId: Int,
         @Query("page") page: Int = 1,
         @Query("sort_by") sort_by: String = "popularity.desc"
-    ): Response<GetMoviesListResponse>
+    ): Response<GetMoviesListResponse<MovieModel>>
 
     @GET("discover/movie")
     suspend fun getMoviesListByGenreId(
@@ -31,17 +31,17 @@ interface IMovieApi {
         @Query("page") page: Int = 1,
         @Query("release_date.lte") lte: String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date()),
         @Query("sort_by") sortBy: String = "release_date.desc"
-    ): Response<GetMoviesListResponse>
+    ): Response<GetMoviesListResponse<MovieModel>>
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(@Path("movie_id") movieId: Int): Response<MovieModel>
 
     @GET("movie/upcoming")
-    suspend fun getUpcomingMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse>
+    suspend fun getUpcomingMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 
     @GET("movie/popular")
-    suspend fun getPopularMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse>
+    suspend fun getPopularMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse>
+    suspend fun getTopRatedMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 }

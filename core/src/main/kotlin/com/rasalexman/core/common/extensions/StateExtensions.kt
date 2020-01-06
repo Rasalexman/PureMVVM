@@ -55,6 +55,7 @@ fun SResult<*>.handle() {
 }
 
 // /------- Mapper function
+@Suppress("UNCHECKED_CAST")
 inline fun <reified O : Any, reified I : IConvertableTo<O>> SResult<List<I>>.mapListTo(noinline converter: InOutHandler<I, O?>? = null): SResult<List<O>> {
     return when (this) {
         is SResult.Success -> {
@@ -64,6 +65,7 @@ inline fun <reified O : Any, reified I : IConvertableTo<O>> SResult<List<I>>.map
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 inline fun <reified O : Any, reified I : Any> SResult<List<I>>.mapListBy(noinline converter: (I.() -> O)? = null): SResult<List<O>> {
     return when(this) {
         is SResult.Success -> {

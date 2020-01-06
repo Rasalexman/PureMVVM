@@ -6,7 +6,7 @@ import com.rasalexman.providers.data.models.remote.MovieModel
 
 interface IMoviesRemoteDataSource : IRemoteDataSource {
 
-    suspend fun getByGenreId(genreId: Int): SResult<List<MovieModel>>
+    suspend fun getByGenreId(genreId: Int, lastReleaseDate: Long?): SResult<List<MovieModel>>
 
     suspend fun getMovieDetails(movieId: Int): SResult<MovieModel>
 

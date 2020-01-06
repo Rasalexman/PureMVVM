@@ -18,7 +18,7 @@ abstract class BaseTabViewPagerFragment<out VM : IBaseViewModel> : BaseViewPager
     open val tabViewLayout: TabLayout
         get() = tabLayout as TabLayout
 
-    private val selectedPosition: Int
+    protected val selectedPosition: Int
         get() = viewModel?.getFromSaveState(KEY_POSITION) ?: DEFAULT_POSITION
 
     private var selectedTab: TabLayout.Tab? = null
@@ -36,14 +36,14 @@ abstract class BaseTabViewPagerFragment<out VM : IBaseViewModel> : BaseViewPager
 
     override fun onTabSelected(tab: TabLayout.Tab) {
         viewModel?.addToSaveState(KEY_POSITION, tab.position)
-        selectTab(tab)
-    }
-
-    protected open fun selectTab(tab: TabLayout.Tab) {
         unSelectTab(selectedTab)
+        selectTab(tab)
         selectedTab = tab
     }
 
+    protected open fun selectTab(tab: TabLayout.Tab) {
+        selectedTab = tab
+    }
     protected open fun unSelectTab(tab: TabLayout.Tab?) = Unit
     protected open fun setCustomTabView(tab: TabLayout.Tab, position: Int) = Unit
 

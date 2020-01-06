@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tabTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/size_8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/size_8dp"
+        android:textColor="@color/text_secondary"
+        tools:text="All"
+        tools:textColor="@color/color_white"
+        tools:background="@drawable/bg_tab_selected"/>
+
+</FrameLayout>

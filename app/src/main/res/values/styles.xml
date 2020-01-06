@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -32,6 +32,13 @@
         <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
         <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
 
+    </style>
+
+    <style name="Base.Widget.Design.TabLayout" parent="android:Widget" tools:ignore="PrivateResource">
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="android:background">@drawable/bg_tab_default</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:elevation">@dimen/size_6dp</item>
     </style>
 
 </resources>

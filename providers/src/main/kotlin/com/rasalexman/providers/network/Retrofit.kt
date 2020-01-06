@@ -73,7 +73,7 @@ fun createOkHttpClient(cache: Cache? = null): OkHttpClient {
 
         val url = originalHttpUrl.newBuilder()
             .addQueryParameter("api_key", BuildConfig.ApiKey)
-            .addQueryParameter("language", Locale.getDefault().toString())
+            .addQueryParameter("language", Locale.getDefault().toLanguageTag())
             .build()
 
         chain.proceed(request.newBuilder()

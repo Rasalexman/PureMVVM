@@ -17,17 +17,14 @@ class MoviesRepository(
         return localDataSource.getDataSourceFactory(genreId)
     }
 
-    override suspend fun getRemoteMovies(genreId: Int): SResult<List<MovieEntity>> {
+    override suspend fun getRemoteMovies(
+        genreId: Int,
+        lastReleaseDate: Long?
+    ): SResult<List<MovieEntity>> {
         return remoteDataSource
-                .getByGenreId(genreId)
-                .mapListTo()
+            .getByGenreId(genreId, lastReleaseDate)
+            .mapListTo()
     }
-
-    /*suspend fun getNewRemoteMovies(genreId: Int): SResult<List<MovieEntity>> {
-        return remoteDataSource
-                .getNewMoviesByGenreId(genreId)
-                .mapListTo()
-    }*/
 
     override suspend fun saveMoviesList(data: List<MovieEntity>) {
         localDataSource.insertAll(data)

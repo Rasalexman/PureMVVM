@@ -1,6 +1,6 @@
 package com.rasalexman.onboarding.presentation
 
-import com.mincor.kodi.core.bind
+import com.mincor.kodi.core.bindTag
 import com.mincor.kodi.core.single
 import com.mincor.kodi.core.with
 import com.rasalexman.core.common.navigation.Navigator
@@ -20,7 +20,7 @@ class OnboardingHostFragment : BaseHostFragment<IBaseViewModel>() {
         get() = Navigator.ONBOARDING_NAVIGATOR
 
     override fun bindNavController() {
-        bind<Navigator>(navigatorTag) with single {
+        bindTag(navigatorTag) with single {
             Navigator.OnboardingNavigator(hostController = navigatorController)
         }
     }

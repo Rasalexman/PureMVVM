@@ -61,7 +61,7 @@ class MoviesListFragment : BaseToolbarPagedRecyclerFragment<MovieEntity, MovieIt
                 releaseDate = releaseDate.takeIf { dt ->
                     dt > 0L
                 }?.let {
-                    SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(releaseDate)
+                    SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(Date(releaseDate))
                 }.orEmpty(),
                 adult = adult,
                 overview = overview

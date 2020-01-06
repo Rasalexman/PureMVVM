@@ -11,7 +11,7 @@ interface IMoviesRepository : IBaseRepository<IMoviesLocalDataSource, IMoviesRem
 
     suspend fun getLocalMoviesDataSource(genreId: Int): DataSource.Factory<Int, MovieEntity>
 
-    suspend fun getRemoteMovies(genreId: Int): SResult<List<MovieEntity>>
+    suspend fun getRemoteMovies(genreId: Int, lastReleaseDate: Long?): SResult<List<MovieEntity>>
 
     suspend fun saveMoviesList(data: List<MovieEntity>)
 

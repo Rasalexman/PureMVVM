@@ -4,6 +4,7 @@ object Resources {
 
     object App {
         val dirs = arrayListOf(
+            "src/main/res-components/events",
             "src/main/res-components/tabs",
             "src/main/res-components/start",
             "src/main/res"
