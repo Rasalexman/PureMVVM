@@ -73,7 +73,6 @@ class MoviesViewModel : BaseViewModel() {
 
         private fun fetchDataFromNetwork() = launchOnUI {
             loadingLiveData?.value = loadingResult()
-
             doWithAsync {
                 remoteUseCase?.execute(genreId)
             }
