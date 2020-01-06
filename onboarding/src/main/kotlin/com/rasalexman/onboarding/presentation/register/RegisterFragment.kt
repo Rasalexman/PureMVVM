@@ -1,6 +1,7 @@
 package com.rasalexman.onboarding.presentation.register
 
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.util.PatternsCompat
 import androidx.fragment.app.viewModels
 import com.rasalexman.core.common.extensions.*
@@ -36,6 +37,16 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
             onBackPressed()
         }
         signUpButton.setOnClickListener(::onSignUpClickHandler)
+        repeatEditText.setOnEditorActionListener { v, actionId, event ->
+            when(actionId) {
+                EditorInfo.IME_ACTION_GO,
+                EditorInfo.IME_ACTION_DONE -> {
+                    hideKeyboard()
+                    false
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onResultHandler(result: SResult<*>) {

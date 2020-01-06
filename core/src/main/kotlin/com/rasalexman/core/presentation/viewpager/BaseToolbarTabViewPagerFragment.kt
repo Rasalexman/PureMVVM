@@ -1,7 +1,8 @@
-package com.rasalexman.core.presentation
+package com.rasalexman.core.presentation.viewpager
 
 import androidx.appcompat.widget.Toolbar
 import com.rasalexman.core.R
+import com.rasalexman.core.presentation.TabSelectListener
 import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 import kotlinx.android.synthetic.main.layout_toolbar.*
 

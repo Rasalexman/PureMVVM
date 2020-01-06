@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputEditText
 import com.mincor.kodi.core.*
 import com.rasalexman.core.common.extensions.hideKeyboard
 import com.rasalexman.core.common.navigation.Navigator
@@ -67,11 +68,14 @@ class MainActivity : AppCompatActivity(), IBaseHost, IKodi {
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
             val v = currentFocus
-            if (v is EditText) {
-                val outRect = Rect()
-                v.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    hideKeyboard()
+            when(currentFocus) {
+                is EditText,
+                is TextInputEditText -> {
+                    val outRect = Rect()
+                    v?.getGlobalVisibleRect(outRect)
+                    if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                        hideKeyboard()
+                    }
                 }
             }
         }

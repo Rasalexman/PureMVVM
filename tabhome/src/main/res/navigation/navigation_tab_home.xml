@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeListFragment"
-        android:name="com.rasalexman.tabhome.presentation.homelist.HomeListFragment"
+        android:name="com.rasalexman.tabhome.presentation.genreslist.GenresListFragment"
         tools:layout="@layout/layout_toolbar_recycler">
 
         <action
@@ -27,8 +27,8 @@
 
         <argument
             android:name="itemId"
-            android:defaultValue="default"
-            app:argType="string" />
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

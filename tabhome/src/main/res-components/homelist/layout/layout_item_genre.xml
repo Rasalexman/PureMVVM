@@ -54,7 +54,7 @@
 
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/titleGenreTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/gray_alpha_60"

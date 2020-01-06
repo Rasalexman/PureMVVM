@@ -21,7 +21,7 @@ fun Any.log(message: String?, tag: String = DEFAULT_TAG) {
     }
 }
 
-fun <T, R> T?.doIfNull(input: OutHandler<R>): Any? {
+fun <T> T?.doIfNull(input: OutHandler<T>): T {
     return this ?: input()
 }
 

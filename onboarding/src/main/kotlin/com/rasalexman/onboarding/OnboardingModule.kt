@@ -1,4 +1,4 @@
-package com.rasalexman.onboarding.modules
+package com.rasalexman.onboarding
 
 import com.mincor.kodi.core.*
 import com.rasalexman.onboarding.domain.CheckUserRegisteredUseCase

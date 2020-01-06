@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">tabhome</string>
+
+    <string name="title_tab_home">Genres</string>
 </resources>

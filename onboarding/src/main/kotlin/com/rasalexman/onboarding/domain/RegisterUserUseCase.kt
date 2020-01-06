@@ -15,8 +15,11 @@ class RegisterUserUseCase(
     override suspend fun execute(data: SignUpEventModel): SResult<Boolean> {
         return when (userRepository.getUser(data.email)) {
             is SResult.Success -> alertResult(exception = QException.AuthErrors.UserExistError)
-            is SResult.Empty -> {
-                userRepository.saveUserData(data.name, data.email, data.password)
+            is SResult.ErrorResult -> userRepository.saveUserData(
+                data.name,
+                data.email,
+                data.password
+            ).run {
                 true.toSuccessResult()
             }
             else -> errorResult(exception = QException.AuthErrors.ResultError())

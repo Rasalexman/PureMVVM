@@ -16,5 +16,5 @@ typealias SInSameOutHandler<T> = suspend (T) -> T
 typealias SInOutHandler<T, R> = suspend (T) -> R
 typealias SParentInOutHandler<P, T, R> = suspend P.(T) -> R
 
-typealias AnyStateLiveData = LiveData<SResult<Any>>
+typealias AnyResultLiveData = LiveData<SResult<Any>>
 typealias DefaultResultHandler = (SResult<Any>) -> Unit

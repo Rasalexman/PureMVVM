@@ -21,6 +21,7 @@ fun QException.getErrorMessageResId(): Int {
         is QException.AuthErrors.EventNullError -> R.string.error_user_event_sign_in_failed
         is QException.AuthErrors.SignInFailedError -> R.string.error_user_sign_in
         is QException.AuthErrors.UserExistError -> R.string.error_user_exist
+        is QException.AuthErrors.UserNullError -> R.string.error_user_not_exist
 
         is QException.NoInternetConnectionException -> R.string.error_no_internet_connection
         is QException.ActivityNullError -> R.string.error_internal_exception

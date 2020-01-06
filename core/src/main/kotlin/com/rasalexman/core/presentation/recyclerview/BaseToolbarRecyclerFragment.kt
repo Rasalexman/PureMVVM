@@ -1,4 +1,4 @@
-package com.rasalexman.core.presentation
+package com.rasalexman.core.presentation.recyclerview
 
 import androidx.appcompat.widget.Toolbar
 import com.rasalexman.core.R

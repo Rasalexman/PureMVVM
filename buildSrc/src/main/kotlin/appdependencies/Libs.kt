@@ -18,7 +18,8 @@ object Libs {
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.Navigation.ui}"
         const val material = "com.google.android.material:material:${Versions.material}"
         const val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
-        const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipreRefresh}"
+        const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefresh}"
+        const val paging = "androidx.paging:paging-runtime-ktx:${Versions.paging}"
     }
 
     object Lifecycle {
@@ -39,6 +40,7 @@ object Libs {
         const val core = "com.mikepenz:fastadapter:$fastAdapterLib@aar"
         const val ui = "com.mikepenz:fastadapter-extensions-ui:${fastAdapterLib}"
         const val diff = "com.mikepenz:fastadapter-extensions-diff:${fastAdapterLib}"
+        const val paged = "com.mikepenz:fastadapter-extensions-paged:${fastAdapterLib}"
         const val uiExt = "com.mikepenz:fastadapter-extensions-ui:${fastAdapterLib}"
         const val expandable = "com.mikepenz:fastadapter-extensions-expandable:${fastAdapterLib}"
     }

@@ -71,16 +71,17 @@ fun createOkHttpClient(cache: Cache? = null): OkHttpClient {
         val request = chain.request()
         val originalHttpUrl = request.url()
 
-        val url = originalHttpUrl.newBuilder().build()
+        val url = originalHttpUrl.newBuilder()
+            .addQueryParameter("api_key", BuildConfig.ApiKey)
+            .addQueryParameter("language", Locale.getDefault().toString())
+            .build()
+
         chain.proceed(request.newBuilder()
             .url(url)
             .removeHeader("Pragma")
             .addHeader("Content-type", "application/json")
             .addHeader("Cache-Control", "public, max-age=$NETWORK_AVAILABLE_AGE")
-            .addHeader("client", "android")
-            .addHeader("Language", Locale.getDefault().language)
-            .build()
-        )
+            .build())
     }
 
     httpClient.addNetworkInterceptor { chain ->

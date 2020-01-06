@@ -131,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:textColor="@color/text_primary"
+                android:imeOptions="actionDone"
                 android:textSize="@dimen/text_size_14sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

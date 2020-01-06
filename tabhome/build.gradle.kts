@@ -18,6 +18,8 @@ android {
         versionName = appdependencies.Builds.Home.VERSION_NAME
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         //consumerProguardFiles = "consumer-rules.pro"
+
+        buildConfigField("Integer", "ITEMS_ON_PAGE", "20")
     }
 
     buildTypes {
@@ -54,6 +56,10 @@ android {
         )
     }
 
+    androidExtensions {
+        isExperimental = true
+        defaultCacheImplementation = org.jetbrains.kotlin.gradle.internal.CacheImplementation.HASH_MAP
+    }
 }
 
 dependencies {

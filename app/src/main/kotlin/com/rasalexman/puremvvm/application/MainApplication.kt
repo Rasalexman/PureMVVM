@@ -5,6 +5,7 @@ import android.content.Context
 import com.mincor.kodi.core.*
 import com.rasalexman.providers.providersModule
 import com.rasalexman.puremvvm.modules.localDataSourceModule
+import com.rasalexman.puremvvm.modules.remoteDataSourceModule
 import com.rasalexman.puremvvm.modules.repositoryModule
 import com.rasalexman.puremvvm.modules.userCaseModule
 
@@ -14,6 +15,7 @@ class MainApplication : Application() {
         bind<Context>() with provider { applicationContext }
         import(providersModule)
         import(localDataSourceModule)
+        import(remoteDataSourceModule)
         import(repositoryModule)
         import(userCaseModule)
     }

@@ -1,4 +1,4 @@
-package com.rasalexman.core.presentation
+package com.rasalexman.core.presentation.recyclerview
 
 import android.os.Bundle
 import android.view.View
@@ -14,11 +14,12 @@ import com.rasalexman.core.common.extensions.ScrollPosition
 import com.rasalexman.core.common.extensions.hideKeyboard
 import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.data.dto.SResult
+import com.rasalexman.core.presentation.BaseFragment
 import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.utils.EndlessRecyclerViewScrollListener
 import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 
-abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewModel> : BaseFragment<VM>() {
+abstract class BaseRecyclerFragment<Item : BaseRecyclerUI<*>, out VM : IBaseViewModel> : BaseFragment<VM>() {
 
     open val recyclerViewId: Int
         get() = R.id.recyclerView
@@ -31,7 +32,7 @@ abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewMod
     protected var recycler: RecyclerView? = null
 
     // current iterating item
-    protected var currentItem: AbstractItem<*>? = null
+    protected var currentItem: Item? = null
 
     // layout manager for recycler
     protected open var recyclerLayoutManager: RecyclerView.LayoutManager? = null
@@ -43,9 +44,15 @@ abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewMod
     protected open var itemDecoration: RecyclerView.ItemDecoration? = null
 
     // main adapter items holder
-    protected open val itemAdapter: ItemAdapter<AbstractItem<*>> by unsafeLazy { ItemAdapter<AbstractItem<*>>() }
+    protected open val itemAdapter: ItemAdapter<Item> by unsafeLazy { ItemAdapter<Item>() }
+
+    // footer adapter
+    protected open val footerAdapter: ItemAdapter<AbstractItem<*>> by unsafeLazy { ItemAdapter<AbstractItem<*>>() }
+
     // save our FastAdapter
-    protected open val mFastItemAdapter: FastAdapter<AbstractItem<*>> by unsafeLazy { FastAdapter.with(itemAdapter) }
+    protected open val mFastItemAdapter: FastAdapter<AbstractItem<*>> by unsafeLazy {
+        FastAdapter.with(listOf(itemAdapter, footerAdapter))
+    }
 
     // последняя сохраненная позиция (index & offset) прокрутки ленты
     protected open val previousPosition: ScrollPosition? = null
@@ -59,7 +66,7 @@ abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewMod
     //
     open val onLoadNextPageHandler: ((Int) -> Unit)? = null
     open val onLoadNextHandler: (() -> Unit)? = null
-    open val onItemClickHandler: ((I) -> Unit)? = null
+    open val onItemClickHandler: ((Item) -> Unit)? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -92,17 +99,16 @@ abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewMod
     override fun showLoading() {
         hideKeyboard()
         hideLoading()
-        itemAdapter.add(progressItem)
+        footerAdapter.add(progressItem)
         isLoading = true
     }
 
     override fun hideLoading() {
-        val position = itemAdapter.getAdapterPosition(progressItem)
-        if (position > -1) itemAdapter.remove(position)
+        footerAdapter.clear()
         isLoading = false
     }
 
-    open fun showItems(list: List<I>) {
+    open fun showItems(list: List<Item>) {
         hideLoading()
         if (list.isNotEmpty()) {
             itemAdapter.set(list)
@@ -111,7 +117,7 @@ abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewMod
         }
     }
 
-    open fun addNewItems(list: List<I>) {
+    open fun addNewItems(list: List<Item>) {
         hideLoading()
         if (list.isNotEmpty()) {
             FastAdapterDiffUtil[itemAdapter] = FastAdapterDiffUtil.calculateDiff(itemAdapter, list)
@@ -119,7 +125,7 @@ abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewMod
         }
     }
 
-    open fun addItems(list: List<I>) {
+    open fun addItems(list: List<Item>) {
         hideLoading()
         if (list.isNotEmpty()) {
             itemAdapter.add(list)
@@ -155,7 +161,7 @@ abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewMod
 
     protected open fun addClickListener() {
         mFastItemAdapter.onClickListener = { _, _, item, _ ->
-            (item as? I)?.let {
+            (item as? Item)?.let {
                 onItemClickHandler?.invoke(it)
             }
             false
@@ -265,7 +271,7 @@ abstract class BaseRecyclerFragment<I : BaseRecyclerUI<*>, out VM : IBaseViewMod
         hideLoading()
         when (result) {
             is SResult.Success -> {
-                (result.data as? List<I>)?.let { dataList ->
+                (result.data as? List<Item>)?.let { dataList ->
                     showItems(dataList)
                 }
             }

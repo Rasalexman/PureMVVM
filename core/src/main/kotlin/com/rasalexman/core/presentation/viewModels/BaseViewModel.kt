@@ -1,27 +1,27 @@
-package io.quasa.quasaconnect.core.presentation.viewModels
+package com.rasalexman.core.presentation.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mincor.kodi.core.IKodi
 import com.mincor.kodi.delegates.immutableGetter
+import com.rasalexman.core.common.extensions.errorResult
+import com.rasalexman.core.data.dto.SEvent
+import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.SuspendCatch
 import com.rasalexman.coroutinesmanager.SuspendTry
 import com.rasalexman.coroutinesmanager.launchOnUITryCatch
-import com.rasalexman.core.common.extensions.errorResult
-import com.rasalexman.core.data.dto.SEvent
-import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 
 open class BaseViewModel : ViewModel(), IKodi,
     IBaseViewModel {
 
-    protected open val observableLiveData: LiveData<*>? = null
-    protected open val errorCatchLiveData by immutableGetter { MutableLiveData<SResult<Any>>() }
+    protected open val anyLiveData: LiveData<*>? = null
+    protected open val resultLiveData: LiveData<*>? = null
+    protected open val errorLiveData by immutableGetter { MutableLiveData<SResult<*>>() }
 
     protected open val defaultCatchBlock: SuspendCatch<Unit> = {
-        errorCatchLiveData.value = errorResult(message = it.message.orEmpty(), exception = it)
+        errorLiveData.value = errorResult(message = it.message.orEmpty(), exception = it)
     }
 
     /**
@@ -51,12 +51,17 @@ open class BaseViewModel : ViewModel(), IKodi,
     /**
      *
      */
-    override fun onErrorLiveData(): LiveData<SResult<Any>> = errorCatchLiveData
+    override fun onAnyLiveData(): LiveData<*>? = anyLiveData
 
     /**
      *
      */
-    override fun onResultLiveData(): LiveData<*>? = observableLiveData
+    override fun onResultLiveData(): LiveData<*>? = resultLiveData
+
+    /**
+     *
+     */
+    override fun onErrorLiveData(): LiveData<SResult<*>> = errorLiveData
 
     /**
      *

@@ -10,13 +10,13 @@ import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.CoroutinesProvider
 import com.rasalexman.providers.preference.IUserPreference
-import io.quasa.quasaconnect.core.presentation.viewModels.BaseViewModel
+import com.rasalexman.core.presentation.viewModels.BaseViewModel
 
 class StartViewModel : BaseViewModel() {
 
     private val userPreference: IUserPreference by immutableInstance()
 
-    override val observableLiveData: LiveData<SResult<Any>> by unsafeLazy {
+    override val resultLiveData: LiveData<SResult<Any>> by unsafeLazy {
         liveData(viewModelScope.coroutineContext + CoroutinesProvider.IO) {
             emit(getResult())
         }
@@ -26,7 +26,7 @@ class StartViewModel : BaseViewModel() {
         return if (userPreference.email.isNotEmpty()) {
             mainNavigator().showTabsDirection
         } else {
-            mainNavigator().showTabsDirection//showOnboardingDirection
+            mainNavigator().showOnboardingDirection
         }.toNavResult(mainNavigator().hostController)
     }
 }

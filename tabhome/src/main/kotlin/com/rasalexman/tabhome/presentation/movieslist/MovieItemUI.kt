@@ -2,6 +2,7 @@ package com.rasalexman.tabhome.presentation.movieslist
 
 import android.view.View
 import androidx.annotation.Keep
+import androidx.core.view.isVisible
 import coil.api.load
 import com.rasalexman.core.common.extensions.clear
 import com.rasalexman.core.common.extensions.hide
@@ -10,7 +11,7 @@ import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.holders.BaseViewHolder
 import com.rasalexman.providers.BuildConfig
 import com.rasalexman.tabhome.R
-import kotlinx.android.synthetic.main.layout_item_movies.view.*
+import kotlinx.android.synthetic.main.layout_item_movies.*
 
 @Keep
 data class MovieItemUI(
@@ -30,6 +31,8 @@ data class MovieItemUI(
     val overview: String
 ) : BaseRecyclerUI<MovieItemUI.MovieViewHolder>() {
 
+    var isPlaceHolder: Boolean = false
+
     override val layoutRes: Int = R.layout.layout_item_movies
     override fun getViewHolder(v: View) = MovieViewHolder(v)
     override val type: Int = 1032
@@ -44,13 +47,17 @@ data class MovieItemUI(
     class MovieViewHolder(view: View) : BaseViewHolder<MovieItemUI>(view) {
 
         override fun bindView(item: MovieItemUI, payloads: MutableList<Any>) {
-            with(containerView) {
-                titleTextView.text = item.title
-                releaseTextView.text = item.releaseDate
-                overviewTextView.text = item.overview
-                setVoteAverage(item)
+            itemView.isVisible = !item.isPlaceHolder
 
-                movieImageView.load(item.fullPosterUrl) {
+            titleTextView.text = item.title
+            releaseTextView.text = item.releaseDate
+            overviewTextView.text = item.overview
+            itemView.setVoteAverage(item)
+
+            item.fullPosterUrl.takeIf {
+                !item.isPlaceHolder
+            }?.let { imageUrl ->
+                movieImageView.load(imageUrl) {
                     placeholder(R.drawable.ic_cloud_off_black_24dp)
                     target(onStart = {
                         imageProgressBar.show()
@@ -66,14 +73,12 @@ data class MovieItemUI(
         }
 
         override fun unbindView(item: MovieItemUI) {
-            with(containerView) {
-                titleTextView.clear()
-                releaseTextView.clear()
-                overviewTextView.clear()
-                voteAverageTextView.clear()
-                movieImageView.clear()
-                imageProgressBar.hide()
-            }
+            titleTextView.clear()
+            releaseTextView.clear()
+            overviewTextView.clear()
+            voteAverageTextView.clear()
+            movieImageView.clear()
+            imageProgressBar.hide()
         }
 
         private fun View.setVoteAverage(item: MovieItemUI) {
@@ -83,6 +88,16 @@ data class MovieItemUI(
             } else {
                 voteAverageTextView.hide()
             }
+        }
+    }
+
+    companion object {
+        fun createPlaceHolderItem() = MovieItemUI(
+            0, 0, 0.0, false, "",
+            0.0, "", "", "",
+            emptyList(), "", "", false, ""
+        ).apply {
+            isPlaceHolder = true
         }
     }
 }

@@ -1,10 +1,11 @@
-package com.rasalexman.core.presentation
+package com.rasalexman.core.presentation.viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.rasalexman.core.R
+import com.rasalexman.core.presentation.BaseFragment
 import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 import kotlinx.android.synthetic.main.layout_viewpager.*
 

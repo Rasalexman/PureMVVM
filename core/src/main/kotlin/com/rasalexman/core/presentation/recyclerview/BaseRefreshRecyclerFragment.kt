@@ -1,4 +1,4 @@
-package com.rasalexman.core.presentation
+package com.rasalexman.core.presentation.recyclerview
 
 import android.os.Bundle
 import android.view.View

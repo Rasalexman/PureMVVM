@@ -9,7 +9,7 @@ import java.util.*
 
 internal class UserPreference(context: Context) : KotprefModel(context), IUserPreference {
     override var name: String           by stringPref("")
-    override var email: String          by stringPref("")
+    override var email: String          by stringPref("sphc@yandex.ru")
     override var password: String       by stringPref("")
     override var createdAt: String      by stringPref("")
     override var updatedAt: String      by stringPref("")

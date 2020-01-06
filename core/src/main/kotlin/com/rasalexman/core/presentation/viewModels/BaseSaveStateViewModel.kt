@@ -1,4 +1,4 @@
-package io.quasa.quasaconnect.core.presentation.viewModels
+package com.rasalexman.core.presentation.viewModels
 
 import androidx.lifecycle.SavedStateHandle
 

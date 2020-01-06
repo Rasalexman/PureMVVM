@@ -53,6 +53,11 @@ android {
         )
     }
 
+    androidExtensions {
+        isExperimental = true
+        defaultCacheImplementation = org.jetbrains.kotlin.gradle.internal.CacheImplementation.HASH_MAP
+    }
+
 }
 
 dependencies {
@@ -65,8 +70,10 @@ dependencies {
     api(appdependencies.Libs.Core.navigationFragmentKtx)
     api(appdependencies.Libs.Core.navigationUiKtx)
     api(appdependencies.Libs.Core.viewPager2)
+    api(appdependencies.Libs.Core.paging)
     api(appdependencies.Libs.Core.swipeRefreshLayout)
     api(appdependencies.Libs.Core.material)
+
 
     api(appdependencies.Libs.Lifecycle.livedataKtx)
     api(appdependencies.Libs.Lifecycle.viewmodelKtx)
@@ -79,6 +86,7 @@ dependencies {
     api(appdependencies.Libs.FastAdapter.uiExt)
     api(appdependencies.Libs.FastAdapter.diff)
     api(appdependencies.Libs.FastAdapter.expandable)
+    api(appdependencies.Libs.FastAdapter.paged)
 
     api(appdependencies.Libs.ImageLoading.coil)
     api(appdependencies.Libs.Common.coroutinesmanager)

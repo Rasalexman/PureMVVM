@@ -10,14 +10,14 @@ import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.CoroutinesProvider
 import com.rasalexman.onboarding.data.SignUpEventModel
 import com.rasalexman.onboarding.domain.RegisterUserUseCase
-import io.quasa.quasaconnect.core.presentation.viewModels.BaseViewModel
+import com.rasalexman.core.presentation.viewModels.BaseViewModel
 
 class RegisterViewModel : BaseViewModel() {
 
     private val registerUserUseCase: RegisterUserUseCase by immutableInstance()
     private val loginLiveData by unsafeLazy { MutableLiveData<SEvent.FetchWith<SignUpEventModel>>() }
 
-    override val observableLiveData: LiveData<SResult<Boolean>> by unsafeLazy {
+    override val resultLiveData: LiveData<SResult<Boolean>> by unsafeLazy {
         loginLiveData.switchMap {
             liveData(viewModelScope.coroutineContext + CoroutinesProvider.IO) {
                 emit(loadingResult())

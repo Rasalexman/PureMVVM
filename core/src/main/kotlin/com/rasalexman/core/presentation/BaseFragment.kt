@@ -16,14 +16,14 @@ import com.mincor.kodi.core.IKodi
 import com.mincor.kodi.core.applyIf
 import com.rasalexman.core.R
 import com.rasalexman.core.common.extensions.*
-import com.rasalexman.core.common.typealiases.AnyStateLiveData
+import com.rasalexman.core.common.typealiases.AnyResultLiveData
 import com.rasalexman.core.common.typealiases.InHandler
 import com.rasalexman.core.common.typealiases.UnitHandler
 import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.data.dto.SResult
+import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.launchOnUITryCatch
-import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
@@ -91,8 +91,11 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        addResultLiveDataObservers()
         addErrorLiveDataObservers()
-        addLiveDataObservers()
+        addAnyLiveDataObservers()
+
         showToolbar()
         initLayout()
     }
@@ -100,9 +103,15 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
     /**
      * Add Standard Live data Observers to handler [SResult] event
      */
-    @Suppress("UNCHECKED_CAST")
-    protected open fun addLiveDataObservers() {
-        (viewModel?.onResultLiveData() as? AnyStateLiveData)?.apply(::observeResultLiveData)
+    protected open fun addAnyLiveDataObservers() {
+        viewModel?.onAnyLiveData()?.apply(::observeAnyLiveData)
+    }
+
+    /**
+     * Add Standard Live data Observers to handler [SResult] event
+     */
+    protected open fun addResultLiveDataObservers() {
+        (viewModel?.onResultLiveData() as? AnyResultLiveData)?.apply(::observeResultLiveData)
     }
 
     /**
@@ -212,7 +221,7 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
      */
     override fun onDestroyView() {
         viewModel?.onResultLiveData()?.removeObservers(viewLifecycleOwner)
-        viewModel?.onErrorLiveData()?.removeObservers(viewLifecycleOwner)
+        viewModel?.onAnyLiveData()?.removeObservers(viewLifecycleOwner)
         context?.closeAlert()
         (view as? ViewGroup)?.clear()
         super.onDestroyView()
@@ -251,17 +260,29 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
     }
 
     /**
-     * Observe Any type of [LiveData]
+     *
+     */
+    protected open fun<T : Any> onAnyDataHandler(data: T?) = Unit
+
+    /**
+     * Observe Any type of [LiveData] with callback
      */
     protected open fun <T : Any> observeAnyLiveData(data: LiveData<T>, callback: InHandler<T>) {
         data.observe(this.viewLifecycleOwner, callback)
     }
 
     /**
+     *
+     */
+    protected open fun observeAnyLiveData(data: LiveData<*>) {
+        data.observe(this.viewLifecycleOwner, ::onAnyDataHandler)
+    }
+
+    /**
      * Observe only [SResult] live data
      */
-    protected open fun observeResultLiveData(data: LiveData<SResult<Any>>?) {
-        data?.observe(viewLifecycleOwner) { result ->
+    protected open fun observeResultLiveData(data: LiveData<SResult<Any>>) {
+        data.observe(viewLifecycleOwner) { result ->
             result.applyIf(!result.isHandled, ::onResultHandler)
         }
     }
