@@ -2,6 +2,8 @@ package com.rasalexman.puremvvm.data.repository
 
 import androidx.paging.DataSource
 import com.rasalexman.core.common.extensions.mapListTo
+import com.rasalexman.core.common.typealiases.ResultList
+import com.rasalexman.core.common.typealiases.ResultMutableLiveData
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.providers.data.models.local.MovieEntity
 import com.rasalexman.providers.data.repository.IMoviesRepository
@@ -17,10 +19,17 @@ class MoviesRepository(
         return localDataSource.getDataSourceFactory(genreId)
     }
 
+    override suspend fun getRemoteSearchDataSource(
+        query: String,
+        resultLiveData: ResultMutableLiveData<Boolean>
+    ): DataSource.Factory<Int, MovieEntity> {
+        return remoteDataSource.getSearchDataSource(query, resultLiveData).map { it.convertTo() }
+    }
+
     override suspend fun getRemoteMovies(
         genreId: Int,
         lastReleaseDate: Long?
-    ): SResult<List<MovieEntity>> {
+    ): ResultList<MovieEntity> {
         return remoteDataSource
             .getByGenreId(genreId, lastReleaseDate)
             .mapListTo()
@@ -33,6 +42,6 @@ class MoviesRepository(
     override suspend fun saveMovie(data: MovieEntity) = localDataSource.insert(data)
 
     override suspend fun getMovieById(movieId: Int): SResult<MovieEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return localDataSource.getById(movieId)
     }
 }

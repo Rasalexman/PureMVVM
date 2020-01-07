@@ -14,11 +14,13 @@ sealed class SResult<out T : Any> {
         val data: T
     ) : SResult<T>()
 
+    object AnyResult : SResult<Any>()
     object Loading : SResult<Nothing>()
     object Empty : SResult<Nothing>()
     object Default : SResult<Nothing>() {
         override var isHandled: Boolean = true
     }
+
     object Clear : SResult<Nothing>()
 
     //---- Navigation States

@@ -1,6 +1,8 @@
 package com.rasalexman.providers.data.repository
 
 import androidx.paging.DataSource
+import com.rasalexman.core.common.typealiases.ResultList
+import com.rasalexman.core.common.typealiases.ResultMutableLiveData
 import com.rasalexman.core.data.base.IBaseRepository
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.providers.data.models.local.MovieEntity
@@ -11,11 +13,16 @@ interface IMoviesRepository : IBaseRepository<IMoviesLocalDataSource, IMoviesRem
 
     suspend fun getLocalMoviesDataSource(genreId: Int): DataSource.Factory<Int, MovieEntity>
 
-    suspend fun getRemoteMovies(genreId: Int, lastReleaseDate: Long?): SResult<List<MovieEntity>>
+    suspend fun getRemoteMovies(genreId: Int, lastReleaseDate: Long?): ResultList<MovieEntity>
 
     suspend fun saveMoviesList(data: List<MovieEntity>)
 
     suspend fun saveMovie(data: MovieEntity)
 
     suspend fun getMovieById(movieId: Int): SResult<MovieEntity>
+
+    suspend fun getRemoteSearchDataSource(
+        query: String,
+        resultLiveData: ResultMutableLiveData<Boolean>
+    ): DataSource.Factory<Int, MovieEntity>
 }

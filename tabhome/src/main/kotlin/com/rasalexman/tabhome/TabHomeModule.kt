@@ -4,7 +4,7 @@ import com.mincor.kodi.core.*
 import com.rasalexman.tabhome.domain.genres.GetGenresUseCase
 import com.rasalexman.tabhome.domain.genres.GetLocalGenresUseCase
 import com.rasalexman.tabhome.domain.genres.GetRemoteGenresUseCase
-import com.rasalexman.tabhome.domain.movies.GetLocalMoviesDataSourceUseCase
+import com.rasalexman.tabhome.domain.movies.GetMoviesDataSourceUseCase
 import com.rasalexman.tabhome.domain.movies.GetRemoteMoviesByGenreIdUseCase
 
 val tabHomeUseCaseModule = kodiModule {
@@ -19,20 +19,14 @@ val tabHomeUseCaseModule = kodiModule {
         )
     }
     bind<GetGenresUseCase>() with provider {
-        GetGenresUseCase(
-            instance(),
-            instance()
-        )
+        GetGenresUseCase(instance(), instance())
     }
 
     bind<GetRemoteMoviesByGenreIdUseCase>() with provider {
-        GetRemoteMoviesByGenreIdUseCase(
-            instance()
-        )
+        GetRemoteMoviesByGenreIdUseCase(instance())
     }
-    bind<GetLocalMoviesDataSourceUseCase>() with provider {
-        GetLocalMoviesDataSourceUseCase(
-            instance()
-        )
+    
+    bind<GetMoviesDataSourceUseCase>() with provider {
+        GetMoviesDataSourceUseCase(instance(), instance())
     }
 }

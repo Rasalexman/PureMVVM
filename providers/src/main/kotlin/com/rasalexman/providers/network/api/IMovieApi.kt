@@ -39,6 +39,12 @@ interface IMovieApi {
     @GET("movie/upcoming")
     suspend fun getUpcomingMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 
+    @GET("search/movie")
+    suspend fun getSearchMovies(
+        @Query("query") query: String,
+        @Query("page") page: Int = 1
+    ): Response<GetMoviesListResponse<MovieModel>>
+
     @GET("movie/popular")
     suspend fun getPopularMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 
