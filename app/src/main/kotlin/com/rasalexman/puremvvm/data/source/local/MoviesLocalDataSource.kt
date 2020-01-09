@@ -25,6 +25,10 @@ class MoviesLocalDataSource(
             else emptyResult()
         } ?: emptyResult()
 
+    override suspend fun getPopularMoviesCount(): Int {
+        return moviesDao.getPopularCount()
+    }
+
     override suspend fun getCount(genreId: Int): Int {
         return moviesDao.getCount(genreId)
     }

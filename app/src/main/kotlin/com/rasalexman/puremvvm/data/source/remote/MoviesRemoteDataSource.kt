@@ -2,6 +2,7 @@ package com.rasalexman.puremvvm.data.source.remote
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
+import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.providers.data.models.remote.MovieModel
 import com.rasalexman.providers.data.source.remote.IMoviesRemoteDataSource
@@ -32,6 +33,14 @@ class MoviesRemoteDataSource(
      */
     override suspend fun getPopularMovies(page: Int): SResult<List<MovieModel>> {
         return moviesApi.getPopularMovie(page).getResult { it.results }
+    }
+
+    override suspend fun getTopRatedMovies(page: Int): ResultList<MovieModel> {
+        return moviesApi.getTopRatedMovies(page).getResult { it.results }
+    }
+
+    override suspend fun getUpcomingMovie(page: Int): ResultList<MovieModel> {
+        return moviesApi.getUpcomingMovies(page).getResult { it.results }
     }
 
     /**

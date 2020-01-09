@@ -20,4 +20,7 @@ interface IMoviesDao : IBaseDao<MovieEntity> {
 
     @Query("SELECT * FROM MovieEntity WHERE id = :movieId LIMIT 1")
     suspend fun getById(movieId: Int): MovieEntity?
+
+    @Query("SELECT COUNT(*) FROM MovieEntity WHERE isPopular = :isPopular")
+    suspend fun getPopularCount(isPopular: Boolean = true): Int
 }

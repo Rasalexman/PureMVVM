@@ -25,6 +25,10 @@ class MoviesRepository(
         return localDataSource.getPopularMoviesDataSourceFactory()
     }
 
+    override suspend fun getPopularMoviesCount(): Int {
+        return localDataSource.getPopularMoviesCount()
+    }
+
     override suspend fun getRemoteSearchDataSource(
         query: String,
         resultLiveData: ResultMutableLiveData<Boolean>
@@ -36,6 +40,14 @@ class MoviesRepository(
         return remoteDataSource.getPopularMovies(page).mapListTo().mapIfSuccessSuspend {
             this.map { it.apply { isPopular = true } }.toSuccessResult()
         }
+    }
+
+    override suspend fun getRemoteTopRatedMovies(page: Int): ResultList<MovieEntity> {
+        return remoteDataSource.getTopRatedMovies(page).mapListTo()
+    }
+
+    override suspend fun getRemoteUpcomingMovies(page: Int): ResultList<MovieEntity> {
+        return remoteDataSource.getTopRatedMovies(page).mapListTo()
     }
 
     override suspend fun getRemoteMovies(

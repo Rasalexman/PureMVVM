@@ -46,8 +46,8 @@ interface IMovieApi {
     suspend fun getPopularMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 
     @GET("movie/top_rated")
-    suspend fun getTopRatedMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
+    suspend fun getTopRatedMovies(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 
     @GET("movie/upcoming")
-    suspend fun getUpcomingMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
+    suspend fun getUpcomingMovies(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 }

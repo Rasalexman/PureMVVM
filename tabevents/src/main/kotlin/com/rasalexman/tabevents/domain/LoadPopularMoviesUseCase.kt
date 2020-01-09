@@ -8,12 +8,11 @@ import com.rasalexman.providers.data.repository.IMoviesRepository
 
 class LoadPopularMoviesUseCase(
     private val moviesRepository: IMoviesRepository
-) : IUseCase.Out<ResultList<MovieEntity>> {
+) : IUseCase.SingleInOut<Int, ResultList<MovieEntity>> {
 
-    private var page: Int = 1
-
-    override suspend fun execute(): ResultList<MovieEntity> {
-        return moviesRepository.getRemotePopularMovies(page++)
+    @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+    override suspend fun execute(page: Int): ResultList<MovieEntity> {
+        return moviesRepository.getRemotePopularMovies(page)
             .applyIfSuccessSuspend(moviesRepository::saveMoviesList)
     }
 }

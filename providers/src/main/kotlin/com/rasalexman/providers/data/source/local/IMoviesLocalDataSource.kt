@@ -10,6 +10,8 @@ interface IMoviesLocalDataSource : ILocalDataSource {
     suspend fun getMoviesByGenreDataSourceFactory(genreId: Int): DataSource.Factory<Int, MovieEntity>
     suspend fun getPopularMoviesDataSourceFactory(): DataSource.Factory<Int, MovieEntity>
 
+    suspend fun getPopularMoviesCount(): Int
+
     suspend fun getCount(genreId: Int): Int
 
     suspend fun getById(movieId: Int): SResult<MovieEntity>
@@ -17,5 +19,6 @@ interface IMoviesLocalDataSource : ILocalDataSource {
     suspend fun insertAll(data: List<MovieEntity>)
 
     suspend fun insert(data: MovieEntity)
+
 
 }

@@ -4,8 +4,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import com.mikepenz.fastadapter.paged.ExperimentalPagedSupport
+import com.rasalexman.core.common.extensions.refresh
 import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.presentation.recyclerview.paged.BasePagedRecyclerFragment
+import com.rasalexman.core.presentation.recyclerview.paged.BasePagedRefreshRecyclerFragment
 import com.rasalexman.core.presentation.viewModels.BaseViewModel
 import com.rasalexman.providers.data.models.local.MovieEntity
 import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
@@ -13,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @ExperimentalPagedSupport
-class PopularFragment : BasePagedRecyclerFragment<MovieEntity, MovieItemUI, PopularViewModel>() {
+class PopularFragment : BasePagedRefreshRecyclerFragment<MovieEntity, MovieItemUI, PopularViewModel>() {
 
     override val viewModel: PopularViewModel by viewModels()
 
@@ -53,6 +55,10 @@ class PopularFragment : BasePagedRecyclerFragment<MovieEntity, MovieItemUI, Popu
                 overview = overview
             )
         }
+    }
+
+    override fun onRefresh() {
+        refresh()
     }
 
     companion object {
