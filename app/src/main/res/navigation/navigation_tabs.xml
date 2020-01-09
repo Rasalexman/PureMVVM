@@ -16,7 +16,7 @@
         />
 
     <fragment android:id="@+id/eventsListFragment"
-        android:name="com.rasalexman.puremvvm.presentation.tabs.events.EventsListFragment"
+        android:name="com.rasalexman.tabevents.presentation.EventsListFragment"
         tools:layout="@layout/layout_toolbar_recycler"
         />
 

@@ -1,4 +1,4 @@
-package com.rasalexman.puremvvm.presentation.tabs.events.upcoming
+package com.rasalexman.tabevents.presentation.upcoming
 
 import com.rasalexman.core.presentation.recyclerview.BaseRecyclerFragment
 import com.rasalexman.core.presentation.viewModels.BaseViewModel

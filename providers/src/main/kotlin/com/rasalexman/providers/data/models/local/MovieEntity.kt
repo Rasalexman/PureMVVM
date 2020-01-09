@@ -37,5 +37,8 @@ data class MovieEntity(
     val status: String,
     val tagline: String,
     val budget: Long,
-    var hasDetails: Boolean = false
+    var hasDetails: Boolean = false,
+    var isPopular: Boolean = false,
+    var isTopRated: Boolean = false,
+    var isUpComing: Boolean = false
 )

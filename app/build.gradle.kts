@@ -159,6 +159,7 @@ dependencies {
     implementation(project(":providers"))
     implementation(project(":onboarding"))
     implementation(project(":tabhome"))
+    implementation(project(":tabevents"))
 
     implementation(Libs.Common.viewPagerIndicator)
 

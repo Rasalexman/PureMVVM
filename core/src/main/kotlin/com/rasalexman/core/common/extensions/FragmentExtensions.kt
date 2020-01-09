@@ -1,6 +1,7 @@
 package com.rasalexman.core.common.extensions
 
 import android.graphics.drawable.Drawable
+import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
@@ -8,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 
 fun Fragment.hideKeyboard() = activity?.hideKeyboard()
+fun Fragment.showKeyboard(view: View) = activity?.showKeyboard(view)
 
 //the same for Fragments
 fun Fragment.dip(value: Int): Int = requireActivity().dip(value)

@@ -10,7 +10,7 @@ import com.rasalexman.providers.data.models.UserName
 import com.rasalexman.providers.data.models.UserPassword
 import com.rasalexman.providers.data.repository.IUserRepository
 import com.rasalexman.providers.data.source.local.IUserLocalDataSource
-import com.rasalexman.providers.database.entities.UserEntity
+import com.rasalexman.providers.data.models.local.UserEntity
 
 class UserRepository(
     override val localDataSource: IUserLocalDataSource

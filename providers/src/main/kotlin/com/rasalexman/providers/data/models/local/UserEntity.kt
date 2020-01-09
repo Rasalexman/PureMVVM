@@ -1,4 +1,4 @@
-package com.rasalexman.providers.database.entities
+package com.rasalexman.providers.data.models.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

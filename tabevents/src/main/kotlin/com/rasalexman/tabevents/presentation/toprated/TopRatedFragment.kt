@@ -1,4 +1,4 @@
-package com.rasalexman.puremvvm.presentation.tabs.events.toprated
+package com.rasalexman.tabevents.presentation.toprated
 
 import com.rasalexman.core.presentation.recyclerview.BaseRecyclerFragment
 import com.rasalexman.core.presentation.viewModels.BaseViewModel

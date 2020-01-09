@@ -36,9 +36,6 @@ interface IMovieApi {
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(@Path("movie_id") movieId: Int): Response<MovieModel>
 
-    @GET("movie/upcoming")
-    suspend fun getUpcomingMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
-
     @GET("search/movie")
     suspend fun getSearchMovies(
         @Query("query") query: String,
@@ -50,4 +47,7 @@ interface IMovieApi {
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
+
+    @GET("movie/upcoming")
+    suspend fun getUpcomingMovie(@Query("page") page: Int = 1): Response<GetMoviesListResponse<MovieModel>>
 }

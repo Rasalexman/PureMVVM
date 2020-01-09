@@ -4,7 +4,6 @@ object Resources {
 
     object App {
         val dirs = arrayListOf(
-            "src/main/res-components/events",
             "src/main/res-components/tabs",
             "src/main/res-components/start",
             "src/main/res"
@@ -54,6 +53,16 @@ object Resources {
         val dirs = arrayListOf(
             "src/main/res-components/movieslist",
             "src/main/res-components/homelist",
+            "src/main/res"
+        )
+
+        val javaDirs = arrayListOf(
+            "src/main/kotlin"
+        )
+    }
+
+    object Events {
+        val dirs = arrayListOf(
             "src/main/res"
         )
 

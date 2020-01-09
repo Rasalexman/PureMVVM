@@ -41,4 +41,9 @@
         <item name="android:elevation">@dimen/size_6dp</item>
     </style>
 
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
 </resources>

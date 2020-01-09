@@ -5,6 +5,8 @@ import androidx.annotation.Keep
 import coil.api.load
 import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.holders.BaseViewHolder
+import com.rasalexman.coroutinesmanager.CoroutinesManager
+import com.rasalexman.coroutinesmanager.launchOnUI
 import com.rasalexman.tabhome.R
 import kotlinx.android.synthetic.main.layout_item_genre.*
 
@@ -24,12 +26,16 @@ data class GenreItemUI(
     override val type: Int = 1024
 
     class GenreViewHolder(view: View) : BaseViewHolder<GenreItemUI>(view) {
+        private val coroutinesManager = CoroutinesManager()
+
         override fun bindView(item: GenreItemUI, payloads: MutableList<Any>) {
             titleGenreTextView.text = item.name
             val urlList = item.images
-            imageView1.load(urlList.getOrNull(0))
-            imageView2.load(urlList.getOrNull(1))
-            imageView3.load(urlList.getOrNull(2))
+            coroutinesManager.launchOnUI {
+                imageView1.load(urlList.getOrNull(0))
+                imageView2.load(urlList.getOrNull(1))
+                imageView3.load(urlList.getOrNull(2))
+            }
         }
     }
 }

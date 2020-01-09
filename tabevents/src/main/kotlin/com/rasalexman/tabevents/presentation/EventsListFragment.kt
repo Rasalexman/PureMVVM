@@ -1,7 +1,8 @@
-package com.rasalexman.puremvvm.presentation.tabs.events
+package com.rasalexman.tabevents.presentation
 
 import android.view.LayoutInflater
 import com.google.android.material.tabs.TabLayout
+import com.mikepenz.fastadapter.paged.ExperimentalPagedSupport
 import com.rasalexman.core.common.extensions.color
 import com.rasalexman.core.common.extensions.drawable
 import com.rasalexman.core.common.extensions.string
@@ -9,12 +10,13 @@ import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.presentation.BaseFragment
 import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 import com.rasalexman.core.presentation.viewpager.BaseToolbarTabViewPagerFragment
-import com.rasalexman.puremvvm.R
-import com.rasalexman.puremvvm.presentation.tabs.events.popular.PopularFragment
-import com.rasalexman.puremvvm.presentation.tabs.events.toprated.TopRatedFragment
-import com.rasalexman.puremvvm.presentation.tabs.events.upcoming.UpcomingFragment
+import com.rasalexman.tabevents.R
+import com.rasalexman.tabevents.presentation.popular.PopularFragment
+import com.rasalexman.tabevents.presentation.toprated.TopRatedFragment
+import com.rasalexman.tabevents.presentation.upcoming.UpcomingFragment
 import kotlinx.android.synthetic.main.layout_item_tab.view.*
 
+@ExperimentalPagedSupport
 class EventsListFragment : BaseToolbarTabViewPagerFragment<IBaseViewModel>() {
 
     override val pageTitles: Array<String>

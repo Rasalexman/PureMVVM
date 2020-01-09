@@ -2,15 +2,4 @@
     <string name="app_name">PureMVVM</string>
 
     <string name="menu_search_hint">Search</string>
-
-    <string name="title_events">Events</string>
-    <string name="title_popular">Popular</string>
-    <string name="title_top_rated">Top Rated</string>
-    <string name="title_upcoming">Upcoming</string>
-
-    <string-array name="events_title">
-        <item>@string/title_popular</item>
-        <item>@string/title_top_rated</item>
-        <item>@string/title_upcoming</item>
-    </string-array>
 </resources>
