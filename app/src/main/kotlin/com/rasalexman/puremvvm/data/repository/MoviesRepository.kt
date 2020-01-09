@@ -1,7 +1,9 @@
 package com.rasalexman.puremvvm.data.repository
 
 import androidx.paging.DataSource
+import com.rasalexman.core.common.extensions.mapIfSuccessSuspend
 import com.rasalexman.core.common.extensions.mapListTo
+import com.rasalexman.core.common.extensions.toSuccessResult
 import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.core.common.typealiases.ResultMutableLiveData
 import com.rasalexman.core.data.dto.SResult
@@ -15,8 +17,12 @@ class MoviesRepository(
     override val remoteDataSource: IMoviesRemoteDataSource
 ) : IMoviesRepository {
 
-    override suspend fun getLocalMoviesDataSource(genreId: Int): DataSource.Factory<Int, MovieEntity> {
-        return localDataSource.getDataSourceFactory(genreId)
+    override suspend fun getMoviesByGenreDataSource(genreId: Int): DataSource.Factory<Int, MovieEntity> {
+        return localDataSource.getMoviesByGenreDataSourceFactory(genreId)
+    }
+
+    override suspend fun getPopularMoviesDataSource(): DataSource.Factory<Int, MovieEntity> {
+        return localDataSource.getPopularMoviesDataSourceFactory()
     }
 
     override suspend fun getRemoteSearchDataSource(
@@ -24,6 +30,12 @@ class MoviesRepository(
         resultLiveData: ResultMutableLiveData<Boolean>
     ): DataSource.Factory<Int, MovieEntity> {
         return remoteDataSource.getSearchDataSource(query, resultLiveData).map { it.convertTo() }
+    }
+
+    override suspend fun getRemotePopularMovies(page: Int): ResultList<MovieEntity> {
+        return remoteDataSource.getPopularMovies(page).mapListTo().mapIfSuccessSuspend {
+            this.map { it.apply { isPopular = true } }.toSuccessResult()
+        }
     }
 
     override suspend fun getRemoteMovies(

@@ -1,5 +1,6 @@
 package com.rasalexman.tabevents.presentation.popular
 
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import com.mikepenz.fastadapter.paged.ExperimentalPagedSupport
@@ -12,7 +13,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @ExperimentalPagedSupport
-class PopularFragment : BasePagedRecyclerFragment<MovieEntity, MovieItemUI, BaseViewModel>() {
+class PopularFragment : BasePagedRecyclerFragment<MovieEntity, MovieItemUI, PopularViewModel>() {
+
+    override val viewModel: PopularViewModel by viewModels()
 
     override val asyncDifferConfig: AsyncDifferConfig<MovieEntity> by unsafeLazy {
         AsyncDifferConfig.Builder<MovieEntity>(object : DiffUtil.ItemCallback<MovieEntity>() {

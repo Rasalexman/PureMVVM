@@ -11,9 +11,9 @@ import com.rasalexman.providers.data.source.remote.IMoviesRemoteDataSource
 
 interface IMoviesRepository : IBaseRepository<IMoviesLocalDataSource, IMoviesRemoteDataSource> {
 
-    suspend fun getLocalMoviesDataSource(genreId: Int): DataSource.Factory<Int, MovieEntity>
+    suspend fun getPopularMoviesDataSource(): DataSource.Factory<Int, MovieEntity>
 
-    suspend fun getRemoteMovies(genreId: Int, lastReleaseDate: Long?): ResultList<MovieEntity>
+    suspend fun getMoviesByGenreDataSource(genreId: Int): DataSource.Factory<Int, MovieEntity>
 
     suspend fun saveMoviesList(data: List<MovieEntity>)
 
@@ -25,4 +25,8 @@ interface IMoviesRepository : IBaseRepository<IMoviesLocalDataSource, IMoviesRem
         query: String,
         resultLiveData: ResultMutableLiveData<Boolean>
     ): DataSource.Factory<Int, MovieEntity>
+
+
+    suspend fun getRemoteMovies(genreId: Int, lastReleaseDate: Long?): ResultList<MovieEntity>
+    suspend fun getRemotePopularMovies(page: Int): ResultList<MovieEntity>
 }

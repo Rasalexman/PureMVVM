@@ -12,8 +12,12 @@ class MoviesLocalDataSource(
     private val moviesDao: IMoviesDao
 ) : IMoviesLocalDataSource {
 
-    override suspend fun getDataSourceFactory(genreId: Int): DataSource.Factory<Int, MovieEntity> =
-        moviesDao.getAll(genreId)
+    override suspend fun getMoviesByGenreDataSourceFactory(genreId: Int): DataSource.Factory<Int, MovieEntity> =
+        moviesDao.getAllByGenreId(genreId)
+
+    override suspend fun getPopularMoviesDataSourceFactory(): DataSource.Factory<Int, MovieEntity> {
+        return moviesDao.getAllByPopular()
+    }
 
     override suspend fun getById(movieId: Int): SResult<MovieEntity> =
         moviesDao.getById(movieId)?.let { localMovie ->

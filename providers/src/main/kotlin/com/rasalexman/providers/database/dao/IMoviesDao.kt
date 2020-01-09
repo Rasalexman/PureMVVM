@@ -10,7 +10,10 @@ import com.rasalexman.providers.database.dao.base.IBaseDao
 interface IMoviesDao : IBaseDao<MovieEntity> {
 
     @Query("SELECT * FROM MovieEntity WHERE genreIds LIKE '%' || :genreId  || '%' ORDER BY releaseDate DESC")
-    fun getAll(genreId: Int): DataSource.Factory<Int, MovieEntity>
+    fun getAllByGenreId(genreId: Int): DataSource.Factory<Int, MovieEntity>
+
+    @Query("SELECT * FROM MovieEntity WHERE isPopular = :isPopular ORDER BY popularity DESC")
+    fun getAllByPopular(isPopular: Boolean = true): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT COUNT(*) FROM MovieEntity WHERE genreIds LIKE '%' || :genreId  || '%' ORDER BY releaseDate DESC")
     suspend fun getCount(genreId: Int): Int

@@ -28,7 +28,7 @@ class GetMoviesDataSourceUseCase(
     ): PagedLiveData<MovieEntity> {
         clearBoundaries()
         resultLiveData.postValue(loadingResult())
-        val dataSourceFactory = moviesRepository.getLocalMoviesDataSource(genreId)
+        val dataSourceFactory = moviesRepository.getMoviesByGenreDataSource(genreId)
         val pageLiveData = LivePagedListBuilder(dataSourceFactory, 20)
         moviesBoundaryCallback = MoviesBoundaryCallback(genreId, resultLiveData, remoteMoviesByGenreIdUseCase)
         pageLiveData.setBoundaryCallback(moviesBoundaryCallback)

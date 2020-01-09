@@ -7,7 +7,8 @@ import com.rasalexman.providers.data.models.local.MovieEntity
 
 interface IMoviesLocalDataSource : ILocalDataSource {
 
-    suspend fun getDataSourceFactory(genreId: Int): DataSource.Factory<Int, MovieEntity>
+    suspend fun getMoviesByGenreDataSourceFactory(genreId: Int): DataSource.Factory<Int, MovieEntity>
+    suspend fun getPopularMoviesDataSourceFactory(): DataSource.Factory<Int, MovieEntity>
 
     suspend fun getCount(genreId: Int): Int
 
@@ -16,4 +17,5 @@ interface IMoviesLocalDataSource : ILocalDataSource {
     suspend fun insertAll(data: List<MovieEntity>)
 
     suspend fun insert(data: MovieEntity)
+
 }

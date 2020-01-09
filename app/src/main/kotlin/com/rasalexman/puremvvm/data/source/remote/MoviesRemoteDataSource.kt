@@ -27,6 +27,14 @@ class MoviesRemoteDataSource(
     }
 
     /**
+     * Get popular movies from Api
+     * @param page - current selected page
+     */
+    override suspend fun getPopularMovies(page: Int): SResult<List<MovieModel>> {
+        return moviesApi.getPopularMovie(page).getResult { it.results }
+    }
+
+    /**
      * Get movies by genre id with pagination
      */
     override suspend fun getByGenreId(
