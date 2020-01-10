@@ -8,7 +8,7 @@ import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 @ExperimentalPagedSupport
-abstract class BaseToolbarPagedRecyclerFragment<Entity, I : BaseRecyclerUI<*>, out VM: IBaseViewModel> : BasePagedRecyclerFragment<Entity, I, VM>() {
+abstract class BaseToolbarPagedRecyclerFragment<Item : BaseRecyclerUI<*>, out VM: IBaseViewModel> : BasePagedRecyclerFragment<Item, VM>() {
 
     override val canGoBack: Boolean
         get() = needBackButton

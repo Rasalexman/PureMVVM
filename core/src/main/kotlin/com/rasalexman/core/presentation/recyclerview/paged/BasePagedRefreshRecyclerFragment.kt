@@ -10,7 +10,7 @@ import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
 
 @ExperimentalPagedSupport
-abstract class BasePagedRefreshRecyclerFragment<Entity, I : BaseRecyclerUI<*>, out VM: IBaseViewModel> : BasePagedRecyclerFragment<Entity, I, VM>(), SwipeRefreshLayout.OnRefreshListener {
+abstract class BasePagedRefreshRecyclerFragment<Item : BaseRecyclerUI<*>, out VM: IBaseViewModel> : BasePagedRecyclerFragment<Item, VM>(), SwipeRefreshLayout.OnRefreshListener {
 
     override val layoutId: Int
         get() = R.layout.layout_refresh_recycler

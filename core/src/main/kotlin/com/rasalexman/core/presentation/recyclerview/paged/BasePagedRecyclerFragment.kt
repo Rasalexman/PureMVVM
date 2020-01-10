@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
@@ -23,7 +24,7 @@ import com.rasalexman.core.presentation.utils.EndlessRecyclerViewScrollListener
 import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 
 @ExperimentalPagedSupport
-abstract class BasePagedRecyclerFragment<Entity, Item : BaseRecyclerUI<*>, out VM : IBaseViewModel> : BaseFragment<VM>() {
+abstract class BasePagedRecyclerFragment<Item : BaseRecyclerUI<*>, out VM : IBaseViewModel> : BaseFragment<VM>() {
 
     open val recyclerViewId: Int
         get() = R.id.recyclerView
@@ -41,17 +42,23 @@ abstract class BasePagedRecyclerFragment<Entity, Item : BaseRecyclerUI<*>, out V
     // layout manager for recycler
     protected open var recyclerLayoutManager: RecyclerView.LayoutManager? = null
     // направление размещения элементов в адаптере
-    protected open val layoutManagerOrientation: Int = LinearLayoutManager.VERTICAL
+    protected open val layoutManagerOrientation  by unsafeLazy { LinearLayoutManager.VERTICAL }
     // бесконечный слушатель слушатель скролла
     private var scrollListener: EndlessRecyclerViewScrollListener? = null
     // custom decorator
     protected open var itemDecoration: RecyclerView.ItemDecoration? = null
 
-    abstract val asyncDifferConfig: AsyncDifferConfig<Entity>
+    open val asyncDifferConfig: AsyncDifferConfig<Item> by unsafeLazy {
+        AsyncDifferConfig.Builder<Item>(object : DiffUtil.ItemCallback<Item>() {
+            override fun areItemsTheSame(oldItem: Item, newItem: Item) =
+                oldItem.identifier == newItem.identifier
+            override fun areContentsTheSame(oldItem: Item, newItem: Item) =
+                oldItem == newItem
+        }).build()
+    }
     abstract val placeholderInterceptor: (Int) -> Item
-    abstract val interceptor: (Entity) -> Item?
-    private val itemAdapter: PagedModelAdapter<Entity, Item> by unsafeLazy {
-        PagedModelAdapter(asyncDifferConfig, placeholderInterceptor, interceptor)
+    private val itemAdapter: PagedModelAdapter<Item, Item> by unsafeLazy {
+        PagedModelAdapter(asyncDifferConfig, placeholderInterceptor, { it })
     }
 
     // footer adapter
@@ -69,9 +76,9 @@ abstract class BasePagedRecyclerFragment<Entity, Item : BaseRecyclerUI<*>, out V
     // крутилка прогресса)
     private val progressItem by unsafeLazy { ProgressItem().apply { isEnabled = false } }
     // корличесвто элементов до того как пойдет запрос на скролл пагинацию
-    protected open val visibleScrollCount = 5
+    protected open val visibleScrollCount  by unsafeLazy { 5 }
     // Need scroll handler
-    protected open val needScroll: Boolean = false
+    protected open val needScroll by unsafeLazy { false }
 
     //
     open val onLoadNextPageHandler: ((Int) -> Unit)? = null
@@ -118,7 +125,7 @@ abstract class BasePagedRecyclerFragment<Entity, Item : BaseRecyclerUI<*>, out V
         isLoading = false
     }
 
-    open fun addItems(list: PagedList<Entity>) {
+    open fun addItems(list: PagedList<Item>) {
         hideLoading()
         itemAdapter.submitList(list)
     }
@@ -150,6 +157,7 @@ abstract class BasePagedRecyclerFragment<Entity, Item : BaseRecyclerUI<*>, out V
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     protected open fun addClickListener() {
         mFastItemAdapter.onClickListener = { _, _, item, _ ->
             (item as? Item)?.let {
@@ -257,8 +265,9 @@ abstract class BasePagedRecyclerFragment<Entity, Item : BaseRecyclerUI<*>, out V
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : Any> onAnyDataHandler(data: T?) {
-        (data as? PagedList<Entity>)?.apply(::addItems)
+        (data as? PagedList<Item>)?.apply(::addItems)
     }
 
     override fun onResultHandler(result: SResult<*>) {
