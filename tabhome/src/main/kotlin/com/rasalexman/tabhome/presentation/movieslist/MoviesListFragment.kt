@@ -15,7 +15,7 @@ import com.rasalexman.tabhome.data.convert
 import kotlinx.coroutines.launch
 
 @ExperimentalPagedSupport
-class MoviesListFragment : BaseToolbarPagedRecyclerFragment<MovieEntity, MovieItemUI, MoviesViewModel>() {
+class MoviesListFragment : BaseToolbarPagedRecyclerFragment<MovieItemUI, MovieItemUI, MoviesViewModel>() {
 
     private val moviesNavArgs: MoviesListFragmentArgs by navArgs()
 
@@ -27,11 +27,11 @@ class MoviesListFragment : BaseToolbarPagedRecyclerFragment<MovieEntity, MovieIt
     override val needBackButton: Boolean
         get() = true
 
-    override val asyncDifferConfig: AsyncDifferConfig<MovieEntity> by unsafeLazy {
-        AsyncDifferConfig.Builder<MovieEntity>(object : DiffUtil.ItemCallback<MovieEntity>() {
-            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity) =
+    override val asyncDifferConfig: AsyncDifferConfig<MovieItemUI> by unsafeLazy {
+        AsyncDifferConfig.Builder<MovieItemUI>(object : DiffUtil.ItemCallback<MovieItemUI>() {
+            override fun areItemsTheSame(oldItem: MovieItemUI, newItem: MovieItemUI) =
                 oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity) =
+            override fun areContentsTheSame(oldItem: MovieItemUI, newItem: MovieItemUI) =
                 oldItem == newItem
         }).build()
     }
@@ -40,8 +40,8 @@ class MoviesListFragment : BaseToolbarPagedRecyclerFragment<MovieEntity, MovieIt
         MovieItemUI.createPlaceHolderItem()
     }
 
-    override val interceptor: (MovieEntity) -> MovieItemUI = {
-        it.convert()
+    override val interceptor: (MovieItemUI) -> MovieItemUI = {
+        it
     }
 
     init {

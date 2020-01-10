@@ -20,6 +20,7 @@ fun MovieEntity.convert() = MovieItemUI(
     originalTitle = originalTitle,
     genreIds = genreIds,
     backdropPath = backdropPath,
+    originalReleaseDate = releaseDate,
     releaseDate = releaseDate.takeIf { dt ->
         dt > 0L
     }?.let {

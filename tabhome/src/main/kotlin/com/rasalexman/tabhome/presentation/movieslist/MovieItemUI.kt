@@ -30,6 +30,7 @@ data class MovieItemUI(
     val genreIds: List<Int>,
     val backdropPath: String,
     val releaseDate: String,
+    val originalReleaseDate: Long,
     val adult: Boolean,
     val overview: String
 ) : BaseRecyclerUI<MovieItemUI.MovieViewHolder>() {
@@ -103,7 +104,7 @@ data class MovieItemUI(
             MovieItemUI(
                 0, 0, 0.0, false, "",
                 0.0, "", "", "",
-                emptyList(), "", "", false, ""
+                emptyList(), "", "", 0L,false, ""
             ).apply {
                 isPlaceHolder = true
             }

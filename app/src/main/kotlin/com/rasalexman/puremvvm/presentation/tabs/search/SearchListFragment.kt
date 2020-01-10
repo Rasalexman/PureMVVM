@@ -20,18 +20,18 @@ import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
 import kotlinx.android.synthetic.main.fragment_search.*
 
 @ExperimentalPagedSupport
-class SearchListFragment : BaseToolbarPagedRecyclerFragment<MovieEntity, MovieItemUI, SearchViewModel>(), SearchView.OnQueryTextListener {
+class SearchListFragment : BaseToolbarPagedRecyclerFragment<MovieItemUI, MovieItemUI, SearchViewModel>(), SearchView.OnQueryTextListener {
 
     override val viewModel: SearchViewModel by viewModels()
 
     override val layoutId: Int
         get() = R.layout.fragment_search
 
-    override val asyncDifferConfig: AsyncDifferConfig<MovieEntity> by unsafeLazy {
-        AsyncDifferConfig.Builder<MovieEntity>(object : DiffUtil.ItemCallback<MovieEntity>() {
-            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity) =
+    override val asyncDifferConfig: AsyncDifferConfig<MovieItemUI> by unsafeLazy {
+        AsyncDifferConfig.Builder<MovieItemUI>(object : DiffUtil.ItemCallback<MovieItemUI>() {
+            override fun areItemsTheSame(oldItem: MovieItemUI, newItem: MovieItemUI) =
                 oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity) =
+            override fun areContentsTheSame(oldItem: MovieItemUI, newItem: MovieItemUI) =
                 oldItem == newItem
         }).build()
     }
@@ -40,8 +40,8 @@ class SearchListFragment : BaseToolbarPagedRecyclerFragment<MovieEntity, MovieIt
         MovieItemUI.createPlaceHolderItem()
     }
 
-    override val interceptor: (MovieEntity) -> MovieItemUI = {
-        it.convert()
+    override val interceptor: (MovieItemUI) -> MovieItemUI = {
+        it
     }
 
     override fun initLayout() {
