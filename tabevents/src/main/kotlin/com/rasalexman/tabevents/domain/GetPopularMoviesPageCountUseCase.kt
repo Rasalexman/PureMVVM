@@ -1,7 +1,7 @@
 package com.rasalexman.tabevents.domain
 
 import com.rasalexman.core.domain.IUseCase
-import com.rasalexman.providers.data.repository.IMoviesRepository
+import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.tabevents.BuildConfig
 
 class GetPopularMoviesPageCountUseCase(

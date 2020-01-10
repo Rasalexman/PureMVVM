@@ -3,8 +3,8 @@ package com.rasalexman.tabevents.domain
 import com.rasalexman.core.common.extensions.mapListTo
 import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.core.domain.IUseCase
+import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.models.ui.MovieItemUI
-import com.rasalexman.providers.data.repository.IMoviesRepository
 
 class GetUpcomingMoviesUseCase(
     private val moviesRepository: IMoviesRepository

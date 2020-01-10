@@ -41,5 +41,10 @@ object Builds {
         const val VERSION_CODE = 10000
         const val VERSION_NAME = "1.0.0"
     }
+
+    object Data {
+        const val VERSION_CODE = 10000
+        const val VERSION_NAME = "1.0.0"
+    }
 }
 

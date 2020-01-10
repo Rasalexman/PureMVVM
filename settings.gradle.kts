@@ -1,3 +1,3 @@
 rootProject.buildFileName = "build.gradle.kts"
-include(":app", ":core", ":providers", ":models", ":onboarding", ":tabhome", ":tabevents")
+include(":app", ":core", ":providers", ":models", ":data", ":onboarding", ":tabhome", ":tabevents")
 rootProject.name= "PureMVVM"

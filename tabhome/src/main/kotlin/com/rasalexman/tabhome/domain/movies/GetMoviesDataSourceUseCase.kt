@@ -11,8 +11,8 @@ import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.doWithAsync
 import com.rasalexman.coroutinesmanager.launchOnUI
+import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.models.ui.MovieItemUI
-import com.rasalexman.providers.data.repository.IMoviesRepository
 import com.rasalexman.tabhome.BuildConfig
 
 class GetMoviesDataSourceUseCase(

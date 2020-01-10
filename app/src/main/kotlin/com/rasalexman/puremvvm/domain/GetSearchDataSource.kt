@@ -4,8 +4,8 @@ import androidx.paging.LivePagedListBuilder
 import com.rasalexman.core.common.typealiases.PagedLiveData
 import com.rasalexman.core.common.typealiases.ResultMutableLiveData
 import com.rasalexman.core.domain.IUseCase
+import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.models.ui.MovieItemUI
-import com.rasalexman.providers.data.repository.IMoviesRepository
 
 class GetSearchDataSource(
     private val movieRepository: IMoviesRepository

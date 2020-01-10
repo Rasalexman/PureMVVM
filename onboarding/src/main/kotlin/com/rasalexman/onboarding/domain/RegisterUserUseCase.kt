@@ -6,8 +6,8 @@ import com.rasalexman.core.common.extensions.toSuccessResult
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.data.errors.QException
 import com.rasalexman.core.domain.IUseCase
+import com.rasalexman.data.repository.IUserRepository
 import com.rasalexman.onboarding.data.SignUpEventModel
-import com.rasalexman.providers.data.repository.IUserRepository
 
 class RegisterUserUseCase(
     private val userRepository: IUserRepository
