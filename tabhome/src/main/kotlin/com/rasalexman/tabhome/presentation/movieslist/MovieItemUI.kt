@@ -7,6 +7,7 @@ import coil.api.load
 import com.rasalexman.core.common.extensions.clear
 import com.rasalexman.core.common.extensions.hide
 import com.rasalexman.core.common.extensions.show
+import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.holders.BaseViewHolder
 import com.rasalexman.providers.BuildConfig
@@ -92,12 +93,16 @@ data class MovieItemUI(
     }
 
     companion object {
-        fun createPlaceHolderItem() = MovieItemUI(
-            0, 0, 0.0, false, "",
-            0.0, "", "", "",
-            emptyList(), "", "", false, ""
-        ).apply {
-            isPlaceHolder = true
+        private val moviePlaceholder by unsafeLazy {
+            MovieItemUI(
+                0, 0, 0.0, false, "",
+                0.0, "", "", "",
+                emptyList(), "", "", false, ""
+            ).apply {
+                isPlaceHolder = true
+            }
         }
+
+        fun createPlaceHolderItem() = moviePlaceholder
     }
 }

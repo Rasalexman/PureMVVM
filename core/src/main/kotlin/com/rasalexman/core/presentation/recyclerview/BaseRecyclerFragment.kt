@@ -112,7 +112,7 @@ abstract class BaseRecyclerFragment<Item : BaseRecyclerUI<*>, out VM : IBaseView
         hideLoading()
         if (list.isNotEmpty()) {
             itemAdapter.set(list)
-            // FastAdapterDiffUtil[itemAdapter] = list
+            //FastAdapterDiffUtil[itemAdapter] = list
             applyScrollPosition()
         }
     }
@@ -267,13 +267,14 @@ abstract class BaseRecyclerFragment<Item : BaseRecyclerUI<*>, out VM : IBaseView
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onResultHandler(result: SResult<*>) {
         hideLoading()
         when (result) {
             is SResult.Success -> {
-                (result.data as? List<Item>)?.let { dataList ->
-                    showItems(dataList)
-                }
+                if(itemAdapter.adapterItemCount == 0)
+                    (result.data as? List<Item>)?.let(::showItems)
+                else (result.data as? List<Item>)?.let(::addItems)
             }
             is SResult.Clear -> clearAdapter()
             else -> super.onResultHandler(result)
