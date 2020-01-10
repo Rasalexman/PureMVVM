@@ -20,5 +20,5 @@ interface IMoviesRemoteDataSource : IRemoteDataSource {
     suspend fun getNewMoviesByGenreId(genreId: Int): ResultList<MovieModel>
 
 
-    suspend fun getUpcomingMovie(page: Int): ResultList<MovieModel>
+    suspend fun getUpcomingMovies(page: Int): ResultList<MovieModel>
 }

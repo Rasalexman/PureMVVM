@@ -39,7 +39,7 @@ class MoviesRemoteDataSource(
         return moviesApi.getTopRatedMovies(page).getResult { it.results }
     }
 
-    override suspend fun getUpcomingMovie(page: Int): ResultList<MovieModel> {
+    override suspend fun getUpcomingMovies(page: Int): ResultList<MovieModel> {
         return moviesApi.getUpcomingMovies(page).getResult { it.results }
     }
 

@@ -21,18 +21,21 @@ class EventsListFragment : BaseToolbarTabViewPagerFragment<EventsListViewModel>(
 
     override val viewModel: EventsListViewModel by activityViewModels()
 
-    override val pageTitles: Array<String>
-        get() = resources.getStringArray(R.array.events_title)
+    override val pageTitles: Array<String> by unsafeLazy {
+        resources.getStringArray(R.array.events_title)
+    }
 
-    override val pages: List<BaseFragment<*>>
-        get() = listOf(
+    override val pages: List<BaseFragment<*>> by unsafeLazy {
+        listOf(
             PopularFragment.newInstance(),
             TopRatedFragment.newInstance(),
             UpcomingFragment.newInstance()
         )
+    }
 
-    override val toolbarTitle: String
-        get() = string(R.string.title_events)
+    override val toolbarTitle: String by unsafeLazy {
+        string(R.string.title_events)
+    }
 
     override val centerToolbarTitle: Boolean
         get() = true

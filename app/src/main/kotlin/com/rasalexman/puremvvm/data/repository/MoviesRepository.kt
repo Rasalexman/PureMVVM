@@ -47,7 +47,7 @@ class MoviesRepository(
     }
 
     override suspend fun getRemoteUpcomingMovies(page: Int): ResultList<MovieEntity> {
-        return remoteDataSource.getTopRatedMovies(page).mapListTo()
+        return remoteDataSource.getUpcomingMovies(page).mapListTo()
     }
 
     override suspend fun getRemoteMovies(
