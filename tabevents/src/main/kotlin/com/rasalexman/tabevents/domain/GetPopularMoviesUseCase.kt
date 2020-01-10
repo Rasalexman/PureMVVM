@@ -9,18 +9,19 @@ import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.doWithAsync
 import com.rasalexman.coroutinesmanager.launchOnUI
-import com.rasalexman.providers.data.models.local.MovieEntity
 import com.rasalexman.providers.data.repository.IMoviesRepository
 import com.rasalexman.tabevents.BuildConfig
+import com.rasalexman.tabhome.data.convert
+import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
 
 class GetPopularMoviesUseCase(
     private val moviesRepository: IMoviesRepository,
     private val loadingPopularMoviesUseCase: LoadPopularMoviesUseCase,
     private val getPopularMoviesPageCountUseCase: GetPopularMoviesPageCountUseCase
-) : IUseCase.SingleInOut<ResultMutableLiveData<Any>, PagedLiveData<MovieEntity>> {
+) : IUseCase.SingleInOut<ResultMutableLiveData<Any>, PagedLiveData<MovieItemUI>> {
 
-    override suspend fun execute(data: ResultMutableLiveData<Any>): PagedLiveData<MovieEntity> {
-        val dataSourceFactory = moviesRepository.getPopularMoviesDataSource()
+    override suspend fun execute(data: ResultMutableLiveData<Any>): PagedLiveData<MovieItemUI> {
+        val dataSourceFactory = moviesRepository.getPopularMoviesDataSource().map { it.convert() }
         val pageLiveData = LivePagedListBuilder(dataSourceFactory, BuildConfig.ITEMS_ON_PAGE)
         val popularMoviesCount = getPopularMoviesPageCountUseCase.execute()
         pageLiveData.setBoundaryCallback(PopularMoviesBoundary(data, loadingPopularMoviesUseCase, popularMoviesCount))
@@ -31,11 +32,11 @@ class GetPopularMoviesUseCase(
         private var loadingLiveData: ResultMutableLiveData<Any>?,
         private var remoteUseCase: LoadPopularMoviesUseCase?,
         currentPage: Int
-    ) : PagedList.BoundaryCallback<MovieEntity>(), ICoroutinesManager {
+    ) : PagedList.BoundaryCallback<MovieItemUI>(), ICoroutinesManager {
         private var page: Int = currentPage
 
         override fun onZeroItemsLoaded() = fetchDataFromNetwork()
-        override fun onItemAtEndLoaded(itemAtEnd: MovieEntity) = fetchDataFromNetwork()
+        override fun onItemAtEndLoaded(itemAtEnd: MovieItemUI) = fetchDataFromNetwork()
 
         private fun fetchDataFromNetwork() = launchOnUI {
             loadingLiveData?.value = loadingResult()

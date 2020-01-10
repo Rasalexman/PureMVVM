@@ -12,15 +12,15 @@ import com.rasalexman.tabhome.data.convert
 import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
 
 @ExperimentalPagedSupport
-class PopularFragment : BasePagedRefreshRecyclerFragment<MovieEntity, MovieItemUI, PopularViewModel>() {
+class PopularFragment : BasePagedRefreshRecyclerFragment<MovieItemUI, MovieItemUI, PopularViewModel>() {
 
     override val viewModel: PopularViewModel by viewModels()
 
-    override val asyncDifferConfig: AsyncDifferConfig<MovieEntity> by unsafeLazy {
-        AsyncDifferConfig.Builder<MovieEntity>(object : DiffUtil.ItemCallback<MovieEntity>() {
-            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity) =
+    override val asyncDifferConfig: AsyncDifferConfig<MovieItemUI> by unsafeLazy {
+        AsyncDifferConfig.Builder<MovieItemUI>(object : DiffUtil.ItemCallback<MovieItemUI>() {
+            override fun areItemsTheSame(oldItem: MovieItemUI, newItem: MovieItemUI) =
                 oldItem.id == newItem.id
-            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity) =
+            override fun areContentsTheSame(oldItem: MovieItemUI, newItem: MovieItemUI) =
                 oldItem == newItem
         }).build()
     }
@@ -29,9 +29,7 @@ class PopularFragment : BasePagedRefreshRecyclerFragment<MovieEntity, MovieItemU
         MovieItemUI.createPlaceHolderItem()
     }
 
-    override val interceptor: (MovieEntity) -> MovieItemUI = {
-        it.convert()
-    }
+    override val interceptor: (MovieItemUI) -> MovieItemUI = { it }
 
     override fun onRefresh() {
         refresh()

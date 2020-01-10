@@ -3,6 +3,7 @@ package com.rasalexman.tabhome.presentation.genreslist
 import android.view.View
 import androidx.annotation.Keep
 import coil.api.load
+import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.holders.BaseViewHolder
 import com.rasalexman.coroutinesmanager.CoroutinesManager
@@ -26,7 +27,7 @@ data class GenreItemUI(
     override val type: Int = 1024
 
     class GenreViewHolder(view: View) : BaseViewHolder<GenreItemUI>(view) {
-        private val coroutinesManager = CoroutinesManager()
+        private val coroutinesManager by unsafeLazy { CoroutinesManager() }
 
         override fun bindView(item: GenreItemUI, payloads: MutableList<Any>) {
             titleGenreTextView.text = item.name
