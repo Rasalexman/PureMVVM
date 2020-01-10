@@ -20,12 +20,20 @@ class GetPopularMoviesUseCase(
     private val getPopularMoviesPageCountUseCase: GetPopularMoviesPageCountUseCase
 ) : IUseCase.SingleInOut<ResultMutableLiveData<Any>, PagedLiveData<MovieItemUI>> {
 
+    private var popularMoviesBoundary: PopularMoviesBoundary? = null
+
     override suspend fun execute(data: ResultMutableLiveData<Any>): PagedLiveData<MovieItemUI> {
         val dataSourceFactory = moviesRepository.getPopularMoviesDataSource().map { it.convert() }
         val pageLiveData = LivePagedListBuilder(dataSourceFactory, BuildConfig.ITEMS_ON_PAGE)
         val popularMoviesCount = getPopularMoviesPageCountUseCase.execute()
-        pageLiveData.setBoundaryCallback(PopularMoviesBoundary(data, loadingPopularMoviesUseCase, popularMoviesCount))
+        popularMoviesBoundary = PopularMoviesBoundary(data, loadingPopularMoviesUseCase, popularMoviesCount)
+        pageLiveData.setBoundaryCallback(popularMoviesBoundary)
         return pageLiveData.build()
+    }
+
+    fun clearBoundaries() {
+        popularMoviesBoundary?.clear()
+        popularMoviesBoundary = null
     }
 
     class PopularMoviesBoundary(

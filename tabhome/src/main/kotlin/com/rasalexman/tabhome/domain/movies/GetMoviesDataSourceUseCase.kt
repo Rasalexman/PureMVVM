@@ -54,9 +54,9 @@ class GetMoviesDataSourceUseCase(
 
         private fun fetchDataFromNetwork(fromReleaseDate: Long? = null) = launchOnUI {
             loadingLiveData?.value = loadingResult()
-            doWithAsync {
+            loadingLiveData?.postValue(doWithAsync {
                 remoteUseCase?.execute(genreId, fromReleaseDate)
-            }
+            })
         }
 
         fun clear() {

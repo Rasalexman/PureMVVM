@@ -29,6 +29,11 @@ class PopularViewModel : BaseViewModel() {
         }
     }
 
+    override fun onCleared() {
+        getPopularMoviesUseCase.clearBoundaries()
+        super.onCleared()
+    }
+
     override fun processViewEvent(viewEvent: SEvent) {
         // Swipe to refresh event
         viewEvent.applyForType<SEvent.Refresh> {
