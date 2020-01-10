@@ -1,5 +1,5 @@
 # PureMVVM
-This is an example of usage multi-modules MVVM architecture on Android with navigation and clean architecture
+This is an example of usage multi-modules MVVM Pattern on Android with Navigation Component and Clean Architecture
 
 1) JetPack:
  - ViewModel (https://developer.android.com/topic/libraries/architecture/viewmodel)
