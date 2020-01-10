@@ -4,7 +4,7 @@ import com.rasalexman.core.common.extensions.mapIfSuccessSuspend
 import com.rasalexman.core.common.extensions.toSuccessResult
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.domain.IUseCase
-import com.rasalexman.tabhome.presentation.genreslist.GenreItemUI
+import com.rasalexman.models.ui.GenreItemUI
 
 class GetGenresUseCase(
     private val getLocalGenresUseCase: GetLocalGenresUseCase,

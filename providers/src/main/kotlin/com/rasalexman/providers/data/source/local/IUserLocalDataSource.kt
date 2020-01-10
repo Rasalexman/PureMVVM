@@ -1,10 +1,10 @@
 package com.rasalexman.providers.data.source.local
 
 import com.rasalexman.core.data.base.ILocalDataSource
-import com.rasalexman.providers.data.models.UserEmail
-import com.rasalexman.providers.data.models.UserName
-import com.rasalexman.providers.data.models.UserPassword
-import com.rasalexman.providers.data.models.local.UserEntity
+import com.rasalexman.models.inline.UserEmail
+import com.rasalexman.models.inline.UserName
+import com.rasalexman.models.inline.UserPassword
+import com.rasalexman.models.local.UserEntity
 
 interface IUserLocalDataSource : ILocalDataSource {
     suspend fun getUserByEmail(userEmail: UserEmail): UserEntity?

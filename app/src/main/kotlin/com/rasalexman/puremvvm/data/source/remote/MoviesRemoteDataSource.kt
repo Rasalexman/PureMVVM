@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.providers.data.models.remote.MovieModel
+import com.rasalexman.models.remote.MovieModel
 import com.rasalexman.providers.data.source.remote.IMoviesRemoteDataSource
 import com.rasalexman.providers.network.api.IMovieApi
 import com.rasalexman.providers.network.responses.getResult

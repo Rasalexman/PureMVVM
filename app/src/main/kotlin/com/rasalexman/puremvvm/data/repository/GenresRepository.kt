@@ -3,7 +3,7 @@ package com.rasalexman.puremvvm.data.repository
 import com.rasalexman.core.common.extensions.applyIfSuccessSuspend
 import com.rasalexman.core.common.extensions.mapListTo
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.providers.data.models.local.GenreEntity
+import com.rasalexman.models.local.GenreEntity
 import com.rasalexman.providers.data.repository.IGenresRepository
 import com.rasalexman.providers.data.source.local.IGenresLocalDataSource
 import com.rasalexman.providers.data.source.remote.IGenresRemoteDataSource

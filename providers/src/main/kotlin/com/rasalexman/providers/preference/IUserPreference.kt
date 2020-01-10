@@ -1,8 +1,8 @@
 package com.rasalexman.providers.preference
 
-import com.rasalexman.providers.data.models.UserEmail
-import com.rasalexman.providers.data.models.UserName
-import com.rasalexman.providers.data.models.UserPassword
+import com.rasalexman.models.inline.UserEmail
+import com.rasalexman.models.inline.UserName
+import com.rasalexman.models.inline.UserPassword
 
 interface IUserPreference {
     var name: String

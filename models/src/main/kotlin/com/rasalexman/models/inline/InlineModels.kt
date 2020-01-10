@@ -1,4 +1,4 @@
-package com.rasalexman.providers.data.models
+package com.rasalexman.models.inline
 
 inline class UserName(val value: String)
 inline class UserEmail(val value: String)

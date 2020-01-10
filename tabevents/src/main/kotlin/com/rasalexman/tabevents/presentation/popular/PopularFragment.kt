@@ -4,7 +4,7 @@ import androidx.fragment.app.viewModels
 import com.mikepenz.fastadapter.paged.ExperimentalPagedSupport
 import com.rasalexman.core.common.extensions.refresh
 import com.rasalexman.core.presentation.recyclerview.paged.BasePagedRefreshRecyclerFragment
-import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
+import com.rasalexman.models.ui.MovieItemUI
 
 @ExperimentalPagedSupport
 class PopularFragment : BasePagedRefreshRecyclerFragment<MovieItemUI, PopularViewModel>() {

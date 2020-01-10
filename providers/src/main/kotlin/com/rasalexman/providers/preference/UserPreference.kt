@@ -2,9 +2,9 @@ package com.rasalexman.providers.preference
 
 import android.content.Context
 import com.chibatching.kotpref.KotprefModel
-import com.rasalexman.providers.data.models.UserEmail
-import com.rasalexman.providers.data.models.UserName
-import com.rasalexman.providers.data.models.UserPassword
+import com.rasalexman.models.inline.UserEmail
+import com.rasalexman.models.inline.UserName
+import com.rasalexman.models.inline.UserPassword
 import java.util.*
 
 internal class UserPreference(context: Context) : KotprefModel(context), IUserPreference {

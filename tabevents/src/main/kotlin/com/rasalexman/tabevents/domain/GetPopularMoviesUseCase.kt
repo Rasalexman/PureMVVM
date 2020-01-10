@@ -9,10 +9,9 @@ import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.doWithAsync
 import com.rasalexman.coroutinesmanager.launchOnUI
+import com.rasalexman.models.ui.MovieItemUI
 import com.rasalexman.providers.data.repository.IMoviesRepository
 import com.rasalexman.tabevents.BuildConfig
-import com.rasalexman.tabhome.data.convert
-import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
 
 class GetPopularMoviesUseCase(
     private val moviesRepository: IMoviesRepository,
@@ -23,7 +22,7 @@ class GetPopularMoviesUseCase(
     private var popularMoviesBoundary: PopularMoviesBoundary? = null
 
     override suspend fun execute(data: ResultMutableLiveData<Any>): PagedLiveData<MovieItemUI> {
-        val dataSourceFactory = moviesRepository.getPopularMoviesDataSource().map { it.convert() }
+        val dataSourceFactory = moviesRepository.getPopularMoviesDataSource().map { it.convertTo() }
         val pageLiveData = LivePagedListBuilder(dataSourceFactory, BuildConfig.ITEMS_ON_PAGE)
         val popularMoviesCount = getPopularMoviesPageCountUseCase.execute()
         popularMoviesBoundary = PopularMoviesBoundary(data, loadingPopularMoviesUseCase, popularMoviesCount)

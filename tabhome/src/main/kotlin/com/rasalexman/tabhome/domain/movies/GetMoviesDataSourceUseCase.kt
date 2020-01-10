@@ -11,10 +11,9 @@ import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.doWithAsync
 import com.rasalexman.coroutinesmanager.launchOnUI
+import com.rasalexman.models.ui.MovieItemUI
 import com.rasalexman.providers.data.repository.IMoviesRepository
 import com.rasalexman.tabhome.BuildConfig
-import com.rasalexman.tabhome.data.convert
-import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
 
 class GetMoviesDataSourceUseCase(
     private val moviesRepository: IMoviesRepository,
@@ -30,7 +29,7 @@ class GetMoviesDataSourceUseCase(
     ): PagedLiveData<MovieItemUI> {
         clearBoundaries()
         resultLiveData.postValue(loadingResult())
-        val dataSourceFactory = moviesRepository.getMoviesByGenreDataSource(genreId).map { it.convert() }
+        val dataSourceFactory = moviesRepository.getMoviesByGenreDataSource(genreId).map { it.convertTo() }
         val pageLiveData = LivePagedListBuilder(dataSourceFactory, BuildConfig.ITEMS_ON_PAGE)
         moviesBoundaryCallback = MoviesBoundaryCallback(genreId, resultLiveData, remoteMoviesByGenreIdUseCase)
         pageLiveData.setBoundaryCallback(moviesBoundaryCallback)

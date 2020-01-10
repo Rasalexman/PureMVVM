@@ -1,4 +1,4 @@
-package com.rasalexman.tabhome.presentation.genreslist
+package com.rasalexman.models.ui
 
 import android.view.View
 import androidx.annotation.Keep
@@ -8,7 +8,7 @@ import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.holders.BaseViewHolder
 import com.rasalexman.coroutinesmanager.CoroutinesManager
 import com.rasalexman.coroutinesmanager.launchOnUI
-import com.rasalexman.tabhome.R
+import com.rasalexman.models.R
 import kotlinx.android.synthetic.main.layout_item_genre.*
 
 @Keep

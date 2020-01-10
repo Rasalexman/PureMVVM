@@ -5,7 +5,7 @@ import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.core.common.typealiases.ResultMutableLiveData
 import com.rasalexman.core.data.base.IBaseRepository
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.providers.data.models.local.MovieEntity
+import com.rasalexman.models.local.MovieEntity
 import com.rasalexman.providers.data.source.local.IMoviesLocalDataSource
 import com.rasalexman.providers.data.source.remote.IMoviesRemoteDataSource
 

@@ -1,9 +1,10 @@
-package com.rasalexman.tabhome.presentation.movieslist
+package com.rasalexman.models.ui
 
 import android.view.View
 import androidx.annotation.Keep
 import androidx.core.view.isVisible
 import coil.api.load
+import com.rasalexman.core.BuildConfig
 import com.rasalexman.core.common.extensions.clear
 import com.rasalexman.core.common.extensions.hide
 import com.rasalexman.core.common.extensions.show
@@ -12,8 +13,7 @@ import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.holders.BaseViewHolder
 import com.rasalexman.coroutinesmanager.CoroutinesManager
 import com.rasalexman.coroutinesmanager.launchOnUI
-import com.rasalexman.providers.BuildConfig
-import com.rasalexman.tabhome.R
+import com.rasalexman.models.R
 import kotlinx.android.synthetic.main.layout_item_movies.*
 
 @Keep
@@ -58,7 +58,7 @@ data class MovieItemUI(
             titleTextView.text = item.title
             releaseTextView.text = item.releaseDate
             overviewTextView.text = item.overview
-            itemView.setVoteAverage(item)
+            setVoteAverage(item)
 
             item.fullPosterUrl.takeIf {
                 !item.isPlaceHolder
@@ -89,7 +89,7 @@ data class MovieItemUI(
             imageProgressBar.hide()
         }
 
-        private fun View.setVoteAverage(item: MovieItemUI) {
+        private fun setVoteAverage(item: MovieItemUI) {
             if (item.voteAverage > 0.0) {
                 voteAverageTextView.show()
                 voteAverageTextView.text = item.voteAverage.toString()

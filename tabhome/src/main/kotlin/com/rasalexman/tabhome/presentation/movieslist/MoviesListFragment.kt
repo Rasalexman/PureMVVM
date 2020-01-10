@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.mikepenz.fastadapter.paged.ExperimentalPagedSupport
 import com.rasalexman.core.common.extensions.toFetch
 import com.rasalexman.core.presentation.recyclerview.paged.BaseToolbarPagedRecyclerFragment
+import com.rasalexman.models.ui.MovieItemUI
 import kotlinx.coroutines.launch
 
 @ExperimentalPagedSupport

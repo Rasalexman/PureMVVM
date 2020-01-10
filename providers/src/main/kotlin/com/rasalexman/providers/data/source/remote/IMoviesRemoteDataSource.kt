@@ -5,7 +5,7 @@ import androidx.paging.DataSource
 import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.core.data.base.IRemoteDataSource
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.providers.data.models.remote.MovieModel
+import com.rasalexman.models.remote.MovieModel
 
 interface IMoviesRemoteDataSource : IRemoteDataSource {
 

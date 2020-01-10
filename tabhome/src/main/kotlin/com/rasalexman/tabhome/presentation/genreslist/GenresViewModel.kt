@@ -7,9 +7,10 @@ import com.mincor.kodi.core.immutableInstance
 import com.rasalexman.core.common.extensions.loadingResult
 import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.coroutinesmanager.CoroutinesProvider
-import com.rasalexman.tabhome.domain.genres.GetGenresUseCase
 import com.rasalexman.core.presentation.viewModels.BaseViewModel
+import com.rasalexman.coroutinesmanager.CoroutinesProvider
+import com.rasalexman.models.ui.GenreItemUI
+import com.rasalexman.tabhome.domain.genres.GetGenresUseCase
 
 class GenresViewModel : BaseViewModel() {
 

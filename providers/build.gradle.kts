@@ -18,12 +18,6 @@ android {
         versionName = appdependencies.Builds.Providers.VERSION_NAME
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         //consumerProguardFiles = "consumer-rules.pro"
-
-        buildConfigField("String", "SERVER_URL", "\"https://api.themoviedb.org/3/\"")
-        buildConfigField("String", "IMAGES_URL", "\"https://image.tmdb.org/t/p/w500\"")
-
-        buildConfigField("String", "ApiKey", "\"026a257e7842ac9cac1fa627496b1468\"")
-        buildConfigField("String", "IMAGES_BACKDROP_URL", "\"https://image.tmdb.org/t/p/original\"")
     }
 
     buildTypes {
@@ -66,10 +60,7 @@ dependencies {
     implementation(fileTree(mapOf("include" to listOf("*.jar"), "dir" to "libs")))
     implementation(kotlin("stdlib-jdk8", appdependencies.Versions.kotlin))
 
-    api(project(":core"))
-
-    api(appdependencies.Libs.Room.runtime)
-    api(appdependencies.Libs.Room.ktx)
+    api(project(":models"))
 
     api(appdependencies.Libs.Retrofit.core)
     api(appdependencies.Libs.Retrofit.moshi)

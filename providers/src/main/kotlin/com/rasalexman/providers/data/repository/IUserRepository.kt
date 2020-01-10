@@ -2,11 +2,11 @@ package com.rasalexman.providers.data.repository
 
 import com.rasalexman.core.data.base.IBaseLocalRepository
 import com.rasalexman.core.data.dto.SResult
+import com.rasalexman.models.inline.UserEmail
+import com.rasalexman.models.inline.UserName
+import com.rasalexman.models.inline.UserPassword
+import com.rasalexman.models.local.UserEntity
 import com.rasalexman.providers.data.source.local.IUserLocalDataSource
-import com.rasalexman.providers.data.models.UserEmail
-import com.rasalexman.providers.data.models.UserName
-import com.rasalexman.providers.data.models.UserPassword
-import com.rasalexman.providers.data.models.local.UserEntity
 
 interface IUserRepository : IBaseLocalRepository<IUserLocalDataSource> {
 

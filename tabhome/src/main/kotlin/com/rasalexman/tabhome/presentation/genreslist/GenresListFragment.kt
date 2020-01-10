@@ -1,11 +1,11 @@
 package com.rasalexman.tabhome.presentation.genreslist
 
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.rasalexman.core.common.extensions.ScrollPosition
 import com.rasalexman.core.common.extensions.homeTabNavigator
 import com.rasalexman.core.common.extensions.string
 import com.rasalexman.core.presentation.recyclerview.BaseToolbarRecyclerFragment
+import com.rasalexman.models.ui.GenreItemUI
 import com.rasalexman.tabhome.R
 
 class GenresListFragment : BaseToolbarRecyclerFragment<GenreItemUI, GenresViewModel>() {

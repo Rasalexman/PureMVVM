@@ -1,14 +1,13 @@
 package com.rasalexman.puremvvm.data.source.remote
 
+import com.rasalexman.core.BuildConfig
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.IAsyncTasksManager
-import com.rasalexman.providers.BuildConfig
-import com.rasalexman.providers.data.models.local.GenreEntity
-import com.rasalexman.providers.data.models.remote.GenreModel
+import com.rasalexman.models.local.GenreEntity
+import com.rasalexman.models.remote.GenreModel
 import com.rasalexman.providers.data.source.remote.IGenresRemoteDataSource
 import com.rasalexman.providers.network.api.IMovieApi
 import com.rasalexman.providers.network.responses.getResult
-import kotlinx.coroutines.sync.Mutex
 
 class GenresRemoteDataSource(
     private val moviesApi: IMovieApi

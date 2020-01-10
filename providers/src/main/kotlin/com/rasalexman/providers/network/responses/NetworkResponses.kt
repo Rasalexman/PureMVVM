@@ -5,8 +5,7 @@ import com.rasalexman.core.common.extensions.emptyResult
 import com.rasalexman.core.common.extensions.errorResult
 import com.rasalexman.core.common.extensions.successResult
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.providers.data.models.remote.GenreModel
-import com.rasalexman.providers.data.models.remote.MovieModel
+import com.rasalexman.models.remote.GenreModel
 import retrofit2.Response
 
 @Keep

@@ -4,7 +4,7 @@ import androidx.paging.DataSource
 import com.rasalexman.core.common.extensions.emptyResult
 import com.rasalexman.core.common.extensions.successResult
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.providers.data.models.local.MovieEntity
+import com.rasalexman.models.local.MovieEntity
 import com.rasalexman.providers.data.source.local.IMoviesLocalDataSource
 import com.rasalexman.providers.database.dao.IMoviesDao
 

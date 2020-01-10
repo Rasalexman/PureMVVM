@@ -37,6 +37,16 @@ object Resources {
         )
     }
 
+    object Models {
+        val dirs = arrayListOf(
+            "src/main/res"
+        )
+
+        val javaDirs = arrayListOf(
+            "src/main/kotlin"
+        )
+    }
+
     object Onboarding {
         val dirs = arrayListOf(
             "src/main/res-components/login",

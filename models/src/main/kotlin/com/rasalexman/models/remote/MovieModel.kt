@@ -1,10 +1,12 @@
-package com.rasalexman.providers.data.models.remote
+package com.rasalexman.models.remote
 
+import androidx.annotation.Keep
 import com.rasalexman.core.data.base.IConvertableTo
-import com.rasalexman.providers.data.models.local.MovieEntity
+import com.rasalexman.models.local.MovieEntity
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Keep
 data class MovieModel(
     val id: Int,
     val vote_count: Int?,

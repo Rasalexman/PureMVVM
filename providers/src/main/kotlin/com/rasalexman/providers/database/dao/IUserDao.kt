@@ -2,8 +2,8 @@ package com.rasalexman.providers.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.rasalexman.models.local.UserEntity
 import com.rasalexman.providers.database.dao.base.IBaseDao
-import com.rasalexman.providers.data.models.local.UserEntity
 
 @Dao
 interface IUserDao : IBaseDao<UserEntity> {

@@ -7,17 +7,12 @@ import androidx.fragment.app.viewModels
 import com.rasalexman.core.common.extensions.*
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.BaseFragment
+import com.rasalexman.models.inline.toUserEmail
+import com.rasalexman.models.inline.toUserName
+import com.rasalexman.models.inline.toUserPassword
 import com.rasalexman.onboarding.R
 import com.rasalexman.onboarding.data.SignUpEventModel
-import com.rasalexman.providers.data.models.toUserEmail
-import com.rasalexman.providers.data.models.toUserName
-import com.rasalexman.providers.data.models.toUserPassword
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_register.*
-import kotlinx.android.synthetic.main.fragment_register.contentLayout
-import kotlinx.android.synthetic.main.fragment_register.emailEditText
-import kotlinx.android.synthetic.main.fragment_register.loadingLayout
-import kotlinx.android.synthetic.main.fragment_register.passwordEditText
 
 class RegisterFragment : BaseFragment<RegisterViewModel>() {
 

@@ -1,7 +1,7 @@
 package com.rasalexman.providers.network
 
 import com.ihsanbal.logging.Level
-import com.rasalexman.providers.BuildConfig
+import com.rasalexman.core.BuildConfig
 import com.squareup.moshi.Moshi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -28,9 +28,9 @@ fun getUnsafeOkHttpClient(): OkHttpClient.Builder {
             val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
                 override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
                 @Throws(CertificateException::class)
-                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {}
+                override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) = Unit
                 @Throws(CertificateException::class)
-                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {}
+                override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) = Unit
             })
 
             val sslContext = SSLContext.getInstance("SSL").apply {

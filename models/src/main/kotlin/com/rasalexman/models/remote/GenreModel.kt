@@ -1,8 +1,10 @@
-package com.rasalexman.providers.data.models.remote
+package com.rasalexman.models.remote
 
+import androidx.annotation.Keep
 import com.rasalexman.core.data.base.IConvertableTo
-import com.rasalexman.providers.data.models.local.GenreEntity
+import com.rasalexman.models.local.GenreEntity
 
+@Keep
 data class GenreModel(
     val id: Int?,
     val name: String?

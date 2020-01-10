@@ -1,6 +1,6 @@
 package com.rasalexman.providers.network.api
 
-import com.rasalexman.providers.data.models.remote.MovieModel
+import com.rasalexman.models.remote.MovieModel
 import com.rasalexman.providers.network.responses.GetGenresResponse
 import com.rasalexman.providers.network.responses.GetMoviesListResponse
 import retrofit2.Response

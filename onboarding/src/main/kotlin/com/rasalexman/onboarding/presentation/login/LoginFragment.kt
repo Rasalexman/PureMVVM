@@ -6,10 +6,10 @@ import androidx.navigation.navGraphViewModels
 import com.rasalexman.core.common.extensions.*
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.BaseFragment
+import com.rasalexman.models.inline.toUserEmail
+import com.rasalexman.models.inline.toUserPassword
 import com.rasalexman.onboarding.R
 import com.rasalexman.onboarding.data.SignInEventModel
-import com.rasalexman.providers.data.models.toUserEmail
-import com.rasalexman.providers.data.models.toUserPassword
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment<LoginViewModel>() {

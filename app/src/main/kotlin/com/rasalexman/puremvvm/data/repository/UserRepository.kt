@@ -5,12 +5,12 @@ import com.rasalexman.core.common.extensions.doIfNull
 import com.rasalexman.core.common.extensions.toSuccessResult
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.data.errors.QException
-import com.rasalexman.providers.data.models.UserEmail
-import com.rasalexman.providers.data.models.UserName
-import com.rasalexman.providers.data.models.UserPassword
+import com.rasalexman.models.inline.UserEmail
+import com.rasalexman.models.inline.UserName
+import com.rasalexman.models.inline.UserPassword
+import com.rasalexman.models.local.UserEntity
 import com.rasalexman.providers.data.repository.IUserRepository
 import com.rasalexman.providers.data.source.local.IUserLocalDataSource
-import com.rasalexman.providers.data.models.local.UserEntity
 
 class UserRepository(
     override val localDataSource: IUserLocalDataSource

@@ -4,9 +4,8 @@ import androidx.paging.LivePagedListBuilder
 import com.rasalexman.core.common.typealiases.PagedLiveData
 import com.rasalexman.core.common.typealiases.ResultMutableLiveData
 import com.rasalexman.core.domain.IUseCase
+import com.rasalexman.models.ui.MovieItemUI
 import com.rasalexman.providers.data.repository.IMoviesRepository
-import com.rasalexman.tabhome.data.convert
-import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
 
 class GetSearchDataSource(
     private val movieRepository: IMoviesRepository
@@ -16,7 +15,7 @@ class GetSearchDataSource(
         query: String,
         resultLiveData: ResultMutableLiveData<Boolean>
     ): PagedLiveData<MovieItemUI> {
-        val searchDataSourceFactory = movieRepository.getRemoteSearchDataSource(query, resultLiveData).map { it.convert() }
+        val searchDataSourceFactory = movieRepository.getRemoteSearchDataSource(query, resultLiveData).map { it.convertTo() }
         val pageLiveData = LivePagedListBuilder(searchDataSourceFactory, 20)
         return pageLiveData.build()
     }

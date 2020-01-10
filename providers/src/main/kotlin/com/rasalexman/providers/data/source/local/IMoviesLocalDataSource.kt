@@ -3,7 +3,7 @@ package com.rasalexman.providers.data.source.local
 import androidx.paging.DataSource
 import com.rasalexman.core.data.base.ILocalDataSource
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.providers.data.models.local.MovieEntity
+import com.rasalexman.models.local.MovieEntity
 
 interface IMoviesLocalDataSource : ILocalDataSource {
 

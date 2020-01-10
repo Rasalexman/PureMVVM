@@ -10,8 +10,8 @@ import com.rasalexman.core.common.extensions.fetchWith
 import com.rasalexman.core.common.extensions.hideKeyboard
 import com.rasalexman.core.common.extensions.showKeyboard
 import com.rasalexman.core.presentation.recyclerview.paged.BaseToolbarPagedRecyclerFragment
+import com.rasalexman.models.ui.MovieItemUI
 import com.rasalexman.puremvvm.R
-import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
 import kotlinx.android.synthetic.main.fragment_search.*
 
 @ExperimentalPagedSupport

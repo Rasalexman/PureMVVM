@@ -3,7 +3,7 @@ package com.rasalexman.providers.database.dao
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Query
-import com.rasalexman.providers.data.models.local.MovieEntity
+import com.rasalexman.models.local.MovieEntity
 import com.rasalexman.providers.database.dao.base.IBaseDao
 
 @Dao

@@ -7,15 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.mincor.kodi.core.immutableInstance
 import com.rasalexman.core.common.extensions.applyForType
 import com.rasalexman.core.common.extensions.loadingResult
-import com.rasalexman.core.common.extensions.mapListBy
 import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.presentation.viewModels.BaseSaveStateViewModel
 import com.rasalexman.coroutinesmanager.CoroutinesProvider
 import com.rasalexman.tabevents.domain.GetTopRatedMoviesUseCase
-import com.rasalexman.tabhome.presentation.movieslist.MovieItemUI
-import java.text.SimpleDateFormat
-import java.util.*
 
 class TopRatedViewModel(saveState: SavedStateHandle) : BaseSaveStateViewModel(saveState) {
 

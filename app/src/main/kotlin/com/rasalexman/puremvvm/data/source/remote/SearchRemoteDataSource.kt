@@ -7,7 +7,7 @@ import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.doWithTryCatchAsync
 import com.rasalexman.coroutinesmanager.launchOnUI
-import com.rasalexman.providers.data.models.remote.MovieModel
+import com.rasalexman.models.remote.MovieModel
 import com.rasalexman.providers.network.api.IMovieApi
 import com.rasalexman.providers.network.responses.GetMoviesListResponse
 import com.rasalexman.providers.network.responses.getResult
