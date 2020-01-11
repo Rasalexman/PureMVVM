@@ -11,6 +11,7 @@ import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.CoroutinesProvider
 import com.rasalexman.providers.preference.IUserPreference
 import com.rasalexman.core.presentation.viewModels.BaseViewModel
+import com.rasalexman.puremvvm.NavigationMainDirections
 
 class StartViewModel : BaseViewModel() {
 
@@ -24,9 +25,9 @@ class StartViewModel : BaseViewModel() {
 
     private fun getResult(): SResult<Any> {
         return if (userPreference.email.isNotEmpty()) {
-            mainNavigator().showTabsDirection
+            NavigationMainDirections.showTabsFragment()
         } else {
-            mainNavigator().showOnboardingDirection
-        }.toNavResult(mainNavigator().hostController)
+            NavigationMainDirections.showOnboardingFragment()
+        }.toNavResult()
     }
 }

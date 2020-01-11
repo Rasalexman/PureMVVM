@@ -8,6 +8,7 @@ import com.mincor.kodi.core.immutableInstance
 import com.rasalexman.core.common.extensions.applyForType
 import com.rasalexman.core.common.extensions.loadingResult
 import com.rasalexman.core.common.extensions.unsafeLazy
+import com.rasalexman.core.data.dto.FetchWith
 import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.presentation.viewModels.BaseSaveStateViewModel
 import com.rasalexman.coroutinesmanager.CoroutinesProvider
@@ -29,7 +30,7 @@ class UpcomingViewModel(saveState: SavedStateHandle) : BaseSaveStateViewModel(sa
     }
 
     override fun processViewEvent(viewEvent: SEvent) {
-        viewEvent.applyForType<SEvent.FetchWith<Int>> {
+        viewEvent.applyForType<FetchWith<Int>> {
             val pageValue = pageLiveData.value ?: it.data
             pageLiveData.value = (pageValue + 1)
         }

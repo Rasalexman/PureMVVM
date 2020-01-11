@@ -25,7 +25,7 @@ fun <T> T?.doIfNull(input: OutHandler<T>): T {
     return this ?: input()
 }
 
-fun <T, R> T?.takeIfNull(input: OutHandler<R>): Any? {
+fun <T, R> T?.takeIfNull(input: OutHandler<R?>): Any? {
     return this ?: input()
 }
 

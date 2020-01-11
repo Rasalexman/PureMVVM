@@ -3,10 +3,8 @@ package com.rasalexman.onboarding.presentation.login
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.*
 import com.mincor.kodi.core.immutableInstance
-import com.rasalexman.core.common.extensions.applyForType
 import com.rasalexman.core.common.extensions.loadingResult
 import com.rasalexman.core.common.extensions.unsafeLazy
-import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.viewModels.BaseViewModel
 import com.rasalexman.coroutinesmanager.CoroutinesProvider
@@ -21,13 +19,8 @@ class LoginViewModel : BaseViewModel() {
     private val checkUserRegisteredUseCase: CheckUserRegisteredUseCase by immutableInstance()
     private val loginLiveData by unsafeLazy { MutableLiveData<SignInEventModel>() }
 
-    val emailValidationError by unsafeLazy {
-        MutableLiveData<Int>()
-    }
-
-    val passwordValidationError by unsafeLazy {
-        MutableLiveData<Int>()
-    }
+    val emailValidationError by unsafeLazy { MutableLiveData<Int>() }
+    val passwordValidationError by unsafeLazy { MutableLiveData<Int>() }
 
     val email by unsafeLazy {
         MutableLiveData<String>()
@@ -46,11 +39,7 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    override fun processViewEvent(viewEvent: SEvent) {
-        viewEvent.applyForType(::validate)
-    }
-
-    private fun validate(viewEvent: SEvent.Fetch) {
+    fun logInHandler() {
         val emailToValidate = email.value.orEmpty()
         val passwordToValidate = password.value.orEmpty()
 

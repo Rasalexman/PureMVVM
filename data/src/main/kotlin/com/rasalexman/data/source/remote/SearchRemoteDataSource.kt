@@ -28,9 +28,7 @@ class SearchRemoteDataSource(
         resultLiveData.postValue(loadingResult())
         loadMoviesByQuery(query).applyIfSuccessSuspend {
             callback.onResult(it, currentPage - 1, currentPage)
-        }.applyForType<SResult.ErrorResult> {
-            resultLiveData.postValue(it)
-        }
+        }.applyIfType<SResult.ErrorResult>(resultLiveData::postValue)
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, MovieModel>) =
@@ -38,9 +36,7 @@ class SearchRemoteDataSource(
             resultLiveData.postValue(loadingResult())
             loadMoviesByQuery(query).applyIfSuccessSuspend {
                 callback.onResult(it, currentPage)
-            }.applyIfType<SResult.ErrorResult> {
-                resultLiveData.postValue(this)
-            }
+            }.applyIfType<SResult.ErrorResult>(resultLiveData::postValue)
         }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, MovieModel>) = Unit

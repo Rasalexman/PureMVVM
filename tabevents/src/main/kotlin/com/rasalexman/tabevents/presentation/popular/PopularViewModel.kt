@@ -7,6 +7,7 @@ import com.mincor.kodi.core.immutableInstance
 import com.rasalexman.core.common.extensions.applyForType
 import com.rasalexman.core.common.extensions.loadingResult
 import com.rasalexman.core.common.extensions.unsafeLazy
+import com.rasalexman.core.data.dto.Refresh
 import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.viewModels.BaseViewModel
@@ -36,10 +37,12 @@ class PopularViewModel : BaseViewModel() {
 
     override fun processViewEvent(viewEvent: SEvent) {
         // Swipe to refresh event
-        viewEvent.applyForType<SEvent.Refresh> {
-            viewModelScope.launch(viewModelScope.coroutineContext + CoroutinesProvider.IO) {
-                resultLiveData.postValue(loadPopularMoviesUseCase.execute(1))
-            }
+        viewEvent.applyForType(::refreshContent)
+    }
+
+    private fun refreshContent(viewEvent: Refresh) {
+        viewModelScope.launch(viewModelScope.coroutineContext + CoroutinesProvider.IO) {
+            resultLiveData.postValue(loadPopularMoviesUseCase.execute(1))
         }
     }
 }

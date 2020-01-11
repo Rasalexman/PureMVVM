@@ -4,20 +4,12 @@
 
     <data>
         <variable
-            name="fetch"
-            type="com.rasalexman.core.data.dto.SEvent.Fetch" />
+            name="fragment"
+            type="com.rasalexman.onboarding.presentation.login.LoginFragment" />
 
         <variable
             name="viewModel"
             type="com.rasalexman.onboarding.presentation.login.LoginViewModel" />
-
-        <variable
-            name="registerDirection"
-            type="androidx.navigation.NavDirections"/>
-
-        <variable
-            name="hostController"
-            type="androidx.navigation.NavController"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,19 +22,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contentLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailTextInputLayout"
@@ -52,10 +44,10 @@
                 android:layout_marginStart="@dimen/size_16dp"
                 android:layout_marginTop="@dimen/size_16dp"
                 android:layout_marginEnd="@dimen/size_16dp"
-                app:boxStrokeWidth="@dimen/size_1dp"
-                app:boxStrokeColor="@color/color_bg_secondary"
-                android:textColorHint="@color/text_secondary"
                 android:hint="@string/hint_enter_email"
+                android:textColorHint="@color/text_secondary"
+                app:boxStrokeColor="@color/color_bg_secondary"
+                app:boxStrokeWidth="@dimen/size_1dp"
 
                 app:layout_constraintBottom_toTopOf="@+id/passwordTextInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -69,9 +61,9 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:text="@={viewModel.email}"
-                    app:validationError="@{viewModel.emailValidationError}"
                     android:textColor="@color/text_primary"
-                    android:textSize="@dimen/text_size_14sp" />
+                    android:textSize="@dimen/text_size_14sp"
+                    app:validationError="@{viewModel.emailValidationError}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,10 +76,10 @@
                 android:layout_marginStart="@dimen/size_16dp"
                 android:layout_marginTop="@dimen/size_16dp"
                 android:layout_marginEnd="@dimen/size_16dp"
-                app:boxStrokeWidth="@dimen/size_1dp"
-                app:boxStrokeColor="@color/color_bg_secondary"
-                android:textColorHint="@color/text_secondary"
                 android:hint="@string/hint_enter_password"
+                android:textColorHint="@color/text_secondary"
+                app:boxStrokeColor="@color/color_bg_secondary"
+                app:boxStrokeWidth="@dimen/size_1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout"
@@ -99,9 +91,9 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:text="@={viewModel.password}"
-                    app:validationError="@{viewModel.passwordValidationError}"
                     android:textColor="@color/text_primary"
-                    android:textSize="@dimen/text_size_14sp" />
+                    android:textSize="@dimen/text_size_14sp"
+                    app:validationError="@{viewModel.passwordValidationError}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,8 +104,8 @@
                 android:layout_marginStart="@dimen/size_16dp"
                 android:layout_marginTop="@dimen/size_16dp"
                 android:layout_marginEnd="@dimen/size_16dp"
+                android:onClick="@{()->viewModel.logInHandler()}"
                 android:text="@string/title_sign_in"
-                android:onClick="@{()->viewModel.processViewEvent(fetch)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
@@ -121,21 +113,21 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/registerButton"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/title_register"
-                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_marginStart="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginEnd="@dimen/size_16dp"
+                android:onClick="@{()->fragment.showRegisterFragment()}"
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
-                android:onClick="@{()->hostController.navigate(registerDirection)}"
+                android:text="@string/title_register"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/signInButton"
-                app:layout_constraintWidth_percent="0.4"
-                android:layout_marginStart="@dimen/size_16dp"
-                android:layout_marginTop="@dimen/size_16dp"
-                android:layout_marginEnd="@dimen/size_16dp" />
+                app:layout_constraintWidth_percent="0.4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

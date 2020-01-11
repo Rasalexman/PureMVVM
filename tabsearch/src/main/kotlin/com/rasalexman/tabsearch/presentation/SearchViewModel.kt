@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.mincor.kodi.core.immutableInstance
 import com.rasalexman.core.common.extensions.applyForType
 import com.rasalexman.core.common.extensions.unsafeLazy
+import com.rasalexman.core.data.dto.FetchWith
 import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.viewModels.BaseSaveStateViewModel
@@ -15,7 +16,7 @@ class SearchViewModel(savedState: SavedStateHandle) : BaseSaveStateViewModel(sav
     private val getSearchRemoteDataSource: GetSearchDataSource by immutableInstance()
 
     private val queryLiveData by unsafeLazy {
-        MutableLiveData<SEvent.FetchWith<String>>()
+        MutableLiveData<FetchWith<String>>()
     }
 
     override val resultLiveData by unsafeLazy {

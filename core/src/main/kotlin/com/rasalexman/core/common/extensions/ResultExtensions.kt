@@ -1,12 +1,16 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.rasalexman.core.common.extensions
 
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
+import com.rasalexman.core.common.typealiases.InHandler
 import com.rasalexman.core.common.typealiases.InOutHandler
+import com.rasalexman.core.common.typealiases.SInHandler
 import com.rasalexman.core.common.typealiases.UnitHandler
+import com.rasalexman.core.data.base.IConvertableTo
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.data.errors.QException
-import com.rasalexman.core.data.base.IConvertableTo
 
 // /------ ViewResult extensions
 inline fun <reified T : Any> Any.successResult(data: T): SResult<T> = SResult.Success(data)
@@ -14,11 +18,6 @@ inline fun <reified T : Any> Any.loadingResult(): SResult<T> = SResult.Loading
 inline fun <reified T : Any> Any.emptyResult(): SResult<T> = SResult.Empty
 inline fun <reified T : Any> Any.defaultResult(): SResult<T> = SResult.Default
 inline fun <reified T : Any> Any.clearResult(): SResult<T> = SResult.Clear
-
-fun Any.navigateToResult(
-    to: NavDirections,
-    navigator: NavController
-) = SResult.NavigateResult.NavigateTo(to, navigator)
 
 fun Any.navigateBackResult() =
     SResult.NavigateResult.NavigateBack
@@ -40,8 +39,8 @@ inline fun <reified T : Any> T.toSuccessResult(): SResult<T> =
     successResult(this)
 
 inline fun <reified T : NavDirections> T.toNavResult(
-    navigator: NavController
-) = navigateToResult(this, navigator)
+    navigator: NavController? = null
+) = SResult.NavigateResult.NavigateTo(this, navigator)
 
 inline fun <reified T : Throwable> T.toErrorResult() =
     errorResult(this.message ?: this.cause?.message.orEmpty(), 0, this)
@@ -90,14 +89,25 @@ fun SResult.ErrorResult.getMessage(): Any? {
     return (this.message?.takeIf { (it as? String)?.isNotEmpty() == true || (it as? Int) != null && it > 0 } ?: (this.exception as? QException)?.getErrorMessageResId()) ?: this.exception?.message ?: this.exception?.cause?.message
 }
 
+///--- Inline Applying functions
+inline fun <reified I : Any> SResult<I>.doIfSuccess(block: UnitHandler): SResult<I> {
+    if (this is SResult.Success) block()
+    return this
+}
+
+suspend inline fun <reified I : Any> SResult<I>.doIfSuccessSuspend(crossinline block: suspend () -> Unit): SResult<I> {
+    if (this is SResult.Success) block()
+    return this
+}
+
 // /--- Inline Applying functions
-inline fun <reified I : Any> SResult<I>.applyIfSuccess(block: (I) -> Unit): SResult<I> {
+inline fun <reified I : Any> SResult<I>.applyIfSuccess(block: InHandler<I>): SResult<I> {
     if (this is SResult.Success) block(this.data)
     return this
 }
 
 @Suppress("REDUNDANT_INLINE_SUSPEND_FUNCTION_TYPE")
-suspend inline fun <reified I : Any> SResult<I>.applyIfSuccessSuspend(crossinline block: suspend (I) -> Unit): SResult<I> {
+suspend inline fun <reified I : Any> SResult<I>.applyIfSuccessSuspend(crossinline block: SInHandler<I>): SResult<I> {
     if (this is SResult.Success) block(this.data)
     return this
 }

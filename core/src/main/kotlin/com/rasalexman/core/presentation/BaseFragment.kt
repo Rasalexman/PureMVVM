@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.mincor.kodi.core.IKodi
 import com.mincor.kodi.core.applyIf
@@ -79,6 +80,12 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
      */
     override val currentNavHandler: INavigationHandler?
         get() = this
+
+    /**
+     * Current Navigation Controller
+     */
+    override val navController: NavController
+        get() = this.findNavController()
 
     /**
      * when need to create view
@@ -207,7 +214,7 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
      * When pressed back
      */
     override fun onBackPressed(): Boolean {
-        return if (!canGoBack) true else this.findNavController().popBackStack()
+        return if (!canGoBack) true else navController.popBackStack()
     }
 
     /**
@@ -222,7 +229,7 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
      */
     override fun onDestroyView() {
         context?.closeAlert()
-        //(view as? ViewGroup)?.clear()
+        (view as? ViewGroup)?.clear()
         super.onDestroyView()
     }
 
@@ -239,12 +246,10 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
 
             is SResult.NavigateResult.NavigateTo -> {
                 val (direction, navigator) = result
-                navigator.navigate(direction)
+                (navigator ?: navController).navigate(direction)
             }
 
-            is SResult.NavigateResult.NavigateBack -> {
-                onBackPressed()
-            }
+            is SResult.NavigateResult.NavigateBack -> onBackPressed()
 
             is SResult.ErrorResult -> {
                 result.getMessage()?.let {

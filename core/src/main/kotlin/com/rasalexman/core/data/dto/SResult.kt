@@ -29,7 +29,7 @@ sealed class SResult<out T : Any> {
 
         data class NavigateTo(
             val navDirection: NavDirections,
-            val qNavigator: NavController
+            val qNavigator: NavController? = null
         ) : NavigateResult()
 
         object NavigateBack : NavigateResult()

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.mincor.kodi.core.immutableInstance
 import com.rasalexman.core.common.extensions.applyForType
 import com.rasalexman.core.common.extensions.unsafeLazy
+import com.rasalexman.core.data.dto.FetchWith
 import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.viewModels.BaseViewModel
@@ -17,7 +18,7 @@ class MoviesViewModel : BaseViewModel() {
 
     private val getMoviesDataSourceUseCase: GetMoviesDataSourceUseCase by immutableInstance()
 
-    private val genreIdLiveData by unsafeLazy { MutableLiveData<SEvent.FetchWith<Int>>() }
+    private val genreIdLiveData by unsafeLazy { MutableLiveData<FetchWith<Int>>() }
     override val resultLiveData by unsafeLazy { MutableLiveData<SResult<Any>>() }
 
     override val anyLiveData by unsafeLazy {

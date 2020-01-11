@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.mincor.kodi.core.IKodi
 import com.mincor.kodi.delegates.immutableGetter
 import com.rasalexman.core.common.extensions.errorResult
+import com.rasalexman.core.data.dto.NavigateTo
 import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
@@ -41,7 +42,7 @@ open class BaseViewModel : ViewModel(), IKodi,
      */
     override fun processViewEvent(viewEvent: SEvent) {
         when (viewEvent) {
-            is SEvent.NavigateTo -> {
+            is NavigateTo -> {
                 val (direction, navigator) = viewEvent
                 navigator.navigate(direction)
             }

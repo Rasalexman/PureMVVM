@@ -44,8 +44,12 @@ class MainActivity : AppCompatActivity(), IBaseHost, IKodi {
         bind<Navigator.MainNavigator>(navigatorTag) with single {
             Navigator.MainNavigator(
                 hostController = navigatorController,
-                showOnboardingDirection = NavigationMainDirections.showOnboardingFragment(),
-                showTabsDirection = NavigationMainDirections.showTabsFragment()
+                showOnboardingHandler = {
+                    navigatorController.navigate(NavigationMainDirections.showOnboardingFragment())
+                },
+                showTabsHandler = {
+                    navigatorController.navigate(NavigationMainDirections.showTabsFragment())
+                }
             )
         }
     }

@@ -1,7 +1,7 @@
 package com.rasalexman.core.common.navigation
 
 import androidx.navigation.NavController
-import androidx.navigation.NavDirections
+import com.rasalexman.core.common.typealiases.UnitHandler
 
 sealed class Navigator(
     val tag: String,
@@ -9,8 +9,8 @@ sealed class Navigator(
 
     class MainNavigator(
         hostController: NavController,
-        val showOnboardingDirection: NavDirections,
-        val showTabsDirection: NavDirections
+        val showOnboardingHandler: UnitHandler,
+        val showTabsHandler: UnitHandler
     ) : Navigator(
         MAIN_NAVIGATOR,
         hostController
