@@ -8,13 +8,13 @@ import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 
 ///------ INLINE SECTION ----///
 inline fun <reified T : IBaseViewModel> BaseFragment<T>.fetch() =
-    this.viewModel?.processViewEvent(Fetch)
+    this.viewModel?.processViewEvent(Fetch) ?: Unit
 
 inline fun <reified T : IBaseViewModel, R : Any> BaseFragment<T>.fetchWith(data: R) = this.viewModel?.processViewEvent(
     data.toFetch()
-)
+) ?: Unit
 
 fun <R : Any> R.toFetch() = FetchWith(this)
 
 inline fun <reified T : IBaseViewModel> BaseFragment<T>.refresh() =
-    this.viewModel?.processViewEvent(Refresh)
+    this.viewModel?.processViewEvent(Refresh) ?: Unit

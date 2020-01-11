@@ -15,9 +15,7 @@ class PopularFragment : BasePagedRefreshRecyclerFragment<MovieItemUI, PopularVie
         MovieItemUI.createPlaceHolderItem()
     }
 
-    override fun onRefresh() {
-        refresh()
-    }
+    override fun onRefresh() = refresh()
 
     companion object {
         fun newInstance() = PopularFragment()
