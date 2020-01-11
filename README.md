@@ -7,6 +7,7 @@ This is an example of usage multi-modules MVVM Pattern on Android with Navigatio
  - Navigation Component (https://developer.android.com/guide/navigation)
  - Paging (https://developer.android.com/topic/libraries/architecture/paging)
  - Room DB with Coroutines (https://developer.android.com/training/data-storage/room)
+ - Data Binding (https://developer.android.com/topic/libraries/data-binding)
 2) ViewPager2 (https://developer.android.com/jetpack/androidx/releases/viewpager2)
 3) SaveStateHandler for ViewModel (https://developer.android.com/topic/libraries/architecture/viewmodel-savedstate)
 4) Mike Penz Fast Adapter (https://github.com/mikepenz/FastAdapter)
