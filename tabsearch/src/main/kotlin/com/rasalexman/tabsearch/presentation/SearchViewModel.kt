@@ -1,4 +1,4 @@
-package com.rasalexman.puremvvm.presentation.tabs.search
+package com.rasalexman.tabsearch.presentation
 
 import androidx.lifecycle.*
 import com.mincor.kodi.core.immutableInstance
@@ -8,7 +8,7 @@ import com.rasalexman.core.data.dto.SEvent
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.viewModels.BaseSaveStateViewModel
 import com.rasalexman.coroutinesmanager.CoroutinesProvider
-import com.rasalexman.puremvvm.domain.GetSearchDataSource
+import com.rasalexman.tabsearch.domain.GetSearchDataSource
 
 class SearchViewModel(savedState: SavedStateHandle) : BaseSaveStateViewModel(savedState) {
 

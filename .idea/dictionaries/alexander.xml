@@ -2,6 +2,7 @@
   <dictionary name="alexander">
     <words>
       <w>coroutines</w>
+      <w>databinding</w>
       <w>homelist</w>
       <w>itemslist</w>
       <w>movieslist</w>
@@ -10,6 +11,8 @@
       <w>rasalexman</w>
       <w>tabevents</w>
       <w>tabhome</w>
+      <w>tabprofile</w>
+      <w>tabsearch</w>
     </words>
   </dictionary>
 </component>

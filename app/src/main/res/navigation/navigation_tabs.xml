@@ -11,7 +11,7 @@
         />
 
     <fragment android:id="@+id/searchListFragment"
-        android:name="com.rasalexman.puremvvm.presentation.tabs.search.SearchListFragment"
+        android:name="com.rasalexman.tabsearch.presentation.SearchListFragment"
         tools:layout="@layout/layout_toolbar_recycler"
         />
 
@@ -21,7 +21,7 @@
         />
 
     <fragment android:id="@+id/profileFragment"
-        android:name="com.rasalexman.puremvvm.presentation.tabs.profile.ProfileFragment"
+        android:name="com.rasalexman.tabprofile.presentation.ProfileFragment"
         tools:layout="@layout/layout_toolbar_recycler"
         />
 

@@ -51,8 +51,7 @@ android {
         kotlinOptions.jvmTarget = "1.8"
         kotlinOptions.noReflect = true
         kotlinOptions.freeCompilerArgs += listOf(
-            "-XXLanguage:+InlineClasses",
-            "-XXLanguage:+ExperimentalUnsignedTypes"
+            "-XXLanguage:+InlineClasses"
         )
     }
 

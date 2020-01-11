@@ -17,7 +17,7 @@
         <item name="colorOnBackground">@color/color_on_background</item>
         <item name="colorOnError">@color/color_on_error</item>
         <item name="colorOnSurface">@color/color_on_surface</item>
-        <item name="scrimBackground">@color/mtrl_scrim_color</item>
+        <item name="scrimBackground">@color/color_bg_disabled</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
@@ -41,9 +41,6 @@
         <item name="android:elevation">@dimen/size_6dp</item>
     </style>
 
-    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
-        <item name="android:textSize">@dimen/text_size_12sp</item>
-        <item name="android:textColor">@color/color_white</item>
-    </style>
+
 
 </resources>

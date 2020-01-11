@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">PureMVVM</string>
-
     <string name="menu_search_hint">Search</string>
 </resources>

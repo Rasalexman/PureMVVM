@@ -5,6 +5,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -54,10 +55,11 @@ android {
         kotlinOptions.jvmTarget = "1.8"
         kotlinOptions.noReflect = true
         kotlinOptions.freeCompilerArgs += listOf(
-            "-XXLanguage:+InlineClasses",
-            "-XXLanguage:+ExperimentalUnsignedTypes"
+            "-XXLanguage:+InlineClasses"
         )
     }
+
+    dataBinding { isEnabled = true }
 
     androidExtensions {
         isExperimental = true
@@ -93,12 +95,15 @@ dependencies {
     api(appdependencies.Libs.FastAdapter.ui)
     api(appdependencies.Libs.FastAdapter.uiExt)
     api(appdependencies.Libs.FastAdapter.diff)
-    api(appdependencies.Libs.FastAdapter.expandable)
     api(appdependencies.Libs.FastAdapter.paged)
 
+    api(appdependencies.Libs.KotPref.core)
+    api(appdependencies.Libs.KotPref.liveData)
+
     api(appdependencies.Libs.ImageLoading.coil)
+
     api(appdependencies.Libs.Common.coroutinesmanager)
-    api(appdependencies.Libs.Common.kotpref)
+    api(appdependencies.Libs.Common.circleimageview)
     api(appdependencies.Libs.Common.kodi)
     api(appdependencies.Libs.Common.timber)
 

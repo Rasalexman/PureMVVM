@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
@@ -70,6 +71,11 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
     open val viewModel: VM? = null
 
     /**
+     *
+     */
+    open val binding: ViewDataBinding? = null
+
+    /**
      * Does this fragment need toolbar back button
      */
     protected open val needBackButton: Boolean = false
@@ -87,7 +93,10 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(layoutId, container, false)
+    ): View? = binding?.run {
+        lifecycleOwner = this@BaseFragment.viewLifecycleOwner
+        root
+    } ?: inflater.inflate(layoutId, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -110,6 +119,7 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
     /**
      * Add Standard Live data Observers to handler [SResult] event
      */
+    @Suppress("UNCHECKED_CAST")
     protected open fun addResultLiveDataObservers() {
         (viewModel?.onResultLiveData() as? AnyResultLiveData)?.apply(::observeResultLiveData)
     }

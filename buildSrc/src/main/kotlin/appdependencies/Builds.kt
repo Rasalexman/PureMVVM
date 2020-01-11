@@ -32,7 +32,17 @@ object Builds {
         const val VERSION_NAME = "1.0.0"
     }
 
+    object Search {
+        const val VERSION_CODE = 10000
+        const val VERSION_NAME = "1.0.0"
+    }
+
     object Events {
+        const val VERSION_CODE = 10000
+        const val VERSION_NAME = "1.0.0"
+    }
+
+    object Profile {
         const val VERSION_CODE = 10000
         const val VERSION_NAME = "1.0.0"
     }

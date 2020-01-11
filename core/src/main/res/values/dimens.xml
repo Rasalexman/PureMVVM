@@ -23,6 +23,7 @@
     <dimen name="size_58dp">58dp</dimen>
     <dimen name="size_64dp">64dp</dimen>
     <dimen name="size_72dp">72dp</dimen>
+    <dimen name="size_96dp">96dp</dimen>
     <dimen name="size_112dp">112dp</dimen>
     <dimen name="size_128dp">128dp</dimen>
     <dimen name="size_156dp">156dp</dimen>

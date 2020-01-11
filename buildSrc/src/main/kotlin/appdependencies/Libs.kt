@@ -3,11 +3,10 @@ package appdependencies
 import appdependencies.Versions.appCompatX
 import appdependencies.Versions.appCoreX
 import appdependencies.Versions.fastAdapterLib
-import appdependencies.Versions.kotPref
 import appdependencies.Versions.lifecycle
-import appdependencies.Versions.savedstate
 import appdependencies.Versions.retrofitLogging
 import appdependencies.Versions.room
+import appdependencies.Versions.savedstate
 
 object Libs {
     object Core {
@@ -42,7 +41,6 @@ object Libs {
         const val diff = "com.mikepenz:fastadapter-extensions-diff:${fastAdapterLib}"
         const val paged = "com.mikepenz:fastadapter-extensions-paged:${fastAdapterLib}"
         const val uiExt = "com.mikepenz:fastadapter-extensions-ui:${fastAdapterLib}"
-        const val expandable = "com.mikepenz:fastadapter-extensions-expandable:${fastAdapterLib}"
     }
 
     //--- ROOM DB
@@ -64,12 +62,15 @@ object Libs {
         const val coil = "io.coil-kt:coil:${Versions.coil}"
     }
 
-    object Common {
-        ///--- View Pager Indicator
-        const val viewPagerIndicator = "me.relex:circleindicator:${Versions.viewPagerIndicator}"
-
+    object KotPref {
         //--- SHARED PREFERENCE
-        const val kotpref = "com.chibatching.kotpref:kotpref:${kotPref}"
+        const val core = "com.chibatching.kotpref:kotpref:${Versions.kotPref}"
+        const val liveData = "com.chibatching.kotpref:livedata-support:${Versions.kotPref}"
+    }
+
+    object Common {
+
+        const val circleimageview = "de.hdodenhof:circleimageview:${Versions.circleImageView}"
 
         // COROUTINES MANAGER
         const val coroutinesmanager = "com.rasalexman.coroutinesmanager:coroutinesmanager:${Versions.coroutinesManager}"

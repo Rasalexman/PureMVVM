@@ -17,6 +17,8 @@
             <option value="$PROJECT_DIR$/providers" />
             <option value="$PROJECT_DIR$/tabevents" />
             <option value="$PROJECT_DIR$/tabhome" />
+            <option value="$PROJECT_DIR$/tabprofile" />
+            <option value="$PROJECT_DIR$/tabsearch" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

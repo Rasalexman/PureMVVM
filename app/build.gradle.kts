@@ -124,8 +124,7 @@ android {
         kotlinOptions.jvmTarget = "1.8"
         kotlinOptions.noReflect = true
         kotlinOptions.freeCompilerArgs += listOf(
-                "-XXLanguage:+InlineClasses",
-                "-XXLanguage:+ExperimentalUnsignedTypes"
+                "-XXLanguage:+InlineClasses"
         )
     }
 
@@ -146,6 +145,8 @@ android {
         }
     }
 
+    dataBinding { isEnabled = true }
+
     androidExtensions {
         isExperimental = true
         defaultCacheImplementation = org.jetbrains.kotlin.gradle.internal.CacheImplementation.HASH_MAP
@@ -155,13 +156,12 @@ android {
 dependencies {
     implementation(fileTree(mapOf("include" to listOf("*.jar"), "dir" to "libs")))
     implementation(kotlin("stdlib-jdk8", Versions.kotlin))
-    implementation(project(":core"))
-    implementation(project(":providers"))
+
     implementation(project(":onboarding"))
     implementation(project(":tabhome"))
+    implementation(project(":tabsearch"))
     implementation(project(":tabevents"))
-
-    implementation(Libs.Common.viewPagerIndicator)
+    implementation(project(":tabprofile"))
 
     testImplementation(Libs.Tests.junit)
     androidTestImplementation(Libs.Tests.runner)

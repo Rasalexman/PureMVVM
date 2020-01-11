@@ -81,7 +81,27 @@ object Resources {
         )
     }
 
+    object Search {
+        val dirs = arrayListOf(
+            "src/main/res"
+        )
+
+        val javaDirs = arrayListOf(
+            "src/main/kotlin"
+        )
+    }
+
     object Events {
+        val dirs = arrayListOf(
+            "src/main/res"
+        )
+
+        val javaDirs = arrayListOf(
+            "src/main/kotlin"
+        )
+    }
+
+    object Profile {
         val dirs = arrayListOf(
             "src/main/res"
         )

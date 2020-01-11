@@ -7,7 +7,7 @@ import com.rasalexman.tabhome.domain.genres.GetRemoteGenresUseCase
 import com.rasalexman.tabhome.domain.movies.GetMoviesDataSourceUseCase
 import com.rasalexman.tabhome.domain.movies.GetRemoteMoviesByGenreIdUseCase
 
-val tabHomeUseCaseModule = kodiModule {
+val tabHomeModule = kodiModule {
     bind<GetLocalGenresUseCase>() with provider {
         GetLocalGenresUseCase(
             instance()

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.rasalexman.tabprofile.presentation.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarProfileLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_bg_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_48dp"
+                android:layout_marginBottom="@dimen/size_48dp"
+                android:background="@color/color_bg_primary">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userImageView"
+                    android:layout_width="@dimen/size_96dp"
+                    android:layout_height="@dimen/size_96dp"
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:background="@color/color_bg_primary"
+                    android:src="@drawable/ic_add_a_photo_black_48dp"
+                    app:url="@{viewModel.userPhoto}"
+                    app:civ_border_color="@color/color_white"
+                    app:civ_border_width="@dimen/size_2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/userNameTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_64dp"
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:layout_marginEnd="@dimen/size_64dp"
+                    android:gravity="center_horizontal"
+                    android:text="@{viewModel.userName}"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_size_22sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/userImageView"
+                    tools:text="User Name" />
+
+                <TextView
+                    android:id="@+id/userEmailTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_64dp"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:layout_marginEnd="@dimen/size_64dp"
+                    android:gravity="center_horizontal"
+                    android:text="@{viewModel.userEmail}"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_size_16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/userNameTextView"
+                    tools:text="sphc@yandex.ru" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

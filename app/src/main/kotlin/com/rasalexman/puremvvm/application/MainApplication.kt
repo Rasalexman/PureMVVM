@@ -3,11 +3,14 @@ package com.rasalexman.puremvvm.application
 import android.app.Application
 import android.content.Context
 import com.mincor.kodi.core.*
-import com.rasalexman.providers.providersModule
 import com.rasalexman.data.localDataSourceModule
 import com.rasalexman.data.remoteDataSourceModule
 import com.rasalexman.data.repositoryModule
-import com.rasalexman.puremvvm.modules.userCaseModule
+import com.rasalexman.onboarding.onboardingModule
+import com.rasalexman.providers.providersModule
+import com.rasalexman.tabevents.tabEventsModule
+import com.rasalexman.tabhome.tabHomeModule
+import com.rasalexman.tabsearch.tabSearchModule
 
 class MainApplication : Application() {
 
@@ -17,11 +20,10 @@ class MainApplication : Application() {
         import(localDataSourceModule)
         import(remoteDataSourceModule)
         import(repositoryModule)
-        import(userCaseModule)
-    }
 
-    override fun onCreate() {
-        super.onCreate()
-        kodi
+        import(onboardingModule)
+        import(tabHomeModule)
+        import(tabSearchModule)
+        import(tabEventsModule)
     }
 }

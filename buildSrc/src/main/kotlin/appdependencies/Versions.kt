@@ -29,10 +29,10 @@ object Versions {
     const val room = "2.2.3"
 
     const val kodi = "1.2.92"
-    const val kotPref = "2.9.1"
+    const val kotPref = "2.10.0"
+    const val circleImageView = "3.0.1"
     const val coroutinesManager = "1.2.31"
     const val timber = "4.7.1"
-    const val viewPagerIndicator = "2.1.4"
 
     object Navigation {
         const val fragment = "2.2.0-rc02"
