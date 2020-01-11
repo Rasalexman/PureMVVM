@@ -6,6 +6,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     id("androidx.navigation.safeargs.kotlin")
+    kotlin("kapt")
 }
 
 android {
@@ -52,6 +53,8 @@ android {
             "-XXLanguage:+InlineClasses"
         )
     }
+
+    dataBinding { isEnabled = true }
 
 }
 

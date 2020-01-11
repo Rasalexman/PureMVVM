@@ -6,11 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.rasalexman.core.presentation.BaseFragment
-import com.rasalexman.core.presentation.utils.FragmentBinding
-import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 
 fun Fragment.hideKeyboard() = activity?.hideKeyboard()
 fun Fragment.showKeyboard(view: View) = activity?.showKeyboard(view)
@@ -26,7 +22,3 @@ fun Fragment.dimen(@DimenRes resource: Int): Int = requireActivity().dimen(resou
 fun Fragment.color(@ColorRes resource: Int): Int = requireActivity().color(resource)
 fun Fragment.string(@StringRes resource: Int): String = requireActivity().string(resource)
 fun Fragment.drawable(@DrawableRes resource: Int): Drawable? = requireActivity().drawable(resource)
-
-fun <B : ViewDataBinding> BaseFragment<IBaseViewModel>.fragmentBinding(): FragmentBinding<B> {
-    return FragmentBinding(layoutId)
-}

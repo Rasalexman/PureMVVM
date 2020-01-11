@@ -11,8 +11,8 @@ import java.util.*
 import kotlin.reflect.KProperty0
 
 internal class UserPreference(context: Context) : KotprefModel(context), IUserPreference {
-    override var name: String           by stringPref("Alexandr")
-    override var email: String          by stringPref("sphc@yandex.ru")
+    override var name: String           by stringPref("")
+    override var email: String          by stringPref("")
     override var photo: String          by stringPref("")
     override var password: String       by stringPref("")
     override var createdAt: String      by stringPref("")

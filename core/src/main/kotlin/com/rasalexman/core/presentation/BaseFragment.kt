@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.observe
@@ -71,11 +70,6 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
     open val viewModel: VM? = null
 
     /**
-     *
-     */
-    open val binding: ViewDataBinding? = null
-
-    /**
      * Does this fragment need toolbar back button
      */
     protected open val needBackButton: Boolean = false
@@ -93,10 +87,7 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = binding?.run {
-        lifecycleOwner = this@BaseFragment.viewLifecycleOwner
-        root
-    } ?: inflater.inflate(layoutId, container, false)
+    ): View? = inflater.inflate(layoutId, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -230,10 +221,8 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
      * When view destroy
      */
     override fun onDestroyView() {
-        viewModel?.onResultLiveData()?.removeObservers(viewLifecycleOwner)
-        viewModel?.onAnyLiveData()?.removeObservers(viewLifecycleOwner)
         context?.closeAlert()
-        (view as? ViewGroup)?.clear()
+        //(view as? ViewGroup)?.clear()
         super.onDestroyView()
     }
 
@@ -272,7 +261,7 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
     /**
      *
      */
-    protected open fun<T : Any> onAnyDataHandler(data: T?) = Unit
+    protected open fun <T : Any> onAnyDataHandler(data: T?) = Unit
 
     /**
      * Observe Any type of [LiveData] with callback
