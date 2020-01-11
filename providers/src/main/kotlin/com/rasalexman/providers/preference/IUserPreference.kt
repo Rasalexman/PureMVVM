@@ -14,7 +14,8 @@ interface IUserPreference {
     var createdAt: String
     var updatedAt: String
 
-    fun create(userName: UserName, userEmail: UserEmail, userPassword: UserPassword)
+    fun createUser(userName: UserName, userEmail: UserEmail, userPassword: UserPassword)
+    fun clearUser()
 
     fun <K : Any> toLiveData(property: KProperty0<K>): LiveData<K>
 }

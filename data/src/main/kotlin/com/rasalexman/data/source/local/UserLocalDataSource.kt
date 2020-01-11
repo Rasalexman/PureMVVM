@@ -21,7 +21,7 @@ class UserLocalDataSource(
         userEmail: UserEmail,
         userPassword: UserPassword
     ) {
-        userPreference.create(userName, userEmail, userPassword)
+        userPreference.createUser(userName, userEmail, userPassword)
         userDao.insert(
             UserEntity(
                 name = userName.value,

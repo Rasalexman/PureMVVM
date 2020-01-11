@@ -18,13 +18,22 @@ internal class UserPreference(context: Context) : KotprefModel(context), IUserPr
     override var createdAt: String      by stringPref("")
     override var updatedAt: String      by stringPref("")
 
-    override fun create(userName: UserName, userEmail: UserEmail, userPassword: UserPassword) {
+    override fun createUser(userName: UserName, userEmail: UserEmail, userPassword: UserPassword) {
         name = userName.value
         email = userEmail.value
         password = userPassword.value
         val date = Calendar.getInstance(Locale.getDefault()).time.toString()
         createdAt = date
         updatedAt = date
+    }
+
+    override fun clearUser() {
+        name = ""
+        email = ""
+        photo = ""
+        password = ""
+        createdAt = ""
+        updatedAt = ""
     }
 
     override fun <K : Any> toLiveData(property:KProperty0<K>): LiveData<K> {

@@ -1,7 +1,9 @@
 package com.rasalexman.data.source.remote
 
 import androidx.paging.PageKeyedDataSource
-import com.rasalexman.core.common.extensions.*
+import com.rasalexman.core.common.extensions.loadingResult
+import com.rasalexman.core.common.extensions.mapIfSuccessSuspend
+import com.rasalexman.core.common.extensions.toSuccessResult
 import com.rasalexman.core.common.typealiases.ResultMutableLiveData
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
@@ -9,6 +11,7 @@ import com.rasalexman.coroutinesmanager.doWithTryCatchAsync
 import com.rasalexman.coroutinesmanager.launchOnUI
 import com.rasalexman.models.remote.MovieModel
 import com.rasalexman.providers.network.api.IMovieApi
+import com.rasalexman.providers.network.handlers.errorResultCatchBlock
 import com.rasalexman.providers.network.responses.GetMoviesListResponse
 import com.rasalexman.providers.network.responses.getResult
 
@@ -25,18 +28,22 @@ class SearchRemoteDataSource(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, MovieModel>
     ) = launchOnUI {
-        resultLiveData.postValue(loadingResult())
-        loadMoviesByQuery(query).applyIfSuccessSuspend {
-            callback.onResult(it, currentPage - 1, currentPage)
-        }.applyIfType<SResult.ErrorResult>(resultLiveData::postValue)
+        resultLiveData.postValue(
+            loadMoviesByQuery(query).mapIfSuccessSuspend {
+                callback.onResult(this, currentPage - 1, currentPage)
+                true.toSuccessResult()
+            }
+        )
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, MovieModel>) =
         launchOnUI {
-            resultLiveData.postValue(loadingResult())
-            loadMoviesByQuery(query).applyIfSuccessSuspend {
-                callback.onResult(it, currentPage)
-            }.applyIfType<SResult.ErrorResult>(resultLiveData::postValue)
+            resultLiveData.postValue(
+                loadMoviesByQuery(query).mapIfSuccessSuspend {
+                    callback.onResult(this, currentPage)
+                    true.toSuccessResult()
+                }
+            )
         }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, MovieModel>) = Unit
@@ -44,13 +51,12 @@ class SearchRemoteDataSource(
     private suspend fun loadMoviesByQuery(query: String): SResult<List<MovieModel>> =
         doWithTryCatchAsync(
             tryBlock = {
+                resultLiveData.postValue(loadingResult())
                 movieApi.getSearchMovies(query).getResult {
                     changePage(it)
                     it.results
                 }
-            }, catchBlock = {
-                errorResult(message = it.message.orEmpty(), exception = it)
-            }
+            }, catchBlock = errorResultCatchBlock()
         )
 
     /**

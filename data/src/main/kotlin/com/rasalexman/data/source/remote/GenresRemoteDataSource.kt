@@ -3,9 +3,11 @@ package com.rasalexman.data.source.remote
 import com.rasalexman.core.BuildConfig
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.IAsyncTasksManager
+import com.rasalexman.coroutinesmanager.doWithTryCatchAsync
 import com.rasalexman.models.local.GenreEntity
 import com.rasalexman.models.remote.GenreModel
 import com.rasalexman.providers.network.api.IMovieApi
+import com.rasalexman.providers.network.handlers.errorResultCatchBlock
 import com.rasalexman.providers.network.responses.getResult
 
 class GenresRemoteDataSource(
@@ -14,9 +16,10 @@ class GenresRemoteDataSource(
 
     private val addedImages by lazy { mutableSetOf<String>() }
 
-    override suspend fun getRemoteGenresList(): SResult<List<GenreModel>> {
-        return moviesApi.getGenresList().getResult { it.genres }
-    }
+    override suspend fun getRemoteGenresList(): SResult<List<GenreModel>> = doWithTryCatchAsync(
+        tryBlock = { moviesApi.getGenresList().getResult { it.genres } },
+        catchBlock = errorResultCatchBlock()
+    )
 
     override suspend fun getGenresImages(result: List<GenreEntity>) {
         result.forEach { genreEntity ->

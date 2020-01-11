@@ -4,16 +4,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.core.data.dto.SResult
+import com.rasalexman.coroutinesmanager.IAsyncTasksManager
+import com.rasalexman.coroutinesmanager.doWithTryCatchAsync
 import com.rasalexman.data.source.factory.SearchDataSourceFactory
 import com.rasalexman.models.remote.MovieModel
 import com.rasalexman.providers.network.api.IMovieApi
+import com.rasalexman.providers.network.handlers.errorResultCatchBlock
 import com.rasalexman.providers.network.responses.getResult
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MoviesRemoteDataSource(
     private val moviesApi: IMovieApi
-) : IMoviesRemoteDataSource {
+) : IMoviesRemoteDataSource, IAsyncTasksManager {
 
     override suspend fun getSearchDataSource(
         query: String,
@@ -30,17 +33,23 @@ class MoviesRemoteDataSource(
      * Get popular movies from Api
      * @param page - current selected page
      */
-    override suspend fun getPopularMovies(page: Int): SResult<List<MovieModel>> {
-        return moviesApi.getPopularMovie(page).getResult { it.results }
-    }
+    override suspend fun getPopularMovies(page: Int): ResultList<MovieModel> =
+        doWithTryCatchAsync(
+            tryBlock = { moviesApi.getPopularMovie(page).getResult { it.results } },
+            catchBlock = errorResultCatchBlock()
+        )
 
-    override suspend fun getTopRatedMovies(page: Int): ResultList<MovieModel> {
-        return moviesApi.getTopRatedMovies(page).getResult { it.results }
-    }
+    override suspend fun getTopRatedMovies(page: Int): ResultList<MovieModel> =
+        doWithTryCatchAsync(
+            tryBlock = { moviesApi.getTopRatedMovies(page).getResult { it.results } },
+            catchBlock = errorResultCatchBlock()
+        )
 
-    override suspend fun getUpcomingMovies(page: Int): ResultList<MovieModel> {
-        return moviesApi.getUpcomingMovies(page).getResult { it.results }
-    }
+    override suspend fun getUpcomingMovies(page: Int): ResultList<MovieModel> =
+        doWithTryCatchAsync(
+            tryBlock = { moviesApi.getUpcomingMovies(page).getResult { it.results } },
+            catchBlock = errorResultCatchBlock()
+        )
 
     /**
      * Get movies by genre id with pagination
@@ -61,9 +70,11 @@ class MoviesRemoteDataSource(
     /**
      * Get all the movie details for current id
      */
-    override suspend fun getMovieDetails(movieId: Int): SResult<MovieModel> {
-        return moviesApi.getMovieDetails(movieId).getResult { it }
-    }
+    override suspend fun getMovieDetails(movieId: Int): SResult<MovieModel> =
+        doWithTryCatchAsync(
+            tryBlock = { moviesApi.getMovieDetails(movieId).getResult { it } },
+            catchBlock = errorResultCatchBlock()
+        )
 
     /**
      * Request data from API
@@ -71,12 +82,12 @@ class MoviesRemoteDataSource(
     private suspend fun requestHandler(
         genreId: Int,
         lastReleaseDate: Long? = null
-    ): SResult<List<MovieModel>> {
+    ): SResult<List<MovieModel>> = doWithTryCatchAsync(tryBlock = {
         val releaseDate = lastReleaseDate?.run { Date(lastReleaseDate) } ?: Date()
         val releaseDateFrom =
             SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(releaseDate)
-        return moviesApi.getMoviesListByGenreId(genreId, 1, releaseDateFrom).getResult { response ->
-            response.results
-        }
-    }
+        moviesApi.getMoviesListByGenreId(genreId, 1, releaseDateFrom).getResult { it.results }
+    }, catchBlock = errorResultCatchBlock())
+
+
 }

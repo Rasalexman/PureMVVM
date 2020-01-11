@@ -8,6 +8,7 @@ class GetPopularMoviesPageCountUseCase(
     private val moviesRepository: IMoviesRepository
     ) : IUseCase.Out<Int> {
     override suspend fun execute(): Int {
-        return (moviesRepository.getPopularMoviesCount() / BuildConfig.ITEMS_ON_PAGE).takeIf { it > 0 } ?: 1
+        val localCount = moviesRepository.getPopularMoviesCount()
+        return (localCount / BuildConfig.ITEMS_ON_PAGE).takeIf { it > 0 } ?: 1
     }
 }

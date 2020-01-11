@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">tabprofile</string>
+
+    <string name="title_log_out">Log out</string>
 </resources>
