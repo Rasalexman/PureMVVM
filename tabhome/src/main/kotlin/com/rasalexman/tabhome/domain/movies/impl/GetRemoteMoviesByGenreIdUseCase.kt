@@ -1,14 +1,14 @@
-package com.rasalexman.tabhome.domain.movies
+package com.rasalexman.tabhome.domain.movies.impl
 
 import com.rasalexman.core.common.extensions.applyIfSuccessSuspend
 import com.rasalexman.core.common.typealiases.ResultList
-import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.models.local.MovieEntity
+import com.rasalexman.tabhome.domain.movies.IGetRemoteMoviesByGenreIdUseCase
 
-class GetRemoteMoviesByGenreIdUseCase(
+internal class GetRemoteMoviesByGenreIdUseCase(
     private val moviesRepository: IMoviesRepository
-) : IUseCase.DoubleInOut<Int, Long?, ResultList<MovieEntity>> {
+) : IGetRemoteMoviesByGenreIdUseCase {
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override suspend fun execute(genreId: Int, lastReleaseDate: Long?): ResultList<MovieEntity> {
         return moviesRepository.getRemoteMovies(genreId, lastReleaseDate)

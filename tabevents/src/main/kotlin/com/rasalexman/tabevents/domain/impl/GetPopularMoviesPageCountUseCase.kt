@@ -1,12 +1,12 @@
-package com.rasalexman.tabevents.domain
+package com.rasalexman.tabevents.domain.impl
 
-import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.tabevents.BuildConfig
+import com.rasalexman.tabevents.domain.IGetPopularMoviesPageCountUseCase
 
-class GetPopularMoviesPageCountUseCase(
+internal class GetPopularMoviesPageCountUseCase(
     private val moviesRepository: IMoviesRepository
-    ) : IUseCase.Out<Int> {
+    ) : IGetPopularMoviesPageCountUseCase {
     override suspend fun execute(): Int {
         val localCount = moviesRepository.getPopularMoviesCount()
         return (localCount / BuildConfig.ITEMS_ON_PAGE).takeIf { it > 0 } ?: 1

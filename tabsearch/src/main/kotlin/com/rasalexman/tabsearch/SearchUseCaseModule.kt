@@ -2,7 +2,8 @@ package com.rasalexman.tabsearch
 
 import com.mincor.kodi.core.*
 import com.rasalexman.tabsearch.domain.GetSearchDataSource
+import com.rasalexman.tabsearch.domain.IGetSearchDataSource
 
 val tabSearchModule = kodiModule {
-    bind<GetSearchDataSource>() with provider { GetSearchDataSource(instance()) }
+    bind<IGetSearchDataSource>() with provider { GetSearchDataSource(instance()) }
 }

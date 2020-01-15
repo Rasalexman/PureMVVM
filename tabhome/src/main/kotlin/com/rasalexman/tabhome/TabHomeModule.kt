@@ -1,32 +1,45 @@
 package com.rasalexman.tabhome
 
 import com.mincor.kodi.core.*
-import com.rasalexman.tabhome.domain.genres.GetGenresUseCase
-import com.rasalexman.tabhome.domain.genres.GetLocalGenresUseCase
-import com.rasalexman.tabhome.domain.genres.GetRemoteGenresUseCase
-import com.rasalexman.tabhome.domain.movies.GetMoviesDataSourceUseCase
-import com.rasalexman.tabhome.domain.movies.GetRemoteMoviesByGenreIdUseCase
+import com.rasalexman.tabhome.domain.genres.IGetGenresUseCase
+import com.rasalexman.tabhome.domain.genres.IGetLocalGenresUseCase
+import com.rasalexman.tabhome.domain.genres.IGetRemoteGenresUseCase
+import com.rasalexman.tabhome.domain.genres.impl.GetGenresUseCase
+import com.rasalexman.tabhome.domain.genres.impl.GetLocalGenresUseCase
+import com.rasalexman.tabhome.domain.genres.impl.GetRemoteGenresUseCase
+import com.rasalexman.tabhome.domain.movies.impl.GetMoviesDataSourceUseCase
+import com.rasalexman.tabhome.domain.movies.impl.GetRemoteMoviesByGenreIdUseCase
+import com.rasalexman.tabhome.domain.movies.IGetMoviesDataSourceUseCase
+import com.rasalexman.tabhome.domain.movies.IGetRemoteMoviesByGenreIdUseCase
 
 val tabHomeModule = kodiModule {
-    bind<GetLocalGenresUseCase>() with provider {
+    bind<IGetLocalGenresUseCase>() with provider {
         GetLocalGenresUseCase(
             instance()
         )
     }
-    bind<GetRemoteGenresUseCase>() with provider {
+    bind<IGetRemoteGenresUseCase>() with provider {
         GetRemoteGenresUseCase(
             instance()
         )
     }
-    bind<GetGenresUseCase>() with provider {
-        GetGenresUseCase(instance(), instance())
+    bind<IGetGenresUseCase>() with provider {
+        GetGenresUseCase(
+            instance(),
+            instance()
+        )
     }
 
-    bind<GetRemoteMoviesByGenreIdUseCase>() with provider {
-        GetRemoteMoviesByGenreIdUseCase(instance())
+    bind<IGetRemoteMoviesByGenreIdUseCase>() with provider {
+        GetRemoteMoviesByGenreIdUseCase(
+            instance()
+        )
     }
     
-    bind<GetMoviesDataSourceUseCase>() with provider {
-        GetMoviesDataSourceUseCase(instance(), instance())
+    bind<IGetMoviesDataSourceUseCase>() with provider {
+        GetMoviesDataSourceUseCase(
+            instance(),
+            instance()
+        )
     }
 }

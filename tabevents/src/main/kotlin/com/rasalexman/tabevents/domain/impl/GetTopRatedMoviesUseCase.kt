@@ -1,17 +1,17 @@
-package com.rasalexman.tabevents.domain
+package com.rasalexman.tabevents.domain.impl
 
 import com.rasalexman.core.common.extensions.mapListTo
 import com.rasalexman.core.common.typealiases.ResultList
-import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.models.ui.MovieItemUI
+import com.rasalexman.tabevents.domain.IGetTopRatedMoviesUseCase
 
-class GetUpcomingMoviesUseCase(
+internal class GetTopRatedMoviesUseCase(
     private val moviesRepository: IMoviesRepository
-) : IUseCase.SingleInOut<Int, ResultList<MovieItemUI>> {
+) : IGetTopRatedMoviesUseCase {
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override suspend fun execute(page: Int): ResultList<MovieItemUI> {
-        return moviesRepository.getRemoteUpcomingMovies(page).mapListTo()
+        return moviesRepository.getRemoteTopRatedMovies(page).mapListTo()
     }
 }

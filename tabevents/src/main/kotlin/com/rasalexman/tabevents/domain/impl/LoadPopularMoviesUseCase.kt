@@ -1,14 +1,14 @@
-package com.rasalexman.tabevents.domain
+package com.rasalexman.tabevents.domain.impl
 
 import com.rasalexman.core.common.extensions.applyIfSuccessSuspend
 import com.rasalexman.core.common.typealiases.ResultList
-import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.models.local.MovieEntity
+import com.rasalexman.tabevents.domain.ILoadPopularMoviesUseCase
 
-class LoadPopularMoviesUseCase(
+internal class LoadPopularMoviesUseCase(
     private val moviesRepository: IMoviesRepository
-) : IUseCase.SingleInOut<Int, ResultList<MovieEntity>> {
+) : ILoadPopularMoviesUseCase {
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override suspend fun execute(page: Int): ResultList<MovieEntity> {

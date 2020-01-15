@@ -1,10 +1,20 @@
 package com.rasalexman.onboarding
 
 import com.mincor.kodi.core.*
-import com.rasalexman.onboarding.domain.CheckUserRegisteredUseCase
-import com.rasalexman.onboarding.domain.RegisterUserUseCase
+import com.rasalexman.onboarding.domain.impl.CheckUserRegisteredUseCase
+import com.rasalexman.onboarding.domain.ICheckUserRegisteredUseCase
+import com.rasalexman.onboarding.domain.IRegisterUserUseCase
+import com.rasalexman.onboarding.domain.impl.RegisterUserUseCase
 
 val onboardingModule = kodiModule {
-    bind<CheckUserRegisteredUseCase>() with provider { CheckUserRegisteredUseCase(instance()) }
-    bind<RegisterUserUseCase>() with provider { RegisterUserUseCase(instance()) }
+    bind<ICheckUserRegisteredUseCase>() with provider {
+        CheckUserRegisteredUseCase(
+            instance()
+        )
+    }
+    bind<IRegisterUserUseCase>() with provider {
+        RegisterUserUseCase(
+            instance()
+        )
+    }
 }

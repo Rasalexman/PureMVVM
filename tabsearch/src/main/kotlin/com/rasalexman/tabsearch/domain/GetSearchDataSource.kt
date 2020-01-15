@@ -3,14 +3,13 @@ package com.rasalexman.tabsearch.domain
 import androidx.paging.LivePagedListBuilder
 import com.rasalexman.core.common.typealiases.PagedLiveData
 import com.rasalexman.core.common.typealiases.ResultMutableLiveData
-import com.rasalexman.core.domain.IUseCase
 import com.rasalexman.data.repository.IMoviesRepository
 import com.rasalexman.models.ui.MovieItemUI
 import com.rasalexman.tabsearch.BuildConfig
 
-class GetSearchDataSource(
+internal class GetSearchDataSource(
     private val movieRepository: IMoviesRepository
-) : IUseCase.DoubleInOut<String, ResultMutableLiveData<Boolean>, PagedLiveData<MovieItemUI>> {
+) : IGetSearchDataSource {
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override suspend fun execute(
         query: String,
