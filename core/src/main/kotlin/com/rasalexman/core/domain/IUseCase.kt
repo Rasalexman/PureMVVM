@@ -4,7 +4,7 @@ import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.coroutinesmanager.IAsyncTasksManager
 import kotlinx.coroutines.flow.Flow
 
-interface IUseCase : IAsyncTasksManager {
+interface IUseCase {
     interface SingleIn<in Input> :
         IUseCase {
         suspend fun execute(data: Input)
@@ -28,6 +28,11 @@ interface IUseCase : IAsyncTasksManager {
     interface SingleFlowInOut<in Input, out Output> :
         IUseCase {
         suspend fun execute(data: Input): Flow<Output>
+    }
+
+    interface SingleFlowInOutList<in Input, out Output> :
+        IUseCase {
+        suspend fun execute(data: Input): Flow<ResultList<Output>>
     }
 
     interface Out<out Output> : IUseCase {
