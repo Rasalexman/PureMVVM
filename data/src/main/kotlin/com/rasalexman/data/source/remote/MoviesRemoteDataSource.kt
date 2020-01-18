@@ -20,7 +20,7 @@ class MoviesRemoteDataSource(
 
     override suspend fun getSearchDataSource(
         query: String,
-        resultLiveData: MutableLiveData<SResult<Boolean>>
+        resultLiveData: MutableLiveData<SResult<Any>>
     ): DataSource.Factory<Int, MovieModel> {
         return SearchDataSourceFactory(
             moviesApi,

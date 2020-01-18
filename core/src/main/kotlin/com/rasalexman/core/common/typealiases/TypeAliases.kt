@@ -19,11 +19,15 @@ typealias SInSameOutHandler<T> = suspend (T) -> T
 typealias SInOutHandler<T, R> = suspend (T) -> R
 typealias SParentInOutHandler<P, T, R> = suspend P.(T) -> R
 
-typealias AnyResultLiveData = LiveData<SResult<Any>>
 typealias ResultLiveData<T> = LiveData<SResult<T>>
 typealias ResultListLiveData<T> = LiveData<SResult<List<T>>>
 typealias ResultMutableLiveData<T> = MutableLiveData<SResult<T>>
 typealias PagedLiveData<T> = LiveData<PagedList<T>>
+
+typealias AnyResult = SResult<Any>
+typealias AnyResultLiveData = ResultLiveData<Any>
+typealias AnyResultListLiveData = ResultListLiveData<Any>
+typealias AnyResultMutableLiveData = ResultMutableLiveData<Any>
 
 typealias ResultList<T> = SResult<List<T>>
 typealias ResultInHandler<T> = (SResult<T>) -> Unit

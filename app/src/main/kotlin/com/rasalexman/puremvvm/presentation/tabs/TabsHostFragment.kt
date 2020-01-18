@@ -22,7 +22,7 @@ class TabsHostFragment : BaseHostFragment<IBaseViewModel>() {
         get() = Navigator.TAB_NAVIGATOR
 
     override fun bindNavController() {
-        navigatorController.let { currentNavController ->
+        navController.let { currentNavController ->
             NavigationUI.setupWithNavController(bottomNavigationView, currentNavController)
             bind<Navigator>(navigatorTag) with single { Navigator.TabNavigator(hostController = currentNavController) }
         }

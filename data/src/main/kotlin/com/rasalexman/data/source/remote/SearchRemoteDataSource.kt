@@ -1,10 +1,11 @@
 package com.rasalexman.data.source.remote
 
 import androidx.paging.PageKeyedDataSource
+import com.rasalexman.core.common.extensions.anyResult
+import com.rasalexman.core.common.extensions.applyIfSuccessSuspend
 import com.rasalexman.core.common.extensions.loadingResult
 import com.rasalexman.core.common.extensions.mapIfSuccessSuspend
-import com.rasalexman.core.common.extensions.toSuccessResult
-import com.rasalexman.core.common.typealiases.ResultMutableLiveData
+import com.rasalexman.core.common.typealiases.AnyResultMutableLiveData
 import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.doWithTryCatchAsync
@@ -18,7 +19,7 @@ import com.rasalexman.providers.network.responses.getResult
 class SearchRemoteDataSource(
     private val movieApi: IMovieApi,
     private val query: String,
-    private val resultLiveData: ResultMutableLiveData<Boolean>
+    private val resultLiveData: AnyResultMutableLiveData
 ) : PageKeyedDataSource<Int, MovieModel>(), ICoroutinesManager {
 
     private var currentPage = 1
@@ -31,7 +32,7 @@ class SearchRemoteDataSource(
         resultLiveData.postValue(
             loadMoviesByQuery(query).mapIfSuccessSuspend {
                 callback.onResult(this, currentPage - 1, currentPage)
-                true.toSuccessResult()
+                anyResult()
             }
         )
     }
@@ -39,9 +40,8 @@ class SearchRemoteDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, MovieModel>) =
         launchOnUI {
             resultLiveData.postValue(
-                loadMoviesByQuery(query).mapIfSuccessSuspend {
-                    callback.onResult(this, currentPage)
-                    true.toSuccessResult()
+                loadMoviesByQuery(query).applyIfSuccessSuspend {
+                    callback.onResult(it, currentPage)
                 }
             )
         }

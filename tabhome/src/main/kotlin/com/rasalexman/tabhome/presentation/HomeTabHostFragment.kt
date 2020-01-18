@@ -21,7 +21,7 @@ class HomeTabHostFragment : BaseHostFragment<IBaseViewModel>() {
 
     override fun bindNavController() {
         bindTag(navigatorTag) with single {
-            Navigator.HomeTabNavigator(hostController = navigatorController)
+            Navigator.HomeTabNavigator(hostController = navController)
         }
     }
 }

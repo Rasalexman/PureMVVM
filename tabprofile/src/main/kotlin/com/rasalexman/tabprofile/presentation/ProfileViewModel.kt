@@ -17,8 +17,7 @@ class ProfileViewModel : BaseViewModel() {
 
 
     fun logOutHandler() {
-        mainNavigator().showOnboardingHandler().also {
-            userProfile.clearUser()
-        }
+        userProfile.clearUser()
+        mainNavigator().showOnboardingHandler()
     }
 }

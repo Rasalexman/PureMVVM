@@ -21,7 +21,7 @@ class OnboardingHostFragment : BaseHostFragment<IBaseViewModel>() {
 
     override fun bindNavController() {
         bindTag(navigatorTag) with single {
-            Navigator.OnboardingNavigator(hostController = navigatorController)
+            Navigator.OnboardingNavigator(hostController = navController)
         }
     }
 }

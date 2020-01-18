@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), IBaseHost, IKodi {
     override val navigatorTag: String
         get() = MAIN_NAVIGATOR
 
-    override val navigatorController: NavController
+    private val navigatorController: NavController
         get() = Navigation.findNavController(this@MainActivity, navControllerId)
 
     override fun onCreate(savedInstanceState: Bundle?) {

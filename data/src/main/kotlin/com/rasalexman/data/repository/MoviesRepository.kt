@@ -30,7 +30,7 @@ class MoviesRepository(
 
     override suspend fun getRemoteSearchDataSource(
         query: String,
-        resultLiveData: ResultMutableLiveData<Boolean>
+        resultLiveData: ResultMutableLiveData<Any>
     ): DataSource.Factory<Int, MovieEntity> {
         return remoteDataSource.getSearchDataSource(query, resultLiveData).map { it.convertTo() }
     }

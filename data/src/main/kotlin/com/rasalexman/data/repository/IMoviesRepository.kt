@@ -1,13 +1,13 @@
 package com.rasalexman.data.repository
 
 import androidx.paging.DataSource
+import com.rasalexman.core.common.typealiases.AnyResultMutableLiveData
 import com.rasalexman.core.common.typealiases.ResultList
-import com.rasalexman.core.common.typealiases.ResultMutableLiveData
 import com.rasalexman.core.data.base.IBaseRepository
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.models.local.MovieEntity
 import com.rasalexman.data.source.local.IMoviesLocalDataSource
 import com.rasalexman.data.source.remote.IMoviesRemoteDataSource
+import com.rasalexman.models.local.MovieEntity
 
 interface IMoviesRepository : IBaseRepository<IMoviesLocalDataSource, IMoviesRemoteDataSource> {
 
@@ -24,7 +24,7 @@ interface IMoviesRepository : IBaseRepository<IMoviesLocalDataSource, IMoviesRem
 
     suspend fun getRemoteSearchDataSource(
         query: String,
-        resultLiveData: ResultMutableLiveData<Boolean>
+        resultLiveData: AnyResultMutableLiveData
     ): DataSource.Factory<Int, MovieEntity>
 
 

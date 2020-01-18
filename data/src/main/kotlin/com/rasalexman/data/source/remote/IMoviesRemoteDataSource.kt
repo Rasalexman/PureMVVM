@@ -9,7 +9,7 @@ import com.rasalexman.models.remote.MovieModel
 
 interface IMoviesRemoteDataSource : IRemoteDataSource {
 
-    suspend fun getSearchDataSource(query: String, resultLiveData: MutableLiveData<SResult<Boolean>>): DataSource.Factory<Int, MovieModel>
+    suspend fun getSearchDataSource(query: String, resultLiveData: MutableLiveData<SResult<Any>>): DataSource.Factory<Int, MovieModel>
 
     suspend fun getByGenreId(genreId: Int, lastReleaseDate: Long?): ResultList<MovieModel>
     suspend fun getPopularMovies(page: Int): ResultList<MovieModel>

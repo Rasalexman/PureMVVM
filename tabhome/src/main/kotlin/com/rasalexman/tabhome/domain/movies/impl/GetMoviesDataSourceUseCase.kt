@@ -1,12 +1,10 @@
 package com.rasalexman.tabhome.domain.movies.impl
 
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.rasalexman.core.common.extensions.loadingResult
 import com.rasalexman.core.common.typealiases.PagedLiveData
 import com.rasalexman.core.common.typealiases.ResultMutableLiveData
-import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.coroutinesmanager.ICoroutinesManager
 import com.rasalexman.coroutinesmanager.doWithAsync
 import com.rasalexman.coroutinesmanager.launchOnUI
@@ -28,8 +26,8 @@ internal class GetMoviesDataSourceUseCase(
         genreId: Int,
         resultLiveData: ResultMutableLiveData<Any>
     ): PagedLiveData<MovieItemUI> {
-        clearBoundaries()
         resultLiveData.postValue(loadingResult())
+        clearBoundaries()
         val dataSourceFactory = moviesRepository.getMoviesByGenreDataSource(genreId).map { it.convertTo() }
         val pageLiveData = LivePagedListBuilder(dataSourceFactory, BuildConfig.ITEMS_ON_PAGE)
         moviesBoundaryCallback =
@@ -49,7 +47,7 @@ internal class GetMoviesDataSourceUseCase(
 
     class MoviesBoundaryCallback(
         private val genreId: Int,
-        private var loadingLiveData: MutableLiveData<SResult<Any>>?,
+        private var loadingLiveData: ResultMutableLiveData<Any>?,
         private var remoteUseCase: IGetRemoteMoviesByGenreIdUseCase?
     ) : PagedList.BoundaryCallback<MovieItemUI>(), ICoroutinesManager {
 
@@ -59,9 +57,9 @@ internal class GetMoviesDataSourceUseCase(
 
         private fun fetchDataFromNetwork(fromReleaseDate: Long? = null) = launchOnUI {
             loadingLiveData?.value = loadingResult()
-            loadingLiveData?.postValue(doWithAsync {
+            loadingLiveData?.value = doWithAsync {
                 remoteUseCase?.execute(genreId, fromReleaseDate)
-            })
+            }
         }
 
         fun clear() {

@@ -9,7 +9,7 @@ import com.rasalexman.core.presentation.viewModels.IBaseViewModel
 
 abstract class BaseHostFragment<out VM : IBaseViewModel> : BaseFragment<VM>(), IBaseHost {
 
-    override val navigatorController: NavController
+    override val navController: NavController
         get() = Navigation.findNavController(
             requireActivity(),
             navControllerId

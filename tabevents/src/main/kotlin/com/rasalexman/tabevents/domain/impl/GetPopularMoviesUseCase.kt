@@ -24,6 +24,9 @@ internal class GetPopularMoviesUseCase(
     private var popularMoviesBoundary: PopularMoviesBoundary? = null
 
     override suspend fun execute(data: ResultMutableLiveData<Any>): PagedLiveData<MovieItemUI> {
+        data.postValue(loadingResult())
+        clearBoundaries()
+
         val dataSourceFactory = moviesRepository.getPopularMoviesDataSource().map { it.convertTo() }
         val pageLiveData = LivePagedListBuilder(dataSourceFactory, BuildConfig.ITEMS_ON_PAGE)
         val popularMoviesCount = getPopularMoviesPageCountUseCase.execute()

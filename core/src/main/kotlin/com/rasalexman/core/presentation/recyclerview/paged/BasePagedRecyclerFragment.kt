@@ -2,6 +2,7 @@ package com.rasalexman.core.presentation.recyclerview.paged
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.observe
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +18,6 @@ import com.rasalexman.core.R
 import com.rasalexman.core.common.extensions.ScrollPosition
 import com.rasalexman.core.common.extensions.hideKeyboard
 import com.rasalexman.core.common.extensions.unsafeLazy
-import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.core.presentation.BaseFragment
 import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.utils.EndlessRecyclerViewScrollListener
@@ -266,15 +266,9 @@ abstract class BasePagedRecyclerFragment<Item : BaseRecyclerUI<*>, out VM : IBas
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : Any> onAnyDataHandler(data: T?) {
-        (data as? PagedList<Item>)?.apply(::addItems)
-    }
-
-    override fun onResultHandler(result: SResult<*>) {
-        hideLoading()
-        when (result) {
-            is SResult.Clear -> clearAdapter()
-            else -> super.onResultHandler(result)
+    override fun addResultLiveDataObservers() {
+        viewModel?.resultLiveData?.observe(viewLifecycleOwner) { data ->
+            (data as? PagedList<Item>)?.apply(::addItems)
         }
     }
 }

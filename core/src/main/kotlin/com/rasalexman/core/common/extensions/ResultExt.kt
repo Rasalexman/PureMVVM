@@ -14,10 +14,11 @@ import com.rasalexman.core.data.errors.QException
 
 // /------ ViewResult extensions
 inline fun <reified T : Any> Any.successResult(data: T): SResult<T> = SResult.Success(data)
-inline fun <reified T : Any> Any.loadingResult(): SResult<T> = SResult.Loading
-inline fun <reified T : Any> Any.emptyResult(): SResult<T> = SResult.Empty
-inline fun <reified T : Any> Any.defaultResult(): SResult<T> = SResult.Default
-inline fun <reified T : Any> Any.clearResult(): SResult<T> = SResult.Clear
+fun Any.loadingResult() = SResult.Loading
+fun Any.emptyResult() = SResult.Empty
+fun Any.defaultResult() = SResult.Default
+fun Any.clearResult() = SResult.Clear
+fun Any.anyResult() = SResult.AnySResult
 
 fun Any.navigateBackResult() =
     SResult.NavigateResult.NavigateBack
@@ -79,7 +80,7 @@ inline fun <reified O : Any, reified I : IConvertableTo<O>> SResult<I>.mapTo(): 
         is SResult.Success -> {
             this.data.convertTo()?.run {
                 this.toSuccessResult()
-            } ?: emptyResult<Any>()
+            } ?: emptyResult()
         }
         else -> this
     }

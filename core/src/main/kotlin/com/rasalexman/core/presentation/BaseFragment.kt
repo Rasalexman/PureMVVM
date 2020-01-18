@@ -9,12 +9,9 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.mincor.kodi.core.IKodi
-import com.mincor.kodi.core.applyIf
 import com.rasalexman.core.R
 import com.rasalexman.core.common.extensions.*
 import com.rasalexman.core.common.typealiases.AnyResultLiveData
@@ -107,11 +104,13 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
         initLayout()
     }
 
+    protected open val onAnyLiveDataHandler: InHandler<Any>? = null
+
     /**
      * Add Standard Live data Observers to handler [SResult] event
      */
     protected open fun addAnyLiveDataObservers() {
-        viewModel?.onAnyLiveData()?.apply(::observeAnyLiveData)
+        onAnyChange(viewModel?.anyLiveData, onAnyLiveDataHandler)
     }
 
     /**
@@ -119,14 +118,14 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
      */
     @Suppress("UNCHECKED_CAST")
     protected open fun addResultLiveDataObservers() {
-        (viewModel?.onResultLiveData() as? AnyResultLiveData)?.apply(::observeResultLiveData)
+        onResultChange(viewModel?.resultLiveData as? AnyResultLiveData, ::onResultHandler)
     }
 
     /**
      * Add Observer for Error Live Data handles (ex. from CoroutinesManager)
      */
     protected open fun addErrorLiveDataObservers() {
-        viewModel?.onErrorLiveData()?.apply(::observeResultLiveData)
+        onResultChange(viewModel?.errorLiveData, ::onResultHandler)
     }
 
     /**
@@ -229,7 +228,7 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
      */
     override fun onDestroyView() {
         context?.closeAlert()
-        (view as? ViewGroup)?.clear()
+       // (view as? ViewGroup)?.clear()
         super.onDestroyView()
     }
 
@@ -241,7 +240,7 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
         result.handle()
 
         when (result) {
-            is SResult.Success<*> -> hideLoading()
+            is SResult.Success -> hideLoading()
             is SResult.Loading -> showLoading()
 
             is SResult.NavigateResult.NavigateTo -> {
@@ -260,34 +259,6 @@ abstract class BaseFragment<out VM : IBaseViewModel> : Fragment(),
                     }
                 }
             }
-        }
-    }
-
-    /**
-     *
-     */
-    protected open fun <T : Any> onAnyDataHandler(data: T?) = Unit
-
-    /**
-     * Observe Any type of [LiveData] with callback
-     */
-    protected open fun <T : Any> observeAnyLiveData(data: LiveData<T>, callback: InHandler<T>) {
-        data.observe(this.viewLifecycleOwner, callback)
-    }
-
-    /**
-     *
-     */
-    protected open fun observeAnyLiveData(data: LiveData<*>) {
-        data.observe(this.viewLifecycleOwner, ::onAnyDataHandler)
-    }
-
-    /**
-     * Observe only [SResult] live data
-     */
-    protected open fun observeResultLiveData(data: LiveData<SResult<Any>>) {
-        data.observe(viewLifecycleOwner) { result ->
-            result.applyIf(!result.isHandled, ::onResultHandler)
         }
     }
 

@@ -1,14 +1,11 @@
 package com.rasalexman.onboarding.presentation.login
 
 import androidx.core.util.PatternsCompat
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
 import com.mincor.kodi.core.immutableInstance
-import com.rasalexman.core.common.extensions.asyncLiveData
-import com.rasalexman.core.common.extensions.loadingResult
-import com.rasalexman.core.common.extensions.unsafeLazy
-import com.rasalexman.core.data.dto.SResult
+import com.rasalexman.core.common.extensions.*
+import com.rasalexman.core.data.dto.FetchWith
 import com.rasalexman.core.presentation.viewModels.BaseViewModel
-import com.rasalexman.coroutinesmanager.CoroutinesProvider
 import com.rasalexman.models.inline.toUserEmail
 import com.rasalexman.models.inline.toUserPassword
 import com.rasalexman.onboarding.R
@@ -18,7 +15,6 @@ import com.rasalexman.onboarding.domain.ICheckUserRegisteredUseCase
 class LoginViewModel : BaseViewModel() {
 
     private val checkUserRegisteredUseCase: ICheckUserRegisteredUseCase by immutableInstance()
-    private val loginLiveData by unsafeLazy { MutableLiveData<SignInEventModel>() }
 
     val emailValidationError by unsafeLazy { MutableLiveData<Int>() }
     val passwordValidationError by unsafeLazy { MutableLiveData<Int>() }
@@ -31,12 +27,10 @@ class LoginViewModel : BaseViewModel() {
         MutableLiveData<String>()
     }
 
-    override val resultLiveData: LiveData<SResult<Boolean>> by unsafeLazy {
-        loginLiveData.switchMap {
-            asyncLiveData<SResult<Boolean>> {
-                emit(loadingResult())
-                emit(checkUserRegisteredUseCase.execute(it))
-            }
+    override val resultLiveData by unsafeLazy {
+        onEventResult<FetchWith<SignInEventModel>> {
+            emit(loadingResult())
+            emit(checkUserRegisteredUseCase.execute(it.data))
         }
     }
 
@@ -49,7 +43,12 @@ class LoginViewModel : BaseViewModel() {
         } else if(passwordToValidate.isEmpty()) {
             passwordValidationError.value = R.string.error_password_empty
         } else {
-            loginLiveData.value = SignInEventModel(emailToValidate.toUserEmail(), passwordToValidate.toUserPassword())
+            processViewEvent(
+                SignInEventModel(
+                    email = emailToValidate.toUserEmail(),
+                    password = passwordToValidate.toUserPassword()
+                ).toFetch()
+            )
         }
     }
 }

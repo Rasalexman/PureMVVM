@@ -2,16 +2,10 @@ package com.rasalexman.onboarding.presentation.register
 
 import androidx.core.util.PatternsCompat
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
 import com.mincor.kodi.core.immutableInstance
-import com.rasalexman.core.common.extensions.asyncLiveData
-import com.rasalexman.core.common.extensions.loadingResult
-import com.rasalexman.core.common.extensions.unsafeLazy
-import com.rasalexman.core.data.dto.SResult
+import com.rasalexman.core.common.extensions.*
+import com.rasalexman.core.data.dto.FetchWith
 import com.rasalexman.core.presentation.viewModels.BaseViewModel
-import com.rasalexman.coroutinesmanager.CoroutinesProvider
 import com.rasalexman.models.inline.toUserEmail
 import com.rasalexman.models.inline.toUserName
 import com.rasalexman.models.inline.toUserPassword
@@ -21,7 +15,6 @@ import com.rasalexman.onboarding.domain.IRegisterUserUseCase
 class RegisterViewModel : BaseViewModel() {
 
     private val registerUserUseCase: IRegisterUserUseCase by immutableInstance()
-    private val loginLiveData by unsafeLazy { MutableLiveData<SignUpEventModel>() }
 
     val nameValidationError by unsafeLazy { MutableLiveData<Int>() }
     val emailValidationError by unsafeLazy { MutableLiveData<Int>() }
@@ -34,11 +27,9 @@ class RegisterViewModel : BaseViewModel() {
     val repeatPassword by unsafeLazy { MutableLiveData<String>() }
 
     override val resultLiveData by unsafeLazy {
-        loginLiveData.switchMap {
-            asyncLiveData<SResult<Boolean>> {
-                emit(loadingResult())
-                emit(registerUserUseCase.execute(it))
-            }
+        onEventResult<FetchWith<SignUpEventModel>> {
+            emit(loadingResult())
+            emit(registerUserUseCase.execute(it.data))
         }
     }
 
@@ -48,21 +39,25 @@ class RegisterViewModel : BaseViewModel() {
         val passwordStr = password.value.orEmpty()
         val repeatPasswordStr = repeatPassword.value.orEmpty()
 
-        if(nameStr.isEmpty()) {
+        if (nameStr.isEmpty()) {
             nameValidationError.value = com.rasalexman.onboarding.R.string.error_user_name_empty
-        } else if(!PatternsCompat.EMAIL_ADDRESS.matcher(emailStr).matches()) {
+        } else if (!PatternsCompat.EMAIL_ADDRESS.matcher(emailStr).matches()) {
             emailValidationError.value = com.rasalexman.onboarding.R.string.error_email_match
-        } else if(passwordStr.isEmpty()) {
+        } else if (passwordStr.isEmpty()) {
             passwordValidationError.value = com.rasalexman.onboarding.R.string.error_password_empty
-        } else if(repeatPasswordStr.isEmpty()) {
-            repeatValidationError.value = com.rasalexman.onboarding.R.string.error_password_repeat_empty
-        } else if(passwordStr != repeatPasswordStr) {
-            repeatValidationError.value = com.rasalexman.onboarding.R.string.error_password_repeat_match
+        } else if (repeatPasswordStr.isEmpty()) {
+            repeatValidationError.value =
+                com.rasalexman.onboarding.R.string.error_password_repeat_empty
+        } else if (passwordStr != repeatPasswordStr) {
+            repeatValidationError.value =
+                com.rasalexman.onboarding.R.string.error_password_repeat_match
         } else {
-            loginLiveData.value = SignUpEventModel(
-                name = nameStr.toUserName(),
-                email = emailStr.toUserEmail(),
-                password = passwordStr.toUserPassword()
+            processViewEvent(
+                SignUpEventModel(
+                    name = nameStr.toUserName(),
+                    email = emailStr.toUserEmail(),
+                    password = passwordStr.toUserPassword()
+                ).toFetch()
             )
         }
     }
