@@ -8,7 +8,7 @@ import com.rasalexman.models.ui.MovieItemUI
 import com.rasalexman.tabevents.domain.IGetTopRatedMoviesFlowUseCase
 import kotlinx.coroutines.flow.map
 
-internal class GetTopRatedMoviesFlowUseCase(
+internal class GetTopRatedMoviesUseCase(
     private val moviesRepository: IMoviesRepository
 ) : IGetTopRatedMoviesFlowUseCase {
 

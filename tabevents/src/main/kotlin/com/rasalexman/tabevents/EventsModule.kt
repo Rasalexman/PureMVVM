@@ -6,7 +6,7 @@ import com.rasalexman.tabevents.domain.impl.*
 
 val tabEventsModule = kodiModule {
     bind<IGetTopRatedMoviesFlowUseCase>() with provider {
-        GetTopRatedMoviesFlowUseCase(
+        GetTopRatedMoviesUseCase(
             instance()
         )
     }

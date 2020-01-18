@@ -18,7 +18,7 @@ class PopularViewModel : BaseViewModel() {
 
     override val anyLiveData by unsafeLazy {
         onEventResult<Refresh> {
-            emit(refreshPopularMoviesUseCase.execute(0))
+            emit(refreshPopularMoviesUseCase.execute(1))
         }
     }
 
