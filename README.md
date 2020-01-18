@@ -21,3 +21,4 @@ This is an example of usage multi-modules MVVM Pattern on Android with Navigatio
 12) Kotlin Gradle DSL
 13) Material Design
 14) Kotlin 1.3.+ with coroutines
+15) Kotlin Flow
