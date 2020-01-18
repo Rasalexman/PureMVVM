@@ -1,5 +1,6 @@
 package com.rasalexman.data.repository
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.rasalexman.core.common.extensions.mapIfSuccessSuspend
 import com.rasalexman.core.common.extensions.mapListTo
@@ -10,6 +11,8 @@ import com.rasalexman.core.data.dto.SResult
 import com.rasalexman.data.source.local.IMoviesLocalDataSource
 import com.rasalexman.data.source.remote.IMoviesRemoteDataSource
 import com.rasalexman.models.local.MovieEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class MoviesRepository(
     override val localDataSource: IMoviesLocalDataSource,
@@ -41,8 +44,10 @@ class MoviesRepository(
         }
     }
 
-    override suspend fun getRemoteTopRatedMovies(page: Int): ResultList<MovieEntity> {
-        return remoteDataSource.getTopRatedMovies(page).mapListTo()
+    override suspend fun getRemoteTopRatedMovies(pageLiveData: LiveData<Int>): Flow<ResultList<MovieEntity>> {
+        return remoteDataSource.getTopRatedMovies(pageLiveData).map {
+            it.mapListTo()
+        }
     }
 
     override suspend fun getRemoteUpcomingMovies(page: Int): ResultList<MovieEntity> {

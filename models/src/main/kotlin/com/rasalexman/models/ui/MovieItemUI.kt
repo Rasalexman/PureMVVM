@@ -11,8 +11,6 @@ import com.rasalexman.core.common.extensions.show
 import com.rasalexman.core.common.extensions.unsafeLazy
 import com.rasalexman.core.presentation.holders.BaseRecyclerUI
 import com.rasalexman.core.presentation.holders.BaseViewHolder
-import com.rasalexman.coroutinesmanager.CoroutinesManager
-import com.rasalexman.coroutinesmanager.launchOnUI
 import com.rasalexman.models.R
 import kotlinx.android.synthetic.main.layout_item_movies.*
 
@@ -50,8 +48,6 @@ data class MovieItemUI(
 
     class MovieViewHolder(view: View) : BaseViewHolder<MovieItemUI>(view) {
 
-        private val coroutinesManager by unsafeLazy { CoroutinesManager() }
-
         override fun bindView(item: MovieItemUI, payloads: MutableList<Any>) {
             itemView.isVisible = !item.isPlaceHolder
 
@@ -63,19 +59,17 @@ data class MovieItemUI(
             item.fullPosterUrl.takeIf {
                 !item.isPlaceHolder
             }?.let { imageUrl ->
-                coroutinesManager.launchOnUI {
-                    movieImageView.load(imageUrl) {
-                        placeholder(R.drawable.ic_cloud_off_black_24dp)
-                        target(onStart = {
-                            imageProgressBar.show()
-                        }, onSuccess = {
-                            movieImageView.setImageDrawable(it)
-                            imageProgressBar.hide(true)
-                        }, onError = {
-                            movieImageView.setImageResource(R.drawable.ic_cloud_off_black_24dp)
-                            imageProgressBar.hide(true)
-                        })
-                    }
+                movieImageView.load(imageUrl) {
+                    placeholder(R.drawable.ic_cloud_off_black_24dp)
+                    target(onStart = {
+                        imageProgressBar.show()
+                    }, onSuccess = {
+                        movieImageView.setImageDrawable(it)
+                        imageProgressBar.hide(true)
+                    }, onError = {
+                        movieImageView.setImageResource(R.drawable.ic_cloud_off_black_24dp)
+                        imageProgressBar.hide(true)
+                    })
                 }
             }
         }
@@ -104,7 +98,7 @@ data class MovieItemUI(
             MovieItemUI(
                 0, 0, 0.0, false, "",
                 0.0, "", "", "",
-                emptyList(), "", "", 0L,false, ""
+                emptyList(), "", "", 0L, false, ""
             ).apply {
                 isPlaceHolder = true
             }

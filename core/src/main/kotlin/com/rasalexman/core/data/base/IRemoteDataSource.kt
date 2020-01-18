@@ -1,4 +1,6 @@
 package com.rasalexman.core.data.base
 
-interface IRemoteDataSource {
+import com.rasalexman.coroutinesmanager.IAsyncTasksManager
+
+interface IRemoteDataSource : IAsyncTasksManager {
 }

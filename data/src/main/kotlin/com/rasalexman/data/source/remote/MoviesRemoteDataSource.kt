@@ -1,22 +1,30 @@
 package com.rasalexman.data.source.remote
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
 import androidx.paging.DataSource
+import com.rasalexman.core.common.extensions.loadingResult
 import com.rasalexman.core.common.typealiases.ResultList
 import com.rasalexman.core.data.dto.SResult
-import com.rasalexman.coroutinesmanager.IAsyncTasksManager
+import com.rasalexman.coroutinesmanager.CoroutinesProvider
 import com.rasalexman.coroutinesmanager.doWithTryCatchAsync
 import com.rasalexman.data.source.factory.SearchDataSourceFactory
 import com.rasalexman.models.remote.MovieModel
 import com.rasalexman.providers.network.api.IMovieApi
+import com.rasalexman.providers.network.handlers.asErrorResult
 import com.rasalexman.providers.network.handlers.errorResultCatchBlock
 import com.rasalexman.providers.network.responses.getResult
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MoviesRemoteDataSource(
     private val moviesApi: IMovieApi
-) : IMoviesRemoteDataSource, IAsyncTasksManager {
+) : IMoviesRemoteDataSource {
 
     override suspend fun getSearchDataSource(
         query: String,
@@ -39,17 +47,20 @@ class MoviesRemoteDataSource(
             catchBlock = errorResultCatchBlock()
         )
 
-    override suspend fun getTopRatedMovies(page: Int): ResultList<MovieModel> =
-        doWithTryCatchAsync(
-            tryBlock = { moviesApi.getTopRatedMovies(page).getResult { it.results } },
-            catchBlock = errorResultCatchBlock()
-        )
-
     override suspend fun getUpcomingMovies(page: Int): ResultList<MovieModel> =
         doWithTryCatchAsync(
             tryBlock = { moviesApi.getUpcomingMovies(page).getResult { it.results } },
             catchBlock = errorResultCatchBlock()
         )
+
+    override suspend fun getTopRatedMovies(pageLiveData: LiveData<Int>) = flow {
+        pageLiveData.asFlow().collect { page ->
+            emit(loadingResult())
+            emit(moviesApi.getTopRatedMovies(page).getResult { it.results })
+        }
+    }.catch {
+        emit(it.asErrorResult())
+    }.flowOn(CoroutinesProvider.IO)
 
     /**
      * Get movies by genre id with pagination

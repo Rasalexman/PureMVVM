@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.rasalexman.core.data.dto.SResult
+import kotlinx.coroutines.flow.Flow
 
 typealias UnitHandler = () -> Unit
 typealias InHandler<T> = (T) -> Unit
@@ -30,5 +31,6 @@ typealias AnyResultListLiveData = ResultListLiveData<Any>
 typealias AnyResultMutableLiveData = ResultMutableLiveData<Any>
 
 typealias ResultList<T> = SResult<List<T>>
+typealias FlowResultList<T> = Flow<SResult<List<T>>>
 typealias ResultInHandler<T> = (SResult<T>) -> Unit
 typealias ResultInOutHandler<T, R> = (SResult<T>) -> SResult<R>

@@ -12,7 +12,7 @@ import com.rasalexman.providers.network.responses.getResult
 
 class GenresRemoteDataSource(
     private val moviesApi: IMovieApi
-) : IGenresRemoteDataSource, IAsyncTasksManager {
+) : IGenresRemoteDataSource {
 
     private val addedImages by lazy { mutableSetOf<String>() }
 

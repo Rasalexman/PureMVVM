@@ -16,3 +16,12 @@ inline fun <reified T : Any> Any.errorResultCatchBlock(): SuspendCatch<SResult<T
         else -> it.toErrorResult()
     }
 }
+
+inline suspend fun<reified T : Any> Throwable.asErrorResult(): SResult<T> {
+    return when (this) {
+        is UnknownHostException,
+        is IOException -> QException.NoInternetConnectionException().toErrorResult()
+        is HttpException -> this.toErrorResult()
+        else -> this.toErrorResult()
+    }
+}
