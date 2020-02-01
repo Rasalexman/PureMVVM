@@ -1,6 +1,6 @@
 package com.rasalexman.tabsearch.domain
 
-import androidx.paging.LivePagedListBuilder
+import androidx.paging.toLiveData
 import com.rasalexman.core.common.typealiases.AnyResultMutableLiveData
 import com.rasalexman.core.common.typealiases.PagedLiveData
 import com.rasalexman.data.repository.IMoviesRepository
@@ -15,8 +15,9 @@ internal class GetSearchDataSource(
         query: String,
         resultLiveData: AnyResultMutableLiveData
     ): PagedLiveData<MovieItemUI> {
-        val searchDataSourceFactory = movieRepository.getRemoteSearchDataSource(query, resultLiveData).map { it.convertTo() }
-        val pageLiveData = LivePagedListBuilder(searchDataSourceFactory, BuildConfig.ITEMS_ON_PAGE)
-        return pageLiveData.build()
+        return  movieRepository
+            .getRemoteSearchDataSource(query, resultLiveData)
+            .map { it.convertTo() }
+            .toLiveData(BuildConfig.ITEMS_ON_PAGE)
     }
 }
